@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  height: 470px;
+  background: url(/balcony2.png);
+  background-repeat: no-repeat;
+  background-size: cover; /* Hace que la imagen cubra toda la sección sin deformarse */
+  background-position: center; /* Centra la imagen en la sección */
+}
+
+@media (max-width:768px){
+    .container {
+        background: url(/balconymobile.jpg);
+        height: calc(100vh - 64px);
+    }
+}
