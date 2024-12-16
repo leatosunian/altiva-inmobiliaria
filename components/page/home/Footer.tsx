@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "@/public/logoblack2.png";
+import logo from "@/public/logo2-1-black.png";
 import { FaFacebook, FaFacebookF, FaFacebookSquare, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { SiMercadopago } from "react-icons/si";
 import Link from "next/link";
@@ -14,31 +14,31 @@ const Footer = () => {
       >
           <div className="container px-4 md:px-20 2xl:px-0 mx-auto">
           <div className="flex flex-wrap text-left lg:text-left">
-            <div className="w-full flex flex-col justify-center px-4 lg:w-5/12">
+            <div className="w-full flex flex-col justify-center px-4 gap-4 lg:w-5/12">
               {/* <h4 className="text-3xl fonat-semibold text-blueGray-700">
                 HASCAR
               </h4> */}
               <Image
                 src={logo}
                 alt=""
-                width={100}
+                width={280}
                 height={100}
                 className="block md:hidden "
               />
               <Image
                 src={logo}
                 alt=""
-                width={170}
+                width={250}
                 height={200}
-                className="md:block hidden mb-4"
+                className="md:block hidden "
               />
-              <h5 className="mt-3 mb-1  text-md md:text-lg text-black">
+              {/* <h5 className="mt-3 mb-1  text-md md:text-lg text-black">
                 Somos <b className="text-red-700">Altiva Propiedades</b>.
-              </h5>
-              <h5 className=" mb-2  text-md md:text-lg text-black">
+              </h5> */}
+              <h5 className=" mb-2  text-base font-medium  text-black">
                 Hacemos realidad tu lugar en el mundo.
               </h5>
-            </div>
+            </div> 
             <div className="w-full  lg:w-7/12">
               <div className="flex flex-wrap mb-6 items-top">
                 <div className="w-full px-4 mt-5 ml-auto lg:mt-0 lg:w-4/12">
