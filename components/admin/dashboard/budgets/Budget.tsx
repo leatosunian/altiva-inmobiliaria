@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/app/css-modules/budget/budget.module.css";
-import logo from "@/public/dalogoblack.png";
+import logo from "@/public/logo2-1-black.png";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -279,7 +279,7 @@ const Budget = ({
         {/* vehicles and budget details */}
         <div className="flex w-full h-full gap-8 mt-3">
           {/* vehicles' details */}
-          <div className="flex flex-col gap-5 w-1/2 h-fit">
+          <div className="flex flex-col w-1/2 gap-5 h-fit">
             <Card
               style={{ borderColor: "rgb(228, 228, 231)" }}
               className="flex w-full h-full p-5 bg-white border-border"
@@ -491,7 +491,7 @@ const Budget = ({
           {/* resumen de presupuesto */}
           <Card
             style={{ borderColor: "rgb(228, 228, 231)" }}
-            className=" p-5 bg-white h-fit w-1/2"
+            className="w-1/2 p-5 bg-white  h-fit"
           >
             <div className="flex flex-col gap-0 text-black bg-white">
               <span

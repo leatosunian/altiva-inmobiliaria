@@ -19,8 +19,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/public/dalogo.png";
-import logoblack from "@/public/dalogoblack.png";
+import logo from "@/public/logo2-1.png";
+import logoblack from "@/public/logo2-1-black.png";
 import { useTheme } from "next-themes";
 import { IoCarSportOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";

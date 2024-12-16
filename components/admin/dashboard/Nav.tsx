@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/public/dalogo.png";
+import logo from "@/public/logo2-1.png";
 
 const Nav = () => {
   const { setTheme } = useTheme();
