@@ -29,7 +29,6 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { ICar } from "@/app/models/car";
 import styles from "@/app/css-modules/dashboard/leads/newleadform.module.css";
 import Image from "next/image";
 import {
@@ -53,6 +52,7 @@ import { ILead } from "@/app/models/lead";
 import { ILeadVehicle } from "@/app/models/leadvehicles";
 import { useToast } from "@/hooks/use-toast";
 import { useSession } from "next-auth/react";
+import { IProperty } from "@/app/models/property";
 
 const LeadEditForm = () => {
   const params = useParams();
@@ -88,8 +88,8 @@ const LeadEditForm = () => {
       leadObservations: "",
     },
   });
-  const [vehicleList, setVehicleList] = useState<ICar[]>([]);
-  const [selectedIntIn, setSelectedIntIn] = useState<ICar>();
+  const [vehicleList, setVehicleList] = useState<IProperty[]>([]);
+  const [selectedIntIn, setSelectedIntIn] = useState<IProperty>();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -196,7 +196,7 @@ const LeadEditForm = () => {
       });
       return;
     }
-    values.leadPrefVehicleUUID = selectedIntIn?.uuid;
+    //values.leadPrefVehicleUUID = selectedIntIn?.uuid;
     values.leadID = lead?._id;
     values.interestedIn = selectedIntIn?.name;
     try {
@@ -686,11 +686,11 @@ const LeadEditForm = () => {
                   <div className="grid grid-cols-1 gap-10 sm:gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {vehicleList?.map((car) => (
                       <div
-                        key={car.uuid}
+                        key={car._id}
                         className="col-span-1 md:h-full h-fit"
                       >
                         <Card
-                          key={car.uuid}
+                          key={car._id}
                           className="flex flex-col h-full shadow-lg"
                         >
                           <Image
@@ -708,11 +708,11 @@ const LeadEditForm = () => {
                               </CardTitle>
                               <CardDescription className="flex items-center justify-between w-full pt-1 pb-2 ">
                                 <div className="flex items-center gap-2">
-                                  <FaRegCalendar /> <span>{car.year}</span>
+                                  <FaRegCalendar /> <span>{car._id}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <IoSpeedometerOutline size={20} />
-                                  <span> {car.kilometers} km</span>
+                                  <span> {car._id} km</span>
                                 </div>
                               </CardDescription>
                               <p className="text-lg font-semibold">
@@ -756,11 +756,11 @@ const LeadEditForm = () => {
                             <CardDescription className="flex items-center justify-between w-full pt-1 pb-2 ">
                               <div className="flex items-center gap-2">
                                 <FaRegCalendar />{" "}
-                                <span>{selectedIntIn?.year}</span>
+                                <span>{selectedIntIn?._id}</span>
                               </div>
                               <div className="flex items-center gap-2">
                                 <IoSpeedometerOutline size={20} />
-                                <span> {selectedIntIn?.kilometers} km</span>
+                                <span> {selectedIntIn?._id} km</span>
                               </div>
                             </CardDescription>
                             <p className="text-lg font-semibold">
