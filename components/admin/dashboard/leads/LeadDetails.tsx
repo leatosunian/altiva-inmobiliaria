@@ -90,7 +90,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ILeadVehicle } from "@/app/models/leadvehicles";
-import LeadBudgetsList from "./LeadBudgetsList";
 import { IBudget } from "@/app/models/budget";
 import { IAdmin } from "@/app/models/admin";
 import { IProperty } from "@/app/models/property";
@@ -1041,7 +1040,6 @@ const LeadDetails = () => {
           </div>
           <Separator className="my-10" />
           {/* budgets history */}
-          <LeadBudgetsList leadID={lead?._id} budgets={budgets} />
           {/* budgets history */}
 
           {/* delete lead modal */}
