@@ -1,6 +1,5 @@
 import { Separator } from "@radix-ui/react-select";
 import React from "react";
-import CreateBudgetForm from "@/components/admin/dashboard/budgets/CreateBudgetForm";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Crear presupuesto | Panel de administración",
@@ -17,7 +16,6 @@ const CreateBudgetPage = () => {
       <div>
         <div className="">
           {/* chart with branches data */}
-          <CreateBudgetForm/>
         </div>
       </div>
     </>

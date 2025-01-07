@@ -3,7 +3,6 @@
 import { Separator } from "@radix-ui/react-select";
 import React, { useState } from "react";
 import NewLeadForm from "@/components/admin/dashboard/leads/NewLeadForm";
-import NewLeadVehiclesForm from "@/components/admin/dashboard/leads/NewLeadVehiclesForm";
 import NewLeadEnd from "@/components/admin/dashboard/leads/NewLeadEnd";
 import { ILead } from "@/app/models/lead";
 
@@ -94,13 +93,8 @@ const CreateLeadPage = () => {
           )}
 
           {/* add lead vehicles form */}
+         
           {componentToShow === 2 && (
-            <NewLeadVehiclesForm
-            createdLeadData={createdLeadData}
-              onChangeFormStep={() => setComponentToShow(3)}
-            />
-          )}
-          {componentToShow === 3 && (
             <NewLeadEnd createdLeadData={createdLeadData} />
           )}
         </div>
