@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
-import CarImageModel from "@/app/models/carimage";
+import CarImageModel from "@/app/models/propertyimage";
 import connectDB from "@/lib/db";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -13,8 +13,8 @@ export async function DELETE(
   console.log(params);
   try {
     cloudinary.config({
-      cloud_name: "duiw7lwlb",
-      api_key: "435529513686272",
+      cloud_name: "dm4mkjisn",
+      api_key: "274595485733553",
       api_secret: process.env.CLOUDINARY_SECRET,
     });
     const imageData = await CarImageModel.findOne({ uuid: params.pathName });

@@ -1,4 +1,5 @@
-import CarImageModel from "@/app/models/carimage";
+import PropertyImageModel from "@/app/models/propertyimage";
+import CarImageModel from "@/app/models/propertyimage";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET GALLERY IMAGES
@@ -9,7 +10,7 @@ export async function GET(
   console.log(params.uuid);
 
   try {
-    const images = await CarImageModel.find({ carID: params.uuid }).sort({createdAt: -1});
+    const images = await PropertyImageModel.find({ propertyID: params.uuid }).sort({createdAt: -1});
 
     return NextResponse.json(images);
   } catch (error) {

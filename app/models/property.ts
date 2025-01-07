@@ -12,24 +12,47 @@ export interface IProperty extends Document {
   state: string;
   imagePath: string;
   price: number;
+  currency: string;
   propertyType: string;
   metersSquare: number;
+  rooms: number;
   coveredMetersSquare: number;
-  uncoveredMetersSquare: number;
   expensas: number;
   antiquity: number;
   floors: number;
   description: string;
+  show: boolean;
+  status: string;
   _id?: string;
+  dormitorios: number;
+  imagePublicID?: string;
 }
 
-const adminSchema: Schema = new Schema<IProperty>(
+const propertyModel: Schema = new Schema<IProperty>(
   {
+    show: {
+      type: Boolean,
+      required: true,
+      default: true
+    },
+    status: {
+      type: String,
+      required: true,
+      default: 'Disponible'
+    },
     bathrooms: {
       type: Number,
       required: true,
     },
+    dormitorios: {
+      type: Number,
+      required: true,
+    },
     name: {
+      type: String,
+      required: true,
+    },
+    currency: {
       type: String,
       required: true,
     },
@@ -41,6 +64,10 @@ const adminSchema: Schema = new Schema<IProperty>(
       type: Number,
       required: true,
     },
+    rooms: {
+      type: Number,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
@@ -48,7 +75,6 @@ const adminSchema: Schema = new Schema<IProperty>(
     city: {
       type: String,
       required: true,
-      select: false,
     },
     neighborhood: {
       type: String,
@@ -61,6 +87,7 @@ const adminSchema: Schema = new Schema<IProperty>(
     imagePath: {
       type: String,
       required: false,
+      default: ''
     },
     price: {
       type: Number,
@@ -71,10 +98,6 @@ const adminSchema: Schema = new Schema<IProperty>(
       required: true,
     },
     metersSquare: {
-      type: Number,
-      required: true,
-    },
-    uncoveredMetersSquare: {
       type: Number,
       required: true,
     },
@@ -98,6 +121,11 @@ const adminSchema: Schema = new Schema<IProperty>(
       type: String,
       required: true,
     },
+    imagePublicID: {
+      type: String,
+      required: false,
+      default: ''
+    }
   },
   {
     timestamps: true,
@@ -105,6 +133,6 @@ const adminSchema: Schema = new Schema<IProperty>(
   }
 );
 
-const AdminModel = models.admin_users || model("admin_users", adminSchema);
+const PropertyModel = models.properties || model("properties", propertyModel);
 
-export default AdminModel;
+export default PropertyModel;

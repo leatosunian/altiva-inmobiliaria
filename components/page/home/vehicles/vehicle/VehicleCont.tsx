@@ -14,7 +14,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { ICar } from "@/app/models/car";
-import { ICarImage } from "@/app/models/carimage";
+import { ICarImage } from "@/app/models/propertyimage";
 import { useParams } from "next/navigation";
 import { type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";

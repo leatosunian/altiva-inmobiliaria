@@ -19,8 +19,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/public/logo2-1.png";
-import logoblack from "@/public/logo2-1-black.png";
+import logo from "@/public/logo2.png";
+import logoblack from "@/public/logoblack2.png";
 import { useTheme } from "next-themes";
 import { IoCarSportOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
@@ -126,10 +126,10 @@ export default function Navbar() {
                 </div> */}
               <div className="">
                 {theme === "dark" && (
-                  <Image className="w-36" src={logo} alt="Logo" />
+                  <Image className="w-10 ml-2 " src={logo} alt="Logo" />
                 )}
                 {theme === "light" && (
-                  <Image className="w-36" src={logoblack} alt="Logo" />
+                  <Image className="w-10 ml-2 " src={logoblack} alt="Logo" />
                 )}
               </div>
               {/* <Image className="w-36" src={logo} alt="Logo" /> */}

@@ -1,9 +1,9 @@
 import connectDB from "@/lib/db";
-import CarModel, { ICar } from "@/app/models/car";
 import { NextRequest, NextResponse } from "next/server";
 import BranchModel from "@/app/models/branch";
 import { v2 as cloudinary } from "cloudinary";
-import CarImageModel from "@/app/models/carimage";
+import PropertyModel, { IProperty } from "@/app/models/property";
+import PropertyImageModel from "@/app/models/propertyimage";
 
 // GET CAR BY UUID
 export async function GET(
@@ -12,14 +12,16 @@ export async function GET(
 ) {
   await connectDB();
   try {
-    const car = await CarModel.findOne({ uuid: params.uuid });
+    const car = await PropertyModel.findOne({ _id: params.uuid });
+    console.log(car);
+    
     return NextResponse.json(car);
   } catch (error) {
-    return NextResponse.json({ msg: "ERROR_GET_CAR" });
+    return NextResponse.json({ msg: "ERROR_GET_PROPERTY" });
   }
 }
 
-// DELETE CAR BY UUID
+// DELETE PROPERTY BY UUID
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { uuid: string } }
@@ -28,49 +30,46 @@ export async function DELETE(
 
   try {
     cloudinary.config({
-      cloud_name: "duiw7lwlb",
-      api_key: "435529513686272",
+      cloud_name: "dm4mkjisn",
+      api_key: "274595485733553",
       api_secret: process.env.CLOUDINARY_SECRET,
     });
 
     // get car data
-    const carToDelete = await CarModel.findOne({ uuid: params.uuid });
+    const propertyToDelete = await PropertyModel.findOne({ _id: params.uuid });
     // get gallery data
-    const gallery = await CarImageModel.find({ carID: params.uuid });
+    const gallery = await PropertyImageModel.find({ propertyID: params.uuid });
     // delete car
-    const deletedCar = await CarModel.findOneAndDelete({ uuid: params.uuid });
+    await PropertyModel.findOneAndDelete({ _id: params.uuid });
     // delete thumbnail from cloudinary
-    await cloudinary.uploader.destroy(carToDelete.imagePublicID);
+    await cloudinary.uploader.destroy(propertyToDelete.imagePublicID);
     // delete gallery images from cloudinary
     for (const image of gallery) {
       await cloudinary.uploader.destroy(image.public_id);
-      await CarImageModel.deleteOne({ _id: image._id });
+      await PropertyImageModel.deleteOne({ _id: image._id });
     }
 
-    return NextResponse.json({ msg: "CAR_DELETED" });
+    return NextResponse.json({ msg: "PROPERTY_DELETED" });
   } catch (error) {
-    console.log("error deleted");
-
-    return NextResponse.json({ msg: "ERROR_DELETE_CAR" });
+    return NextResponse.json({ msg: "ERROR_DELETE_PROPERTY" });
   }
 }
 
-// EDIT CAR
+// EDIT PROPERTY
 export async function PUT(
   request: NextRequest,
   { params }: { params: { uuid: string } }
 ) {
   await connectDB();
   const { uuid } = params;
-  const data: ICar = await request.json();
-  const branchAddress = await BranchModel.findOne({ _id: data.branchID });
-  data.branchAddress = branchAddress.address;
+  const data: IProperty = await request.json();
+
   try {
-    const car = await CarModel.findOneAndUpdate({ uuid }, data, {
+    const car = await PropertyModel.findOneAndUpdate({ uuid }, data, {
       new: true,
     });
     return NextResponse.json(car);
   } catch (error) {
-    return NextResponse.json({ msg: "ERROR_EDIT_CAR" });
+    return NextResponse.json({ msg: "ERROR_EDIT_PROPERTY" });
   }
 }

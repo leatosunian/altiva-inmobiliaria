@@ -1,20 +1,18 @@
-import CarImageModel from "@/app/models/carimage";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { mkdir, writeFile } from "fs/promises";
-import fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
+import PropertyImageModel from "@/app/models/propertyimage";
 
 // SAVE GALLERY IMAGES
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
-    const carID = data.get("carID") as string;
+    const propertyID = data.get("carID") as string;
     const files = data.getAll("gallery_images") as File[];
+    console.log('files', files)
     cloudinary.config({
-      cloud_name: "duiw7lwlb",
-      api_key: "435529513686272",
+      cloud_name: "dm4mkjisn",
+      api_key: "274595485733553",
       api_secret: process.env.CLOUDINARY_SECRET,
     });
     if (files.length === 0) {
@@ -36,8 +34,8 @@ export async function POST(request: NextRequest) {
           .end(buffer);
       });
       console.log(cloudinaryResponse);
-      await CarImageModel.create({
-        carID,
+      await PropertyImageModel.create({
+        propertyID,
         path: cloudinaryResponse.secure_url,
         uuid: uuidv4(),
         public_id: cloudinaryResponse.public_id

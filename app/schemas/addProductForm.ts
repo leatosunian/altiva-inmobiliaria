@@ -2,47 +2,74 @@ import { z } from "zod";
 
 export const formSchema = z.object({
   name: z.string({ message: "Ingresá un nombre." }).min(1, {
-    message: "Ingresa un nombre.",
+    message: "Ingresá un nombre.",
   }),
-  year: z
+  bathrooms: z
     .string({
-      message: "Ingresa un año..",
+      message: "Ingresá la cantidad de baños..",
     })
-    .min(4, {
-      message: "Ingresa un año.",
+    .min(1, {
+      message: "Ingresá la cantidad de baños.",
     }),
-  brand: z.string().min(1, {
-    message: "Selecciona una marca.",
+  rooms: z
+    .string({
+      message: "Ingresá la cantidad de ambientes.",
+    })
+    .min(1, {
+      message: "Ingresá la cantidad de ambientes.",
+    }),
+  dormitorios: z
+    .string({
+      message: "Ingresá la cantidad de dormitorios.",
+    })
+    .min(1, {
+      message: "Ingresá la cantidad de dormitorios.",
+    }),
+  garageCarsQuantity: z
+    .string({
+      message: "Ingresá la capacidad de autos del garage..",
+    })
+    .min(1, {
+      message: "Ingresá la capacidad de autos del garage.",
+    }),
+  businessType: z.string().min(1, {
+    message: "Selecciona un tipo de negocio.",
   }),
-  kilometers: z.string().min(1, {
-    message: "Ingresa un kilometraje.",
-  }),
-  motor: z.string().min(1, {
-    message: "Ingresá un motor.",
-  }),
-  type: z.string().min(1, {
-    message: "Selecciona un tipo de vehículo.",
+  address: z.string().min(1, {
+    message: "Ingresá el domicilio.",
   }),
   currency: z.string().min(1, {
+    message: "Ingresá una moneda.",
+  }),
+  city: z.string().min(1, {
+    message: "Ingresá la ciudad.",
+  }),
+  neighborhood: z.string().min(1, {
+    message: "Ingresá el barrio.",
+  }),
+  state: z.string().min(1, {
     message: "Selecciona una moneda.",
   }),
   price: z.string().min(1, {
-    message: "Ingresa un precio.",
+    message: "Ingresá un precio.",
   }),
-  modelName: z.string().min(1, {
-    message: "Ingresá un modelo.",
+  propertyType: z.string().min(1, {
+    message: "Ingresá un tipo de propiedad.",
   }),
-  gearbox: z.string().min(1, {
-    message: "Selecciona una transmisión",
+  metersSquare: z.string().min(1, {
+    message: "Ingresá el total de metros cuadrados.",
   }),
-  doors: z.string().min(1, {
-    message: "Selecciona una cantidad de puertas.",
+  coveredMetersSquare: z.string().min(1, {
+    message: "Ingresá los metros cuadrados cubiertos.",
   }),
-  gas: z.string().min(1, {
-    message: "Selecciona un combustible.",
+  expensas: z.string().min(1, {
+    message: "Ingresá el monto de expensas.",
+  }),
+  antiquity: z.string().min(1, {
+    message: "Ingresá la antiguedad de la propiedad.",
+  }),
+  floors: z.string().min(1, {
+    message: "Ingresá la cantidad de pisos.",
   }),
   description: z.string().optional().or(z.literal("")),
-  branchID: z.string().min(1, {
-    message: "Selecciona una sucursal.",
-  }),
 });

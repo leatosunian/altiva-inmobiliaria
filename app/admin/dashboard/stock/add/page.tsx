@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const AddProduct = () => {
   return (
     <>
-      <h2 className="text-2xl font-medium ">Agregar vehículo</h2>
+      <h2 className="text-2xl font-medium ">Agregar propiedad</h2>
       <Separator className="my-4" />
       <div>
         <div className="grid gap-0 ">

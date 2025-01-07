@@ -1,8 +1,9 @@
 import connectDB from "@/lib/db";
-import CarModel from "@/app/models/car";
 import { NextRequest, NextResponse } from "next/server";
 import BranchModel from "@/app/models/branch";
 import { v4 as uuidv4 } from "uuid";
+import PropertyModel from "@/app/models/property";
+
 // GET ALL CARS
 export async function GET(request: NextRequest, context: any) {
   await connectDB();
@@ -11,28 +12,39 @@ export async function GET(request: NextRequest, context: any) {
     const searchQuery =
       search && (search !== "null") !== null
         ? {
-            name: { $regex: new RegExp(search.toLowerCase(), "i") },
-          }
+          name: { $regex: new RegExp(search.toLowerCase(), "i") },
+        }
         : {};
-    const cars = await CarModel.find(searchQuery);
-    return NextResponse.json(cars);
+    const properties = await PropertyModel.find(searchQuery);
+    return NextResponse.json(properties);
   } catch (error) {
-    return NextResponse.json({ msg: "ERROR_GET_CAR" });
+    return NextResponse.json({ msg: "ERROR_GET_PROPERTY" });
   }
 }
 
-// CREATE NEW CAR
+// CREATE NEW PROPERTY
 export async function POST(request: NextRequest) {
+
   await connectDB();
   const data = await request.json();
-  console.log(data);
+  data.imagePublicID = ''
   
-  const branchAddress = await BranchModel.findOne({ _id: data.branchID });
-  data.branchAddress = branchAddress.address;
+  //data.bathrooms = Number(data.bathrooms)
+  //data.floors = Number(data.floors)
+  //data.antiquity = Number(data.antiquity)
+  //data.expensas = Number(data.expensas)
+  //data.price = Number(data.price)
+  //data.coveredMetersSquare = Number(data.coveredMetersSquare)
+  //data.metersSquare = Number(data.metersSquare)
+  //data.garageCarsQuantity = Number(data.garageCarsQuantity)
+  //data.rooms = Number(data.rooms)
+  //data.dormitorios = Number(data.dormitorios)
+  console.log(data)
   try {
-    const vehicle = await CarModel.create(data);
-    return NextResponse.json(vehicle);
+    const property = await PropertyModel.create(data);
+    return NextResponse.json(property);
   } catch (error) {
-    return NextResponse.json({ msg: "ERROR_CREATE_CAR" });
+    console.error("Error al crear la propiedad:", error);
+    return NextResponse.json({ msg: "ERROR_CREATE_PROPERTY" });
   }
 }

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const EditProduct = ({ params }: { params: { id: string } }) => {
   return (
     <>
-      <h2 className="text-2xl font-medium ">Editar vehículo</h2>
+      <h2 className="text-2xl font-medium ">Editar propiedad</h2>
       <Separator className="my-4" />
       <div>
         <div className="grid gap-0 ">

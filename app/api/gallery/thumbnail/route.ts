@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import CarModel from "@/app/models/car";
+import PropertyModel from "@/app/models/property";
 import { mkdir, writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
     const files = data.getAll("gallery_images") as File[];
 
     cloudinary.config({
-      cloud_name: "duiw7lwlb",
-      api_key: "435529513686272",
+      cloud_name: "dm4mkjisn",
+      api_key: "274595485733553",
       api_secret: process.env.CLOUDINARY_SECRET,
     });
 
@@ -36,8 +36,10 @@ export async function POST(request: NextRequest) {
             })
             .end(buffer);
         });
-        const updatedCar = await CarModel.findOneAndUpdate(
-          { uuid: carID },
+        console.log('cloudinaryResponse', cloudinaryResponse);
+        
+        const updatedCar = await PropertyModel.findOneAndUpdate(
+          { _id: carID },
           {
             imagePath: cloudinaryResponse.secure_url,
             imagePublicID: cloudinaryResponse.public_id,

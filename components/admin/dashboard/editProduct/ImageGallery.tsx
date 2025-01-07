@@ -32,7 +32,7 @@ import { Input } from "@/components/ui/input";
 import { Camera } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useParams } from "next/navigation";
-import { ICarImage } from "@/app/models/carimage";
+import { IPropertyImage } from "@/app/models/propertyimage";
 import { useRouter } from "next/navigation";
 
 const ImageGallery = () => {
@@ -49,7 +49,7 @@ const ImageGallery = () => {
     modalButtonRef.current?.click();
   };
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
-  const [galleryImages, setGalleryImages] = useState<ICarImage[]>([]);
+  const [galleryImages, setGalleryImages] = useState<IPropertyImage[]>([]);
   const [imageToDelete, setImageToDelete] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [fetchLoading, setFetchLoading] = useState(true);

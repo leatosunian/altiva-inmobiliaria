@@ -491,7 +491,7 @@ const Budget = ({
           {/* resumen de presupuesto */}
           <Card
             style={{ borderColor: "rgb(228, 228, 231)" }}
-            className="w-1/2 p-5 bg-white  h-fit"
+            className="w-1/2 p-5 bg-white h-fit"
           >
             <div className="flex flex-col gap-0 text-black bg-white">
               <span

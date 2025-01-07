@@ -88,11 +88,11 @@ const StockList = async () => {
   return (
     <>
       <div className="flex items-center justify-between ">
-        <h2 className="text-xl font-medium md:text-2xl ">Mis vehículos</h2>
+        <h2 className="text-xl font-medium md:text-2xl ">Mis propiedades</h2>
         <Link href={"/admin/dashboard/stock/add"}>
           <Button variant="outline" className="flex gap-2 p-2 w-fit h-fit">
             <IoMdAdd size={20} className="w-fit h-fit" />
-            <span>Crear vehículo</span>
+            <span>Crear propiedad</span>
           </Button>
         </Link>
       </div>

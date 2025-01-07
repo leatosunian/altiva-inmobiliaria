@@ -1,16 +1,16 @@
 import { Document, model, Schema, models } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
-export interface ICarImage extends Document {
-  carID: string;
+export interface IPropertyImage extends Document {
+  propertyID: string;
   path: string;
   uuid: string;
   public_id: string;
 }
 
-const carImageSchema: Schema = new Schema<ICarImage>(
+const propertyImageSchema: Schema = new Schema<IPropertyImage>(
   {
-    carID: {
+    propertyID: {
       type: String,
       required: true,
     },
@@ -33,6 +33,6 @@ const carImageSchema: Schema = new Schema<ICarImage>(
   }
 );
 
-const CarImageModel = models.car_images || model("car_images", carImageSchema);
+const PropertyImageModel = models.property_images || model("property_images", propertyImageSchema);
 
-export default CarImageModel;
+export default PropertyImageModel;

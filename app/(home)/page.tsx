@@ -7,7 +7,6 @@ import NewProducts from "@/components/page/home/NewProducts";
 import Section2 from "@/components/page/home/Section2";
 import Slider from "@/components/page/home/Slider";
 import { Suspense, useEffect, useState } from "react";
-import { ICar } from "../models/car";
 import Section3 from "@/components/page/home/Section3";
 import Search from "@/components/page/home/Search";
 import LoaderFullscreen from "@/components/page/LoaderFullscreen";
@@ -18,26 +17,27 @@ import Budget from "@/components/page/home/Budget";
 import SearchingFor from "@/components/page/home/SearchingFor";
 import Counters from "@/components/page/home/Counters";
 import { Separator } from "@/components/ui/separator";
+import { IProperty } from '../models/property';
 
 const Home = () => {
-  const [latestVehicles, setLatestVehicles] = useState<ICar[]>([]);
+  const [latestProperties, setLatestProperties] = useState<IProperty[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  async function getLastVehicles() {
-    const latestVehicles = await fetch("/api/cars/latests/", {
+  async function getLastProperties() {
+    const latestProperties = await fetch("/api/cars/latests/", {
       method: "GET",
       cache: "no-store",
     });
-    const cars = await latestVehicles.json();
+    const cars = await latestProperties.json();
     if (cars.length !== 0) {
-      setLatestVehicles(cars);
+      setLatestProperties(cars);
       setLoading(false);
     }
-    return latestVehicles;
+    return latestProperties;
   }
 
   useEffect(() => {
-    //getLastVehicles();
+    getLastProperties();
     //fetch 10 lastest vehicles
   }, []);
 
@@ -51,7 +51,7 @@ const Home = () => {
           <SearchingFor />
           <Separator className="w-2/3 my-16 mx-auto" />
 
-          {/* <LatestProperties vehicles={latestVehicles} /> */}
+          <LatestProperties properties={latestProperties} />
           <AboutSection />
           <Counters/>
           <Separator className="w-2/3 mb-14 sm:mb-36 mx-auto" />
