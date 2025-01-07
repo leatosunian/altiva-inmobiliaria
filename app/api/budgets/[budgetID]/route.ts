@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
 import BudgetModel from "@/app/models/budget";
 import BudgetBonifModel from "@/app/models/budgetbonif";
 import connectDB from "@/lib/db";
-import LeadModel from "@/app/models/lead";
-import TaskModel from "@/app/models/task";
 
 // get budget by ID
 export async function GET(

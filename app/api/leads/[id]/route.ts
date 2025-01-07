@@ -2,9 +2,9 @@ import connectDB from "@/lib/db";
 import LeadModel, { ILead } from "@/app/models/lead";
 import { NextRequest, NextResponse } from "next/server";
 import LeadVehiclesModel from "@/app/models/leadvehicles";
-import CarModel from "@/app/models/car";
 import TaskModel from "@/app/models/task";
 import AdminModel from "@/app/models/admin";
+import PropertyModel from "@/app/models/property";
 
 // GET CAR BY UUID
 export async function GET(
@@ -21,7 +21,7 @@ export async function GET(
     const leadVehicles = await LeadVehiclesModel.findOne({ leadID: params.id });
     console.log('leadVehicles', leadVehicles);
     
-    const intInVehicle = await CarModel.findOne({
+    const intInVehicle = await PropertyModel.findOne({
       uuid: leadVehicles.leadPrefVehicleUUID,
     });
     console.log('intInVehicle', intInVehicle);
