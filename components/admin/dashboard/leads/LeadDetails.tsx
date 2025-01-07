@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { useParams, useRouter } from "next/navigation";
 import { es } from "date-fns/locale";
-import { ICar } from "@/app/models/car";
 import Image from "next/image";
 import { FaRegEdit } from "react-icons/fa";
 import {
@@ -94,6 +93,7 @@ import { ILeadVehicle } from "@/app/models/leadvehicles";
 import LeadBudgetsList from "./LeadBudgetsList";
 import { IBudget } from "@/app/models/budget";
 import { IAdmin } from "@/app/models/admin";
+import { IProperty } from "@/app/models/property";
 dayjs.locale("es");
 
 const LeadDetails = () => {
@@ -130,7 +130,7 @@ const LeadDetails = () => {
   const [lead, setLead] = useState<ILead>();
   const [completedTasks, setCompletedTasks] = useState<ITask[]>([]);
   const [pendingTasks, setPendingTasks] = useState<ITask[]>([]);
-  const [intInVehicle, setIntInVehicle] = useState<ICar>();
+  const [intInVehicle, setIntInVehicle] = useState<IProperty>();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const { id } = useParams();
   const { toast } = useToast();
@@ -616,12 +616,12 @@ const LeadDetails = () => {
                             <div className="flex items-center gap-2">
                               {/* <FaRegCalendar /> <span>{car.year}</span> */}
                               <FaRegCalendar />{" "}
-                              <span> {intInVehicle?.year}</span>
+                              {/* <span> {intInVehicle?.year}</span> */}
                             </div>
                             <div className="flex items-center gap-2">
                               <IoSpeedometerOutline size={20} />
                               {/* <span> {car.kilometers} km</span> */}
-                              <span> {intInVehicle?.kilometers} km</span>
+                              {/* <span> {intInVehicle?.kilometers} km</span> */}
                             </div>
                           </CardDescription>
                           <span className="text-lg font-semibold">

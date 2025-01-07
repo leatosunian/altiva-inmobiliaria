@@ -24,7 +24,6 @@ import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { formSchema } from "@/app/schemas/createLeadForm";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ICar } from "@/app/models/car";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { IAdmin } from "@/app/models/admin";
@@ -43,6 +42,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ILead } from "@/app/models/lead";
 import { useSession } from "next-auth/react";
+import { IProperty } from "@/app/models/property";
 
 interface props {
   onChangeFormStep: () => void;
@@ -73,7 +73,7 @@ const NewLeadForm = ({
   });
 
   const { data: session }: any = useSession();
-  const [vehicleList, setVehicleList] = useState<ICar[]>([]);
+  const [vehicleList, setVehicleList] = useState<IProperty[]>([]);
   const [employees, setEmployees] = useState<IAdmin[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [branches, setBranches] = useState<IBranch[]>([]);
