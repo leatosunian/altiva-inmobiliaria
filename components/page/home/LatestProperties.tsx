@@ -60,13 +60,13 @@ const LatestProperties = ({ properties }: Props) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center w-full gap-8 my-16 align-middle h-fit xl:h-screen md:gap-8 2xl:gap-12 md:my-14 2xl:my-0">
+      <section className="flex flex-col justify-center w-full gap-8 my-8 align-middle h-fit xl:h-screen md:gap-8 2xl:gap-12 md:my-14 2xl:my-0">
         <motion.header
           initial={{ opacity: 0, y: -70 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: "some", once: true }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="flex flex-col items-start justify-center px-6 overflow-visible md:overflow-hidden md:hidden"
+          className="flex flex-col items-start justify-center px-6 overflow-visible sm:px-16 md:px-32 2xl:px-56 md:overflow-hidden md:hidden"
         >
           <div className="flex flex-col ">
             <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
@@ -184,18 +184,18 @@ const LatestProperties = ({ properties }: Props) => {
                         />
                         <div className="flex flex-col justify-between w-full h-fit md:h-1/2">
                           <CardHeader style={{ padding: "0 16px 10px 16px" }}>
-                            <CardTitle className="text-base sm:text-base textCut pb-1">
+                            <CardTitle className="pb-1 text-base sm:text-base textCut">
                               {property.name}
                             </CardTitle>
                             <Separator />
                             <p
                               style={{ color: "#a1a1aa" }}
-                              className="flex py-1 items-center gap-1 text-xs "
+                              className="flex items-center gap-1 py-1 text-xs "
                             >
                               <FaLocationDot size={13} /> {property.neighborhood}, {property.city}
                             </p>
                             <Separator />
-                            <CardDescription className="flex items-center h-fit flex-wrap gap-y-2 justify-between w-full pt-2 pb-2 ">
+                            <CardDescription className="flex flex-wrap items-center justify-between w-full pt-2 pb-2 h-fit gap-y-2 ">
                               <div className="flex items-center gap-1">
                                 <Maximize2 size={14} />
                                 <span className="text-xs">{property.metersSquare} m² </span>
@@ -222,14 +222,14 @@ const LatestProperties = ({ properties }: Props) => {
                               </p>
                             </div>
                           </CardHeader>
-                          <CardFooter className=" gap-3 w-full px-4 pb-5 mt-2 md:mt-0">
+                          <CardFooter className="w-full gap-3 px-4 pb-5 mt-2 md:mt-0">
                             <Link
                               href={`/properties/${property._id}`}
                               className="w-full h-fit"
                             >
                               <Button
                                 variant={"default"}
-                                className="w-full text-xs md:text-xs 2xl:text-xs"
+                                className="w-full text-xs text-white bg-red-800 hover:bg-red-900 md:text-xs 2xl:text-xs"
                               >
                                 Ver más
                               </Button>
@@ -258,11 +258,11 @@ const LatestProperties = ({ properties }: Props) => {
             />
           ))}
         </div>
-        <div className="flex justify-center w-full mt-4 md:hidden h-fit">
+        <div className="flex justify-center w-full mt-4 h-fit">
           <Link className="w-fit h-fit" href={"/properties"}>
-            <button className={`${stylesSearch.button}`}>
-              Ver todos los vehículos
-            </button>
+            <Button className="text-xs text-white bg-red-800 md:text-sm hover:bg-red-900">
+              Ver todas las propiedades
+            </Button>
           </Link>
         </div>
       </section>

@@ -45,27 +45,29 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { CheckIcon, ChevronsUpDown } from "lucide-react";
-import { ICar } from "@/app/models/car";
+import { Bath, CheckIcon, ChevronsUpDown, DoorOpen, Maximize2 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoaderFullscreen from "@/components/page/LoaderFullscreen";
 import Link from "next/link";
-import { FaRegCalendar } from "react-icons/fa";
+import { FaBed, FaRegCalendar } from "react-icons/fa";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { Badge } from "@/components/ui/badge";
+import { IProperty } from "@/app/models/property";
+import { Separator } from "@radix-ui/react-separator";
+import { FaLocationDot } from "react-icons/fa6";
 
 const VehiclesCont = () => {
   const [open, setOpen] = useState(false);
   const [brandFilter, setBrandFilter] = useState("");
-  const [vehicleFetch, setVehicleFetch] = useState<ICar[]>([]);
-  const [vehicleList, setVehicleList] = useState<ICar[]>([]);
+  const [vehicleFetch, setVehicleFetch] = useState<IProperty[]>([]);
+  const [vehicleList, setVehicleList] = useState<IProperty[]>([]);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchFilter = searchParams.get("search");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentVehicles, setCurrentVehicles] = useState<ICar[]>([]);
+  const [currentVehicles, setCurrentVehicles] = useState<IProperty[]>([]);
   const [vehiclesPerPage, setVehiclesPerPage] = useState<number>(12);
   const lastVehicleIndex = currentPage * vehiclesPerPage;
   const firstVehicleIndex = lastVehicleIndex - vehiclesPerPage;
@@ -95,13 +97,13 @@ const VehiclesCont = () => {
     const vehiclesSorted = [...vehicleList].sort(
       (prev, next) => next.price - prev.price
     );
-    setVehicleList(vehiclesSorted); 
+    setVehicleList(vehiclesSorted);
   }
   function sortVehiclesByPriceAsc() {
     const vehiclesSorted = [...vehicleList].sort(
       (prev, next) => prev.price - next.price
     );
-    setVehicleList(vehiclesSorted); 
+    setVehicleList(vehiclesSorted);
   }
   function sortVehiclesByDateAsc() {
     const vehiclesSorted = [...vehicleList].sort((a, b) => {
@@ -119,33 +121,28 @@ const VehiclesCont = () => {
     });
     setVehicleList(vehiclesSorted);
   }
-  function handleFilterByYear(year: string) {
+  function handleFilterByAmbientes(rooms: number) {
     const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
-      return vehicle.year === Number(year);
+      return vehicle.rooms === Number(rooms);
     });
     setVehicleList(vehiclesFiltered);
   }
-  function handleFilterByDoors(doors: string) {
+  function handleFilterByPropertyType(propertyType: string) {
     const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
-      return vehicle.doors === doors;
+      return vehicle.propertyType === propertyType;
     });
     setVehicleList(vehiclesFiltered);
   }
-  function handleFilterByBrand(brand: string) {
+
+  function handleFilterByBathrooms(bathrooms: number) {
     const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
-      return vehicle.brand === brand;
+      return vehicle.bathrooms === bathrooms;
     });
     setVehicleList(vehiclesFiltered);
   }
-  function handleFilterByGearbox(gearbox: string) {
+  function handleFilterByBusinessType(businessType: string) {
     const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
-      return vehicle.gearbox === gearbox;
-    });
-    setVehicleList(vehiclesFiltered);
-  }
-  function handleFilterByType(type: string) {
-    const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
-      return vehicle.type === type;
+      return vehicle.businessType === businessType;
     });
     setVehicleList(vehiclesFiltered);
   }
@@ -163,9 +160,9 @@ const VehiclesCont = () => {
   }
 
   function refresh() {
-    router.replace("/vehicles");
+    router.replace("/properties");
     setTimeout(() => {
-      if (pathname === "/vehicles" && searchFilter !== "") {
+      if (pathname === "/properties" && searchFilter !== "") {
         window.location.reload();
       }
     }, 500);
@@ -210,10 +207,10 @@ const VehiclesCont = () => {
         <div className="flex flex-col justify-between w-full gap-2 mt-0 md:mt-2 md:flex-row h-fit ">
           <div className="flex flex-col w-fit">
             <h4 className="text-2xl font-medium md:text-3xl">
-              Todos los vehículos
+              Todas las propiedades
             </h4>
             <span className="mb-2 text-sm text-gray-400">
-              Mostrando 1-12 de {vehicleList.length} vehículos
+              Mostrando 1-12 de {vehicleList.length} propiedades
             </span>
           </div>
 
@@ -325,11 +322,11 @@ const VehiclesCont = () => {
 
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Tipo de vehículo</span>
+                <span className="text-sm font-medium">Tipo de operación</span>
                 <Select
                   onValueChange={(type) => {
                     console.log(type);
-                    handleFilterByType(type);
+                    handleFilterByBusinessType(type);
                   }}
                 >
                   <SelectTrigger className="w-full">
@@ -337,85 +334,58 @@ const VehiclesCont = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="CAR">Automóvil</SelectItem>
-                      <SelectItem value="BIKE">Motocicleta</SelectItem>
-                      <SelectItem value="QUAD">Cuatriciclo</SelectItem>
-                      <SelectItem value="PICKUP">Pickup</SelectItem>
-                      <SelectItem value="UTILITARY">Utilitario</SelectItem>
-                      <SelectItem value="SUV">SUV</SelectItem>
-                      <SelectItem value="VAN">Van</SelectItem>
-                      <SelectItem value="CONVERTIBLE">Convertible</SelectItem>
-                      <SelectItem value="COUPE">Coupe</SelectItem>
-                      <SelectItem value="HATCHBACK">Hatchback</SelectItem>
-                      <SelectItem value="UTV">UTV</SelectItem>
-                      <SelectItem value="ATV">ATV</SelectItem>
-                      <SelectItem value="MOTORHOME">Motorhome</SelectItem>
-                      <SelectItem value="SCOOTER">Scooter</SelectItem>
+                      <SelectItem value="Venta">Venta</SelectItem>
+                      <SelectItem value="Alquiler">Alquiler</SelectItem>
+                      <SelectItem value="Alquiler temporal">Alquiler temporal</SelectItem>
+
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Marca</span>
-                <Popover open={open} onOpenChange={setOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      aria-expanded={open}
-                      className="justify-between w-full"
-                    >
-                      {brandFilter
-                        ? carBrands.find((brand) => brand === brandFilter)
-                        : "Seleccionar marca..."}
 
-                      <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-full  p-0">
-                    <Command>
-                      <CommandInput
-                        placeholder="Buscar marca..."
-                        className="h-9"
-                      />
-                      <CommandList>
-                        <CommandEmpty>No hay resultados.</CommandEmpty>
-                        <CommandGroup>
-                          {carBrands.map((brand) => (
-                            <CommandItem
-                              key={brand}
-                              value={brand}
-                              onSelect={() => {
-                                console.log(brand);
-                                setBrandFilter(brand);
-                                handleFilterByBrand(brand);
-                                setOpen(false);
-                              }}
-                            >
-                              {brand}
-                              <CheckIcon
-                                className={cn(
-                                  "ml-auto h-4 w-4",
-                                  brandFilter === brand
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </CommandList>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-              </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Cantidad de puertas</span>
+                <span className="text-sm font-medium">Tipo de propiedad</span>
                 <Select
                   onValueChange={(doors) => {
                     console.log(doors);
-                    handleFilterByDoors(doors);
+                    handleFilterByPropertyType(doors);
+                  }}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Seleccionar tipo..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Casa">Casa</SelectItem>
+                      <SelectItem value="Departamento">Departamento</SelectItem>
+                      <SelectItem value="PH">PH</SelectItem>
+                      <SelectItem value="Fondo de comercio">Fondo de comercio</SelectItem>
+                      <SelectItem value="Terreno">Terreno</SelectItem>
+                      <SelectItem value="Lote">Lote</SelectItem>
+                      <SelectItem value="Local">
+                        Local
+                      </SelectItem>
+                      <SelectItem value="Oficina">Oficina</SelectItem>
+                      <SelectItem value="Quinta">Quinta</SelectItem>
+                      <SelectItem value="Galpon">
+                        Galpón
+                      </SelectItem>
+                      <SelectItem value="Chacra">Chacra</SelectItem>
+                      <SelectItem value="Depósito">Depósito</SelectItem>
+                      <SelectItem value="Campo">Campo</SelectItem>
+                      <SelectItem value="Otro">Otro</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium">Ambientes</span>
+                <Select
+                  onValueChange={(doors) => {
+                    console.log(doors);
+                    handleFilterByAmbientes(Number(doors));
                   }}
                 >
                   <SelectTrigger className="w-full">
@@ -423,51 +393,31 @@ const VehiclesCont = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="2P">2 puertas</SelectItem>
-                      <SelectItem value="3P">3 puertas</SelectItem>
-                      <SelectItem value="4P">4 puertas</SelectItem>
-                      <SelectItem value="5P">5 puertas</SelectItem>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4 o más</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Año</span>
+                <span className="text-sm font-medium">Baños</span>
                 <Select
-                  onValueChange={(year) => {
-                    handleFilterByYear(year);
+                  onValueChange={(bathrooms) => {
+                    handleFilterByBathrooms(Number(bathrooms));
                   }}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Seleccionar año..." />
+                    <SelectValue placeholder="Seleccionar cantidad..." />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      {carYears.map((year) => (
-                        <SelectItem key={year} value={year}>
-                          {year}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Transmisión</span>
-                <Select
-                  onValueChange={(gearbox) => {
-                    handleFilterByGearbox(gearbox);
-                  }}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Seleccionar transm..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="MANUAL">Manual </SelectItem>
-                      <SelectItem value="AUTOMATIC">Automática</SelectItem>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4 o más</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -486,6 +436,7 @@ const VehiclesCont = () => {
                     refresh();
                   }
                 }}
+                className="bg-red-800 text-white hover:bg-red-900"
               >
                 Remover filtros
               </Button>
@@ -498,68 +449,75 @@ const VehiclesCont = () => {
             {currentVehicles.length !== 0 && (
               <>
                 <div
-                  className={`${styles.vehiclesCont} xl:gap-10 gap-14 2xl:gap-12 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 py-5 md:py-0 pl-0 lg:pl-10   `}
+                  className={`${styles.vehiclesCont} xl:gap-10 gap-14 2xl:gap-12 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 py-5 md:py-0 pl-0 lg:pl-10   `}
                 >
                   {currentVehicles.length > 0 &&
-                    currentVehicles.map((car) => (
+                    currentVehicles.map((property) => (
                       <>
                         <div
-                          key={car.uuid}
+                          key={property._id}
                           className="col-span-1 md:h-full h-fit"
                         >
-                          <Card className="flex flex-col h-full shadow-lg">
-                            {car.status === "RESERVED" && (
-                              <Badge
-                                className="absolute bg-orange-500 border-none shadow-lg mt-2 md:py-1 md:px-3 py-1.5 px-3.5 ml-2 text-white font-normal md:text-xs text-sm "
-                                variant="outline"
-                              >
-                                Reservado
-                              </Badge>
-                            )}
-                            {car.status === "SOLD" && (
-                              <Badge
-                                className="absolute bg-red-500 border-none shadow-lg mt-2 md:py-1 md:px-3 py-1.5 px-3.5 ml-2 text-white font-normal md:text-xs text-sm "
-                                variant="outline"
-                              >
-                                Vendido
-                              </Badge>
-                            )}
+                          <Card
+                            key={property._id}
+                            className="flex unselectable flex-col md:max-h-[500px] max-h-fit 2xl:max-h-fit  h-fit shadow-lg"
+                          >
                             <Image
-                              src={car?.imagePath!}
-                              alt="auto"
+                              src={property.imagePath!}
+                              alt=""
+                              unoptimized
                               width={500}
                               height={500}
-                              unoptimized
-                              className="object-cover h-full mb-4 overflow-hidden rounded-t-md md:h-1/2 "
+                              className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
                             />
-                            <div className="flex flex-col justify-between w-full h-full md:h-1/2">
-                              <CardHeader
-                                style={{ padding: "0 16px 0px 16px" }}
-                              >
-                                <CardTitle className="text-lg md:text-base textCut">
-                                  {car.name}
+                            <div className="flex flex-col justify-between w-full h-fit md:h-1/2">
+                              <CardHeader style={{ padding: "0 16px 10px 16px" }}>
+                                <CardTitle className="text-base sm:text-base textCut pb-1">
+                                  {property.name}
                                 </CardTitle>
-                                <CardDescription className="flex items-center justify-between w-full pt-1 pb-2 ">
-                                  <div className="flex items-center gap-2">
-                                    <FaRegCalendar /> <span>{car.year}</span>
+                                <Separator />
+                                <p
+                                  style={{ color: "#a1a1aa" }}
+                                  className="flex py-1 items-center gap-1 text-xs "
+                                >
+                                  <FaLocationDot size={13} /> {property.neighborhood}, {property.city}
+                                </p>
+                                <Separator />
+                                <CardDescription className="flex items-center h-fit flex-wrap gap-y-2 justify-between w-full pt-2 pb-2 ">
+                                  <div className="flex items-center gap-1">
+                                    <Maximize2 size={14} />
+                                    <span className="text-xs">{property.metersSquare} m² </span>
                                   </div>
-                                  <div className="flex items-center gap-2">
-                                    <IoSpeedometerOutline size={20} />
-                                    <span> {car.kilometers} km</span>
+                                  <div className="flex items-center gap-1">
+                                    <FaBed size={16} />
+                                    <span className="text-xs"> {property.dormitorios} dormitorios</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <DoorOpen size={17} />
+                                    <span className="text-xs"> {property.rooms} ambientes</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Bath size={17} />
+                                    <span className="text-xs"> {property.bathrooms} baños</span>
                                   </div>
                                 </CardDescription>
-                                <p className="text-lg font-semibold">
-                                  {car.currency} ${car.price}
-                                </p>
+                                <Separator />
+
+                                <div className="flex flex-col gap-5 pt-2 pb-2">
+
+                                  <p className="text-lg font-semibold">
+                                    {property.currency} ${property.price}
+                                  </p>
+                                </div>
                               </CardHeader>
-                              <CardFooter className="px-4 pb-5 mt-5 md:mt-3">
+                              <CardFooter className=" gap-3 w-full px-4 pb-5 mt-2 md:mt-0">
                                 <Link
-                                  href={`/vehicles/${car.uuid}`}
+                                  href={`/properties/${property._id}`}
                                   className="w-full h-fit"
                                 >
                                   <Button
                                     variant={"default"}
-                                    className="w-full"
+                                    className="w-full text-xs md:text-xs 2xl:text-xs hover:bg-red-900 bg-red-800 text-white"
                                   >
                                     Ver más
                                   </Button>
@@ -616,10 +574,9 @@ const VehiclesCont = () => {
                   <span className="text-2xl font-semibold">
                     No se encontró ningún resultado.
                   </span>
-                  <button
+                  <Button
+                  
                     onClick={() => {
-                      console.log(searchFilter);
-
                       if (searchFilter === "") {
                         setVehicleList(vehicleFetch);
                         return;
@@ -629,10 +586,10 @@ const VehiclesCont = () => {
                         refresh();
                       }
                     }}
-                    className={`${buttonStyle.button}`}
+                    className="bg-red-800 text-white hover:bg-red-900"
                   >
                     Eliminar filtros
-                  </button>
+                  </Button>
                 </div>
               </>
             )}

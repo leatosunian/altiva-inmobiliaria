@@ -1,0 +1,22 @@
+.sectionCont {
+  width: 100%;
+  background-image: url(/modern-home.jpeg);
+  position: relative;
+  background-size: cover; /* Hace que la imagen cubra toda la sección sin deformarse */
+  background-position: center; /* Centra la imagen en la sección */
+  background-repeat: no-repeat; /* Evita que la imagen se repita si no llena todo el contenedor */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: white;
+  height: 70vh;
+}
+
+@media (max-width: 768px){
+  .sectionCont {
+    width: 90vw;
+    gap: 15px;
+    height: fit-content;
+  }
+  
+}

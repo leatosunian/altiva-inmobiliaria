@@ -49,16 +49,16 @@ const Home = () => {
           <Header />
           <Slider />
           <SearchingFor />
-          <Separator className="w-2/3 my-16 mx-auto" />
+          <Separator className="w-2/3 mx-auto my-16" />
 
           <LatestProperties properties={latestProperties} />
           <AboutSection />
           <Counters/>
-          <Separator className="w-2/3 mb-14 sm:mb-36 mx-auto" />
+          <Separator className="w-2/3 mx-auto mb-14 sm:mb-36" />
 
           <Budget />
-          <Separator className="w-2/3 mb-36 mx-auto" />
-
+          <Separator className="w-2/3 mx-auto mb-0 md:mb-36" />
+          <ContactForm/>
           <Footer />
         </div>
       </Suspense>

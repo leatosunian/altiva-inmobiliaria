@@ -28,7 +28,7 @@ const Breadcrumbs = ({ name }: { name: string | undefined }) => {
             </BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbItem className="hidden font-medium xs:block">
-            <BreadcrumbPage className="font-medium textCutOneLine">
+            <BreadcrumbPage className="font-medium text-red textCutOneLine">
               {name}
             </BreadcrumbPage>
           </BreadcrumbItem>

@@ -351,8 +351,9 @@ const AddProductForm = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="Alquiler">Alquiler</SelectItem>
-                            <SelectItem value="Venta">Venta</SelectItem>
+                          <SelectItem value="Alquiler">Alquiler</SelectItem>
+                          <SelectItem value="Alquiler temporal">Alquiler temporal</SelectItem>
+                          <SelectItem value="Venta">Venta</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />

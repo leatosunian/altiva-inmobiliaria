@@ -26,6 +26,8 @@ export interface IProperty extends Document {
   _id?: string;
   dormitorios: number;
   imagePublicID?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
 }
 
 const propertyModel: Schema = new Schema<IProperty>(
