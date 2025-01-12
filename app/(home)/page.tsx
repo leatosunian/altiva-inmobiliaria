@@ -1,15 +1,9 @@
 "use client";
 import React from "react";
 import Header from "@/components/page/Header";
-import AdminHeader from "@/components/page/AdminHeader";
 import Footer from "@/components/page/home/Footer";
-import NewProducts from "@/components/page/home/NewProducts";
-import Section2 from "@/components/page/home/Section2";
 import Slider from "@/components/page/home/Slider";
 import { Suspense, useEffect, useState } from "react";
-import Section3 from "@/components/page/home/Section3";
-import Search from "@/components/page/home/Search";
-import LoaderFullscreen from "@/components/page/LoaderFullscreen";
 import ContactForm from "@/components/page/home/ContactForm";
 import AboutSection from "@/components/page/home/About";
 import LatestProperties from "@/components/page/home/LatestProperties";
