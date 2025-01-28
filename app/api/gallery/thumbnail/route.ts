@@ -46,7 +46,9 @@ export async function POST(request: NextRequest) {
           }
         );
         if (updatedCar.imagePublicID !== "") {
-          await cloudinary.uploader.destroy(updatedCar.imagePublicID);
+          console.log(updatedCar.imagePublicID);
+          
+          //await cloudinary.uploader.destroy(updatedCar.imagePublicID);
         }
       } catch (writeError) {
         console.error("Error writing file:", writeError);
