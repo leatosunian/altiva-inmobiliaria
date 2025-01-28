@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       } catch (writeError) {
         console.error("Error writing file:", writeError);
         return NextResponse.json(
-          { msg: "ERROR_WRITING_FILE", error: writeError },
+          { msg: "ERROR_WRITING_FILE", error: writeError, carID },
           { status: 500 }
         );
       }
