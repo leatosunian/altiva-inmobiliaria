@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
             .end(buffer);
         });
         console.log('cloudinaryResponse', cloudinaryResponse);
-        
+
         const updatedCar = await PropertyModel.findOneAndUpdate(
           { _id: carID },
           {
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       } catch (writeError) {
         console.error("Error writing file:", writeError);
         return NextResponse.json(
-          { msg: "ERROR_WRITING_FILE" },
+          { msg: "ERROR_WRITING_FILE", error: writeError },
           { status: 500 }
         );
       }
