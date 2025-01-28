@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
             .end(buffer);
         });
         console.log('cloudinaryResponse', cloudinaryResponse);
-
+        
         const updatedCar = await PropertyModel.findOneAndUpdate(
           { _id: carID },
           {
@@ -46,14 +46,12 @@ export async function POST(request: NextRequest) {
           }
         );
         if (updatedCar.imagePublicID !== "") {
-          console.log(updatedCar.imagePublicID);
-          
-          //await cloudinary.uploader.destroy(updatedCar.imagePublicID);
+          await cloudinary.uploader.destroy(updatedCar.imagePublicID);
         }
       } catch (writeError) {
         console.error("Error writing file:", writeError);
         return NextResponse.json(
-          { msg: "ERROR_WRITING_FILE", error: writeError, carID },
+          { msg: "ERROR_WRITING_FILE" },
           { status: 500 }
         );
       }
