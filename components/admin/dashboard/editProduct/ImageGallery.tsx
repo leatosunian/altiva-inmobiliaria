@@ -106,10 +106,11 @@ const ImageGallery = () => {
       }
     } catch (error) {
       // error alert
-      toast({
-        description: "Error al eliminar imagen",
-        variant: "destructive",
-      });
+      setFetchLoading(false)
+      //toast({
+      //  description: "Error al eliminar imagen",
+      //  variant: "destructive",
+      //});
     }
   }
 
