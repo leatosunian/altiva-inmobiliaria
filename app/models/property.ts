@@ -26,6 +26,18 @@ export interface IProperty extends Document {
   _id?: string;
   dormitorios: number;
   imagePublicID?: string;
+
+  luminocity?: string;
+  infrastructureStatus?: string;
+  disposition?: string;
+
+  hasElevator?: boolean;
+  calefaction?: string;
+  hasPatio?: boolean;
+  hasPool?: boolean;
+  hasQuincho?: boolean;
+  hasTerrace?: boolean;
+  uncoveredMetersSquare?: number;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
@@ -44,11 +56,11 @@ const propertyModel: Schema = new Schema<IProperty>(
     },
     bathrooms: {
       type: Number,
-      required: true,
+      required: false,
     },
     dormitorios: {
       type: Number,
-      required: true,
+      required: false,
     },
     name: {
       type: String,
@@ -64,11 +76,11 @@ const propertyModel: Schema = new Schema<IProperty>(
     },
     garageCarsQuantity: {
       type: Number,
-      required: true,
+      required: false,
     },
     rooms: {
       type: Number,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
@@ -101,33 +113,74 @@ const propertyModel: Schema = new Schema<IProperty>(
     },
     metersSquare: {
       type: Number,
-      required: true,
+      required: false,
     },
     coveredMetersSquare: {
       type: Number,
-      required: true,
+      required: false,
+    },
+    uncoveredMetersSquare: {
+      type: Number,
+      required: false,
     },
     expensas: {
       type: Number,
-      required: true,
+      required: false,
     },
     antiquity: {
       type: Number,
-      required: true,
+      required: false,
     },
     floors: {
       type: Number,
-      required: true,
+      required: false,
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     imagePublicID: {
       type: String,
       required: false,
-      default: ''
-    }
+    },
+    luminocity: {
+      type: String,
+      required: false,
+    },
+    infrastructureStatus: {
+      type: String,
+      required: false,
+    },
+    disposition: {
+      type: String,
+      required: false,
+    },
+    hasElevator: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    calefaction: {
+      type: String,
+      required: false,
+    },
+    hasPatio: {
+      type: Boolean,
+      required: false,
+    },
+    hasPool: {
+      type: Boolean,
+      required: false,
+    },
+    hasQuincho: {
+      type: Boolean,
+      required: false,
+    },
+    hasTerrace: {
+      type: Boolean,
+      required: false,
+    },
+
   },
   {
     timestamps: true,

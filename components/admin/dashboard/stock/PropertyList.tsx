@@ -2,7 +2,7 @@
 
 import { FaLocationDot } from "react-icons/fa6";
 
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   Card,
@@ -56,12 +56,12 @@ import rooms from '@/public/cuartos.png'
 import { Bath, DoorOpen, House, Maximize2, Scan } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
-const CarList = ({ cars }: { cars: IProperty[] }) => {
+const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   const [loading, setLoading] = useState(true);
-  const [carList, setCarList] = useState<IProperty[]>([]);
+  const [propertyList, setPropertyList] = useState<IProperty[]>([]);
   const [selectedToDelete, setSelectedToDelete] = useState({
     uuid: "",
-    carName: "",
+    propertyName: "",
   });
   const modalButtonRef = useRef<HTMLButtonElement>(null);
   const handleClick = () => {
@@ -69,19 +69,23 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
   };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentVehicles, setCurrentVehicles] = useState<IProperty[]>([]);
+  const [currentProperties, setCurrentProperties] = useState<IProperty[]>([]);
   const [branches, setBranches] = useState<IBranch[]>([]);
-  const [vehiclesPerPage, setVehiclesPerPage] = useState<number>(12);
-  const lastVehicleIndex = currentPage * vehiclesPerPage;
-  const firstVehicleIndex = lastVehicleIndex - vehiclesPerPage;
+  const [propertiesPerPage, setPropertiesPerPage] = useState<number>(12);
+  const lastPropertyIndex = currentPage * propertiesPerPage;
+  const firstPropertyIndex = lastPropertyIndex - propertiesPerPage;
   const [numberOfPages, setNumberOfPages] = useState<number[]>([0]);
+  const [filteredProperties, setFilteredProperties] = useState<IProperty[]>([]); // NEW: lista filtrada
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const router = useRouter();
   useEffect(() => {
-    if (cars) {
-      setCarList(cars);
+    if (properties) {
+      setPropertyList(properties);
+      setFilteredProperties(properties); // Inicialmente, la lista filtrada es igual a la lista completa
+      setLoading(false);
     }
-  }, [cars]);
+  }, [properties]);
 
   const { data: session, status } = useSession();
 
@@ -97,7 +101,7 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
       }).then((response) => response.json());
       console.log("vehicle:", vehicle);
       if (vehicle.msg === "CAR_DELETED") {
-        setCarList((prevCars) => {
+        setPropertyList((prevCars) => {
           const updatedCars = prevCars?.filter((car) => car._id !== uuid);
           console.log("updatedCars:", updatedCars);
           return updatedCars;
@@ -110,14 +114,45 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
     }
   }
 
+  function handleSearchChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setSearchTerm(value);
+    setCurrentPage(1); // vuelvo siempre a la primera página cuando cambia la búsqueda
+  }
+
+  useEffect(() => {
+    const term = searchTerm.trim().toLowerCase();
+
+    const result =
+      term === ""
+        ? propertyList
+        : propertyList.filter((property) => property.name.toLowerCase().includes(term));
+
+    setFilteredProperties(result);
+  }, [searchTerm, propertyList]);
+
+  /* ------------------------- paginación ------------------------- */
+  useEffect(() => {
+    const lastPropertyIndex = currentPage * propertiesPerPage;
+    const firstPropertyIndex = lastPropertyIndex - propertiesPerPage;
+
+    setCurrentProperties(filteredProperties.slice(firstPropertyIndex, lastPropertyIndex));
+
+    const pages: number[] = [];
+    for (let i = 1; i <= Math.ceil(filteredProperties.length / propertiesPerPage); i++) {
+      pages.push(i);
+    }
+    setNumberOfPages(pages);
+  }, [filteredProperties, currentPage, propertiesPerPage]);
+
   function openDeleteModal({
-    carName,
+    propertyName,
     uuid,
   }: {
-    carName: string;
+    propertyName: string;
     uuid: string;
   }) {
-    setSelectedToDelete({ carName, uuid });
+    setSelectedToDelete({ propertyName, uuid });
     handleClick();
   }
 
@@ -139,15 +174,15 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
   }
 
   useEffect(() => {
-    const currentVehicles = carList.slice(firstVehicleIndex, lastVehicleIndex);
-    setCurrentVehicles(currentVehicles);
+    const currentProperties = propertyList.slice(firstPropertyIndex, lastPropertyIndex);
+    setCurrentProperties(currentProperties);
     let paginationPages: number[] = [];
-    for (let i = 1; i <= Math.ceil(carList.length / vehiclesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(propertyList.length / propertiesPerPage); i++) {
       paginationPages.push(i);
     }
     setNumberOfPages(paginationPages);
     setLoading(false);
-  }, [carList, currentPage]);
+  }, [propertyList, currentPage]);
 
   async function getBranches() {
     try {
@@ -179,7 +214,7 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
       {!loading && (
         <>
           {/* no vehicles  */}
-          {currentVehicles.length === 0 && (
+          {filteredProperties.length === 0 && (
             <>
               <div className="flex flex-col items-center justify-center w-full gap-5 py-36 h-fit">
                 <h4 className="text-base font-semibold md:text-2xl">
@@ -191,172 +226,169 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
               </div>
             </>
           )}
-          {/* vehicles */}
-          {currentVehicles.length > 0 && (
+          {/* properties */}
+          {filteredProperties.length > 0 && (
             <>
-              {/* search and filter bar */}
-              <div className="flex justify-between mb-7">
-                {/* search bar */}
-                <div className="text-sm text-black bg-white groupSearch dark:bg-background dark:text-white ">
-                  <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    className="iconSearch"
-                  >
-                    <g>
-                      <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
-                    </g>
-                  </svg>
-                  <input
-                    className="text-black inputSearch dark:text-white"
-                    type="search"
-                    placeholder="Buscar propiedades"
-                  />
-                </div>
-
-                {/* filters */}
-                <div className="flex gap-4">
-                  <Select>
-                    <SelectTrigger className="w-fit">
-                      <SelectValue placeholder="Sucursal" className="mr-2" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {branches &&
-                          branches.map((branch) => (
-                            <SelectItem
-                              key={branch.branchName}
-                              value={branch._id!}
-                            >
-                              {branch.address}
-                            </SelectItem>
-                          ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-
-                  <Select>
-                    <SelectTrigger className="w-fit">
-                      <SelectValue placeholder="Estado" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="apple">Disponible</SelectItem>
-                        <SelectItem value="banana">Reservado</SelectItem>
-                        <SelectItem value="blueberry">Vendido</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-
-                  <Select>
-                    <SelectTrigger className="w-fit">
-                      <SelectValue
-                        className="text-xs"
-                        placeholder="Uso del vehiculo"
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="apple">Usado</SelectItem>
-                        <SelectItem value="banana">0km</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-
-                  <Select>
-                    <SelectTrigger className="w-fit">
-                      <SelectValue placeholder="Ordenar por..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="price-desc">
-                          Mayor a menor precio
-                        </SelectItem>
-                        <SelectItem value="price-asc">
-                          Menor a mayor precio
-                        </SelectItem>
-                        <SelectItem value="date-desc">
-                          Mas recientes a mas antiguos
-                        </SelectItem>
-                        <SelectItem value="date-asc">
-                          Mas antiguos a mas recientes
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
+              {/* filter / search bar */}
+              <div className="text-sm mb-2 text-black bg-white groupSearch dark:bg-background dark:text-white">
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="iconSearch">
+                  <g>
+                    <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                  </g>
+                </svg>
+                <input
+                  className="text-black inputSearch dark:text-white"
+                  type="search"
+                  placeholder="Buscar propiedad..."
+                  value={searchTerm}                      // NEW
+                  onChange={handleSearchChange}            // NEW
+                />
               </div>
 
-              {/* vehicle list */}
-              <div className="grid grid-cols-1 gap-10 sm:gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                {currentVehicles?.map((car) => (
-                  <div key={car._id} className="col-span-1 md:h-full h-fit">
+              {/* filters */}
+              {/* <div className="flex gap-4">
+                <Select>
+                  <SelectTrigger className="w-fit">
+                    <SelectValue placeholder="Sucursal" className="mr-2" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {branches &&
+                        branches.map((branch) => (
+                          <SelectItem
+                            key={branch.branchName}
+                            value={branch._id!}
+                          >
+                            {branch.address}
+                          </SelectItem>
+                        ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <Select>
+                  <SelectTrigger className="w-fit">
+                    <SelectValue placeholder="Estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="apple">Disponible</SelectItem>
+                      <SelectItem value="banana">Reservado</SelectItem>
+                      <SelectItem value="blueberry">Vendido</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <Select>
+                  <SelectTrigger className="w-fit">
+                    <SelectValue
+                      className="text-xs"
+                      placeholder="Uso del vehiculo"
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="apple">Usado</SelectItem>
+                      <SelectItem value="banana">0km</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <Select>
+                  <SelectTrigger className="w-fit">
+                    <SelectValue placeholder="Ordenar por..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="price-desc">
+                        Mayor a menor precio
+                      </SelectItem>
+                      <SelectItem value="price-asc">
+                        Menor a mayor precio
+                      </SelectItem>
+                      <SelectItem value="date-desc">
+                        Mas recientes a mas antiguos
+                      </SelectItem>
+                      <SelectItem value="date-asc">
+                        Mas antiguos a mas recientes
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div> */}
+
+              {/* property list */}
+              <div className="grid grid-cols-1 gap-10 sm:gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 ">
+                {filteredProperties?.map((property) => (
+                  <div key={property._id} className="col-span-1 md:h-full h-fit">
                     <Card
-                      key={car._id}
-                      className="flex flex-col h-fit shadow-lg"
+                      key={property._id}
+                      className="flex flex-col min-h-[420px] sm:min-h-[420px] md:min-h-[520px] lg:min-h-[560px] xl:min-h-[520px] 2xl:min-h-[450px] shadow-lg overflow-hidden"
                     >
-                      <Image
-                        src={car.imagePath!}
-                        alt=""
-                        unoptimized
-                        width={500}
-                        height={500}
-                        className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
-                      />
-                      <div className="flex flex-col justify-between w-full h-fit md:h-1/2">
+                      <div className="relative w-full h-56 mb-4 overflow-hidden sm:h-64 md:h-72 lg:h-72 xl:h-64 2xl:h-40 rounded-t-md sm:mb-5">
+                        <Image
+                          src={property.imagePath!}
+                          alt=""
+                          unoptimized
+                          width={500}
+                          height={500}
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover" />
+                      </div>
+                      {/* Use h-full so the footer pushes to the bottom consistently */}
+                      <div className="flex flex-col justify-start w-full h-fit md:justify-between md:h-full">
                         <CardHeader style={{ padding: "0 16px 10px 16px" }}>
-                          <CardTitle className="text-sm textCut pb-1">
-                            {car.name}
+                          <CardTitle className="pb-1 text-sm textCut">
+                            {property.name}
                           </CardTitle>
                           <Separator />
                           <p
                             style={{ color: "#a1a1aa" }}
-                            className="flex py-1 items-center gap-1 text-xs "
+                            className="flex items-center gap-1 py-1 text-xs "
                           >
-                            <FaLocationDot size={13} /> {car.neighborhood}, {car.city}
+                            <FaLocationDot size={13} /> {property.neighborhood}, {property.city}
                           </p>
                           <Separator />
-                          <CardDescription className="flex items-center h-fit flex-wrap gap-y-2 justify-between w-full pt-2 pb-2 ">
+                          <CardDescription className="flex flex-wrap items-center justify-between w-full pt-2 pb-2 h-fit gap-y-2 ">
                             <div className="flex items-center gap-1">
                               <Maximize2 size={14} />
-                              <span className="text-xs">{car.metersSquare} m² </span>
+                              <span className="text-xs">{property.metersSquare} m² </span>
                             </div>
                             <div className="flex items-center gap-1">
                               <FaBed size={16} />
-                              <span className="text-xs"> {car.dormitorios} dormitorios</span>
+                              <span className="text-xs"> {property.dormitorios} dormitorios</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <DoorOpen size={17} />
-                              <span className="text-xs"> {car.rooms} ambientes</span>
+                              <span className="text-xs"> {property.rooms} ambientes</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Bath size={17} />
-                              <span className="text-xs"> {car.bathrooms} baños</span>
+                              <span className="text-xs"> {property.bathrooms} baños</span>
                             </div>
                           </CardDescription>
 
                           <Separator />
 
                           <div className="flex flex-col gap-5 pt-2 pb-2">
-
                             <p className="text-base font-semibold">
-                              {car.currency} ${car.price}
+                              {property.currency} {property.price.toLocaleString()}
                             </p>
                           </div>
                         </CardHeader>
                         <CardFooter className="grid grid-cols-2 gap-3 px-4 pb-5 mt-2 md:mt-0">
                           <Button
-                            onClick={() => handleEdit(car._id!)}
+                            onClick={() => handleEdit(property._id!)}
                             variant={"default"}
-                            className="text-sm py-2"
+                            className="py-2 text-sm"
                           >
                             Editar
                           </Button>
                           <Button
                             onClick={() =>
                               openDeleteModal({
-                                carName: car.name,
-                                uuid: car._id!,
+                                propertyName: property.name,
+                                uuid: property._id!,
                               })
                             }
                             variant={"destructive"}
@@ -386,7 +418,7 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
                     <AlertDialogHeader>
                       <AlertDialogTitle>Eliminar propiedad</AlertDialogTitle>
                       <AlertDialogDescription>
-                        ¿Querés eliminar tu propiedad {selectedToDelete.carName}?
+                        ¿Querés eliminar tu propiedad {selectedToDelete.propertyName}?
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
@@ -443,9 +475,10 @@ const CarList = ({ cars }: { cars: IProperty[] }) => {
             </>
           )}
         </>
-      )}
+      )
+      }
     </>
   );
 };
 
-export default CarList;
+export default PropertyList;

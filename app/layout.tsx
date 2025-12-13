@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/app/globals.css";
+import "./globals.css";
 import SessionWrapper from "@/components/SessionWrapper";
 
-const inter = Inter({ subsets: ["latin"],  display: "swap",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <SessionWrapper>
-      <html lang="en">
+      <html lang="en" className={inter.variable}>
         <body className={inter.className}>{children}</body>
       </html>
     </SessionWrapper>

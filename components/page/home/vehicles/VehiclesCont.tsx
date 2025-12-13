@@ -66,6 +66,7 @@ const VehiclesCont = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchFilter = searchParams.get("search");
+  const propertyTypeFilter = searchParams.get("propType");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentVehicles, setCurrentVehicles] = useState<IProperty[]>([]);
   const [vehiclesPerPage, setVehiclesPerPage] = useState<number>(12);
@@ -188,7 +189,18 @@ const VehiclesCont = () => {
 
   useEffect(() => {
     getCars();
+    console.log(propertyTypeFilter);
+    
+    if(propertyTypeFilter === 'venta'){
+      handleFilterByBusinessType('Venta')
+    }
+    if(propertyTypeFilter === 'alquiler'){
+      handleFilterByBusinessType('Alquiler')
+    }
   }, []);
+
+
+
 
   return (
     <>
@@ -575,7 +587,7 @@ const VehiclesCont = () => {
                     No se encontró ningún resultado.
                   </span>
                   <Button
-                  
+
                     onClick={() => {
                       if (searchFilter === "") {
                         setVehicleList(vehicleFetch);

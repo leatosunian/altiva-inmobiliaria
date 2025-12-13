@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
-import ImageGallery from "@/components/admin/dashboard/editProduct/ImageGallery";
-import EditProductForm from "@/components/admin/dashboard/editProduct/EditProductForm";
+import ImageGallery from "@/components/admin/dashboard/editProperty/ImageGallery";
+import EditPropertyForm from "@/components/admin/dashboard/editProperty/EditPropertyForm";
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
 const ACCEPTED_FILE_TYPES = ["image/png"];
 import React from "react";
@@ -19,7 +19,7 @@ const EditProduct = ({ params }: { params: { id: string } }) => {
       <div>
         <div className="grid gap-0 ">
           {/* EDIT PRODUCT FORM */}
-          <EditProductForm uuid={params.id} />
+          <EditPropertyForm uuid={params.id} />
 
           <div className="block md:hidden">
             <Separator className="my-10 " />

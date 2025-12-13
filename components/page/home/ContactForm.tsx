@@ -33,7 +33,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import styles from '@/app/css-modules/home.contact.module.css'
 import { FaPhone } from "react-icons/fa6";
-import { Instagram } from "lucide-react";
 import { FaFacebookSquare, FaYoutube } from "react-icons/fa";
 
 const ContactForm = () => {
@@ -112,7 +111,7 @@ const ContactForm = () => {
                   <div className="flex items-center gap-3">
                     <FaLocationDot color="red" />
                     <div className="flex flex-col">
-                      <span>Visitanos en</span>
+                      <span className="text-sm font-semibold md:text-2xl">Visitanos en</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "
@@ -129,7 +128,7 @@ const ContactForm = () => {
                   <div className="flex items-center gap-3">
                     <FaPhone color="red" />
                     <div className="flex flex-col">
-                      <span>Pongámonos en contacto</span>
+                      <span  className="text-sm font-semibold md:text-2xl">Pongámonos en contacto</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "
@@ -147,7 +146,7 @@ const ContactForm = () => {
                   <div className="flex items-center gap-3">
                     <FaClock color="red" />
                     <div className="flex flex-col">
-                      <span>Nuestros horarios</span>
+                      <span className="text-sm font-semibold md:text-2xl">Nuestros horarios</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "

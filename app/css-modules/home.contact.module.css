@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: start;
   color: white;
-  height: 70vh;
+  height:fit-content;
 }
 
 @media (max-width: 768px){

@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "@/public/logo2-1.png";
 import React from "react";
 import { Metadata } from "next";
+import { Card } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Iniciar sesión | Panel de administración",
   description:
@@ -19,12 +20,12 @@ const Login = () => {
         style={{ height: "calc(100vh - 70px)" }}
         className="flex flex-col items-center justify-center w-full dark"
       >
-        <div className="flex flex-col gap-8 w-fit h-fit dark">
-          <span className="text-2xl font-normal text-left ">
+        <Card className="flex flex-col justify-between gap-6 px-6 pt-6 w-fit h-fit dark">
+          <span className="text-2xl font-semibold text-left ">
             Iniciar sesión
           </span>
           <LoginForm />
-        </div>
+        </Card>
       </div>
     </>
   );

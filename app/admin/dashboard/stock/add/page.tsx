@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import AddProductForm from "@/components/admin/dashboard/addProduct/AddProductForm";
+import AddPropertyForm from "@/components/admin/dashboard/addProperty/AddPropertyForm";
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
 const ACCEPTED_FILE_TYPES = ["image/png"];
 import React from "react";
@@ -17,7 +17,7 @@ const AddProduct = () => {
       <div>
         <div className="grid gap-0 ">
           {/* EDIT PRODUCT FORM */}
-          <AddProductForm />
+          <AddPropertyForm />
         </div>
       </div>
     </>

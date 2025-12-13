@@ -3,6 +3,7 @@ import React from "react";
 import Footer from "@/components/page/home/Footer";
 import VehicleCont from "@/components/page/home/vehicles/vehicle/VehicleCont";
 import { Metadata } from "next";
+import { GlassmorphismNavBlack } from "@/components/page/GlassmorphismNavBlack";
 
 export const metadata: Metadata = {
   title: "Vehículos | Distrito Automotor",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <>
-      <Header />
-      <VehicleCont  />
+      <GlassmorphismNavBlack />
+      <VehicleCont />
       <Footer />
     </>
   );

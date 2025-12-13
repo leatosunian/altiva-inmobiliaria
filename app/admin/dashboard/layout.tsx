@@ -121,7 +121,7 @@ export default function DashboardLayout({
           <main>
             <div className="px-4 pt-6">
               <div className="w-full min-h-[calc(100vh-230px)]">
-                <div className="p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-background dark:border-border sm:p-6 xl:p-8">
+                <div className="p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-background dark:border-border sm:p-6 xl:p-6">
                   {children}
                 </div>
               </div>

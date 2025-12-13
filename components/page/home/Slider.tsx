@@ -26,21 +26,15 @@ const Slider = () => {
       ></motion.div>
       {/* black overlay for background */}
 
-      <div className="z-20 flex flex-col items-center w-full gap-16 mx-auto sm:w-4/5">
+      <div className="z-20 flex flex-col items-center w-full gap-10 mx-auto sm:w-4/5">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 1.3 }}
           className="mx-auto text-left sm:text-center"
         >
-          {/* <h3
-            className="text-4xl font-semibold sm:text-5xl xl:text-7xl"
-            style={{ letterSpacing: ".5px" }}
-          >
-            Tu próximo auto, cada vez más cerca
-          </h3> */}
           <h3
-            className="text-4xl font-extrabold text-left sm:text-center sm:text-6xl "
+            className="text-4xl font-extrabold text-left sm:text-center xl:text-5xl 2xl:text-6xl text-white"
             style={{ letterSpacing: ".5px" }}
           >
             Encuentra el espacio perfecto para tu vida o negocio
@@ -82,7 +76,7 @@ const Slider = () => {
         >
           <Card
             style={{ border: "1px solid #ebebeb25" }}
-            className="flex flex-col shadow-lg gap-5 sm:flex-row bg-black bg-opacity-30  p-5 "
+            className="flex flex-col gap-5 p-5 shadow-lg sm:flex-row bg-white/10 backdrop-blur-md border-white/20 "
           >
             <Select>
               <SelectTrigger className="w-full sm:w-[240px]">
@@ -118,7 +112,7 @@ const Slider = () => {
               </SelectContent>
             </Select>
 
-            <Button className="flex text-white bg-red-800 hover:bg-red-500 gap-2">
+            <Button className="flex gap-2 text-white bg-red-800 hover:bg-red-500">
               <FaSearch /> Buscar
             </Button>
           </Card>

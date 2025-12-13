@@ -114,7 +114,7 @@ const VehicleCont = () => {
     <>
       {loading && <LoaderFullscreen />}
       {/* HEADER SEPARATOR */}
-      <div className="w-full h-16 md:h-20"></div>
+      <div className="w-full h-16 md:h-28"></div>
 
       {/* BREADCRUMBS */}
       <div className="w-full px-6 pt-5 pb-5 md:px-24 2xl:px-64 h-fit">

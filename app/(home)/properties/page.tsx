@@ -1,4 +1,4 @@
-import Header from "@/components/page/Header";
+import { GlassmorphismNav } from "@/components/page/GlassmorphismNav";
 import VehiclesCont from "@/components/page/home/vehicles/VehiclesCont";
 import { Metadata } from "next";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <>
-      <Header />
+      <GlassmorphismNav />
       <VehiclesCont />
     </>
   );

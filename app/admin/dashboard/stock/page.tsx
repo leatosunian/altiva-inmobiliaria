@@ -1,4 +1,4 @@
-import CarList from "@/components/admin/dashboard/stock/CarList";
+import PropertyList from "@/components/admin/dashboard/stock/PropertyList";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -70,7 +70,7 @@ const carList = [
   },
 ];
 
-async function getCars() {
+async function getProperties() {
   try {
     const carsFetch = await fetch(`${process.env.NEXTAUTH_URL}/api/cars`, {
       method: "GET",
@@ -84,7 +84,7 @@ async function getCars() {
 }
 
 const StockList = async () => {
-  const cars = await getCars();
+  const cars = await getProperties();
   return (
     <>
       <div className="flex items-center justify-between ">
@@ -96,8 +96,8 @@ const StockList = async () => {
           </Button>
         </Link>
       </div>
-      <Separator className="mt-4 mb-5 md:mt-7 md:mb-8"></Separator>
-      <CarList cars={cars} />
+      <Separator className="mt-4 mb-5"></Separator>
+      <PropertyList properties={cars} />
     </>
   );
 };

@@ -18,7 +18,7 @@ const SearchingFor = () => {
   return (
     <>
       <div
-        className="w-full flex flex-col justify-center gap-6 my-10 sm:my-20 items-center  sm:px-16 px-6 md:px-32 2xl:px-56"
+        className="flex flex-col items-center justify-center w-full gap-6 px-6 sm:px-16 md:px-32 2xl:px-56"
         style={{ height: "fit-content" }}
       >
         {/* Título */}
@@ -27,9 +27,9 @@ const SearchingFor = () => {
           viewport={{ amount: "all", once: true }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="w-full flex flex-col gap-0 sm:gap-3"
+          className="flex flex-col w-full gap-0 sm:gap-3"
         >
-          <h3 className="font-bold text-2xl sm:text-3xl  sm:text-left">
+          <h3 className="text-2xl font-bold sm:text-3xl sm:text-left">
             ¿Qué estás buscando?
           </h3>
           <Separator
@@ -39,17 +39,17 @@ const SearchingFor = () => {
         </motion.div>
 
         {/* Contenedor de categorías */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 mt-0 sm:mt-5">
+        <div className="grid w-full grid-cols-1 gap-5 mt-0 sm:grid-cols-2 sm:mt-5">
           {/* Div 1 */}
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             viewport={{ amount: "some", once: true }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="relative w-full h-64 rounded-md shadow-xl overflow-hidden bg-cover bg-center"
+            className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md shadow-xl"
           >
             <motion.div
-              className="relative w-full h-64 rounded-md overflow-hidden bg-cover bg-center"
+              className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md"
               style={{
                 backgroundImage: "url('/house.jpg')", // Reemplaza con la URL de la imagen correspondiente
               }}
@@ -57,14 +57,14 @@ const SearchingFor = () => {
               whileHover={{ opacity: 1, scale: 1.04 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-40 items-center flex justify-center">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                 <div className="flex flex-col m-auto">
-                  <span className="text-center text-white font-bold text-xl sm:text-left">
+                  <span className="text-xl font-bold text-center text-white sm:text-left">
                     CASAS
                   </span>
                   <Separator
                     style={{ height: "2px" }}
-                    className="my-5 bg-red-800 w-5 sm:my-0"
+                    className="w-5 my-5 bg-red-800 sm:my-0"
                   />
                 </div>
               </div>
@@ -76,10 +76,10 @@ const SearchingFor = () => {
             viewport={{ amount: "some", once: true }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="relative w-full h-64 rounded-md shadow-xl overflow-hidden bg-cover bg-center"
+            className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md shadow-xl"
           >
             <motion.div
-              className="relative w-full h-64 rounded-md overflow-hidden bg-cover bg-center"
+              className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md"
               style={{
                 backgroundImage: "url('/building.jpg')", // Reemplaza con la URL de la imagen correspondiente
               }}
@@ -87,14 +87,14 @@ const SearchingFor = () => {
               whileHover={{ opacity: 1, scale: 1.04 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-40 items-center flex justify-center">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                 <div className="flex flex-col m-auto">
-                  <span className="text-center text-white font-bold text-xl sm:text-left">
+                  <span className="text-xl font-bold text-center text-white sm:text-left">
                     DEPARTAMENTOS
                   </span>
                   <Separator
                     style={{ height: "2px" }}
-                    className="my-5 bg-red-800 w-5 sm:my-0"
+                    className="w-5 my-5 bg-red-800 sm:my-0"
                   />
                 </div>
               </div>
@@ -107,10 +107,10 @@ const SearchingFor = () => {
             viewport={{ amount: "some", once: true }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="relative w-full h-64 rounded-md shadow-xl overflow-hidden bg-cover bg-center"
+            className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md shadow-xl"
           >
             <motion.div
-              className="relative w-full h-64  rounded-md overflow-hidden bg-cover bg-center"
+              className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md"
               style={{
                 backgroundImage: "url('/terreno.jpg')", // Reemplaza con la URL de la imagen correspondiente
               }}
@@ -118,14 +118,14 @@ const SearchingFor = () => {
               whileHover={{ opacity: 1, scale: 1.04 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-40 items-center flex justify-center">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                 <div className="flex flex-col m-auto">
-                  <span className="text-center text-white font-bold text-xl sm:text-left">
+                  <span className="text-xl font-bold text-center text-white sm:text-left">
                     TERRENOS Y LOTES
                   </span>
                   <Separator
                     style={{ height: "2px" }}
-                    className="my-5 bg-red-800 w-5 sm:my-0"
+                    className="w-5 my-5 bg-red-800 sm:my-0"
                   />
                 </div>
               </div>
@@ -138,10 +138,10 @@ const SearchingFor = () => {
             viewport={{ amount: "some", once: true }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 2 }}
-            className="relative w-full h-64 rounded-md shadow-xl overflow-hidden bg-cover bg-center"
+            className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md shadow-xl"
           >
             <motion.div
-              className="relative w-full h-64 rounded-md overflow-hidden bg-cover bg-center"
+              className="relative w-full h-64 overflow-hidden bg-center bg-cover rounded-md"
               style={{
                 backgroundImage: "url('/office.jpeg')", // Reemplaza con la URL de la imagen correspondiente
               }}
@@ -149,16 +149,16 @@ const SearchingFor = () => {
               whileHover={{ opacity: 1, scale: 1.04 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-40 items-center flex justify-center">
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                 <div className="flex flex-col m-auto">
-                  <span className="text-center text-white font-bold text-xl sm:text-left">
+                  <span className="text-xl font-bold text-center text-white sm:text-left">
                     OFICINAS{" "}
                     {/* <AnimatedCounter from={0} to={100} /> */}
                   </span>
 
                   <Separator
                     style={{ height: "2px" }}
-                    className="my-5 bg-red-800 w-5 sm:my-0"
+                    className="w-5 my-5 bg-red-800 sm:my-0"
                   />
                 </div>
               </div>

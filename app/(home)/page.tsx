@@ -12,6 +12,7 @@ import SearchingFor from "@/components/page/home/SearchingFor";
 import Counters from "@/components/page/home/Counters";
 import { Separator } from "@/components/ui/separator";
 import { IProperty } from '../models/property';
+import { GlassmorphismNavBlack } from "@/components/page/GlassmorphismNavBlack";
 
 const Home = () => {
   const [latestProperties, setLatestProperties] = useState<IProperty[]>([]);
@@ -40,19 +41,20 @@ const Home = () => {
       <Suspense>
         {/* {loading && <LoaderFullscreen />} */}
         <div className="w-full">
-          <Header />
+          {/* <Header /> */}
+          <GlassmorphismNavBlack />
           <Slider />
+          <AboutSection />
+          <Separator className="w-2/3 mx-auto my-16" />
           <SearchingFor />
           <Separator className="w-2/3 mx-auto my-16" />
-
           <LatestProperties properties={latestProperties} />
-          <AboutSection />
-          <Counters/>
-          <Separator className="w-2/3 mx-auto mb-14 sm:mb-36" />
-
+          <Separator className="w-2/3 mx-auto my-16" />
           <Budget />
           <Separator className="w-2/3 mx-auto mb-0 md:mb-36" />
-          <ContactForm/>
+          <Counters />
+          <Separator className="w-2/3 mx-auto mb-14 sm:mb-36" />
+          <ContactForm />
           <Footer />
         </div>
       </Suspense>

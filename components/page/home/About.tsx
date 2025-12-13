@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 const AboutSection = () => {
   return (
-    <section className="w-full py-0 my-10 bg-gray-100 md:py-28">
+    <section className="w-full py-0 mb-10 bg-gray-100 md:py-28">
       <div className="container flex flex-col items-center gap-5 px-6 mx-auto sm:gap-24 md:px-10 lg:flex-row">
         {/* Image Section */}
         <div className="w-full mb-6 md:w-1/2 md:mb-0">
