@@ -1,12 +1,10 @@
 "use client";
 
 import { FaLocationDot } from "react-icons/fa6";
-
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -23,10 +21,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import carImg from "@/public/car.jpg";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import React from "react";
 import Link from "next/link";
 import {
@@ -37,24 +33,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { FaBed, FaRegCalendar } from "react-icons/fa";
-import { IoSpeedometerOutline } from "react-icons/io5";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/selectxs";
+import { FaBed } from "react-icons/fa";
 import { IBranch } from "@/app/models/branch";
 import { IProperty } from "@/app/models/property";
-import covered from '@/public/medidas.png'
-import uncovered from '@/public/uncovered.png'
-import rooms from '@/public/cuartos.png'
-import { Bath, DoorOpen, House, Maximize2, Scan } from "lucide-react";
+import { Bath, DoorOpen, Maximize2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
 
 const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   const [loading, setLoading] = useState(true);
@@ -67,6 +51,7 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   const handleClick = () => {
     modalButtonRef.current?.click();
   };
+  const { toast } = useToast();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentProperties, setCurrentProperties] = useState<IProperty[]>([]);
@@ -75,19 +60,17 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   const lastPropertyIndex = currentPage * propertiesPerPage;
   const firstPropertyIndex = lastPropertyIndex - propertiesPerPage;
   const [numberOfPages, setNumberOfPages] = useState<number[]>([0]);
-  const [filteredProperties, setFilteredProperties] = useState<IProperty[]>([]); // NEW: lista filtrada
+  const [filteredProperties, setFilteredProperties] = useState<IProperty[]>([]); // lista filtrada
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const router = useRouter();
   useEffect(() => {
     if (properties) {
       setPropertyList(properties);
-      setFilteredProperties(properties); // Inicialmente, la lista filtrada es igual a la lista completa
+      setFilteredProperties(properties); // seteo de lista filtrada con lista completa al iniciar
       setLoading(false);
     }
   }, [properties]);
-
-  const { data: session, status } = useSession();
 
   async function handleEdit(uuid: string) {
     router.push("/admin/dashboard/stock/" + uuid);
@@ -96,14 +79,13 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   async function handleDelete(uuid: string) {
     setLoading(true)
     try {
-      const vehicle = await fetch("/api/cars/" + uuid, {
+      const vehicle = await fetch("/api/properties/" + uuid, {
         method: "DELETE",
       }).then((response) => response.json());
-      console.log("vehicle:", vehicle);
-      if (vehicle.msg === "CAR_DELETED") {
+      if (vehicle.msg === "PROPERTY_DELETED") {
         setPropertyList((prevCars) => {
           const updatedCars = prevCars?.filter((car) => car._id !== uuid);
-          console.log("updatedCars:", updatedCars);
+          toast({ description: "¡Propiedad eliminada!", variant: "default" });
           return updatedCars;
         });
         setLoading(false)
@@ -111,6 +93,7 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
       router.refresh();
     } catch (error) {
       // error alert
+      toast({ description: "Error al eliminar propiedad", variant: "destructive" });
     }
   }
 
@@ -218,7 +201,7 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
             <>
               <div className="flex flex-col items-center justify-center w-full gap-5 py-36 h-fit">
                 <h4 className="text-base font-semibold md:text-2xl">
-                  Todavía no tenés propiedadess en tu stock.
+                  Todavía no tenés propiedades en tu stock.
                 </h4>
                 <Link href={"/admin/dashboard/stock/add"}>
                   <Button>Agregar propiedad</Button>
@@ -230,7 +213,7 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
           {filteredProperties.length > 0 && (
             <>
               {/* filter / search bar */}
-              <div className="text-sm mb-2 text-black bg-white groupSearch dark:bg-background dark:text-white">
+              <div className="mb-5 text-sm text-black bg-white groupSearch dark:bg-background dark:text-white">
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="iconSearch">
                   <g>
                     <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>

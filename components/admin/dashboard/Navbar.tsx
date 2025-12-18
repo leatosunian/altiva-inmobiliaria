@@ -33,7 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TbMailQuestion, TbUserEdit } from "react-icons/tb";
-import { BsShop } from "react-icons/bs";
+import { BsBuildingFillAdd, BsFillBuildingsFill, BsShop } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 
 export default function Navbar() {
@@ -269,9 +269,8 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         style={{ transform: "translateY(63px)", zIndex: "9999999" }}
-        className={`fixed  inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed  inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <div
           className="absolute inset-0 bg-black bg-opacity-65 "
@@ -279,9 +278,8 @@ export default function Navbar() {
         ></div>
 
         <div
-          className={`absolute top-0 pt-2 right-0 w-64 h-full bg-white border-b border-gray-200 dark:bg-background dark:border-border bg-opacity-90 shadow-lg transform transition-transform duration-300 pb-4 ease-in-out flex flex-col justify-between ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 pt-2 right-0 w-64 h-full bg-white border-b border-gray-200 dark:bg-background dark:border-border bg-opacity-90 shadow-lg transform transition-transform duration-300 pb-4 ease-in-out flex flex-col justify-between ${isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
           style={{ height: "calc(100vh - 62px)" }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -290,16 +288,16 @@ export default function Navbar() {
               className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
               onClick={() => setIsOpen(false)}
             >
-              <IoCarSportOutline />
-              <span className="ml-3 ">Mi stock</span>
+              <BsFillBuildingsFill />
+              <span className="ml-3 ">Mis propiedades</span>
             </Link>
             <Link
               href="/admin/dashboard/stock/add"
               className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
               onClick={() => setIsOpen(false)}
             >
-              <IoMdAdd />
-              <span className="ml-3 ">Agregar producto</span>
+              <BsBuildingFillAdd />
+              <span className="ml-3 ">Agregar propiedad</span>
             </Link>
 
             {session?.user?.role && session?.user?.role === "ADMIN" && (
@@ -313,7 +311,7 @@ export default function Navbar() {
               </Link>
             )}
 
-            {session?.user?.role && session?.user?.role === "ADMIN" && (
+            {/* {session?.user?.role && session?.user?.role === "ADMIN" && (
               <Link
                 href="/admin/dashboard/branches"
                 className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
@@ -322,7 +320,7 @@ export default function Navbar() {
                 <BsShop />
                 <span className="ml-3 ">Sucursales</span>
               </Link>
-            )}
+            )} */}
 
             <Link
               href="/admin/dashboard/leads"

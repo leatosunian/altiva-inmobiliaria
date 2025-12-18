@@ -90,20 +90,20 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
   const [branches, setBranches] = useState<IBranch[]>();
   const [buttonLoading, setButtonLoading] = useState(false);
 
-  async function getVehicleData() {
+  async function getPropertyData() {
     try {
-      const vehicle = await fetch("/api/cars/" + uuid, {
+      const property = await fetch("/api/properties/" + uuid, {
         method: "GET",
       }).then((response) => response.json());
-      console.log(vehicle);
-
-      if (vehicle) {
-        setPropertyData(vehicle);
+      if (property) {
+        setPropertyData(property);
         setTimeout(() => {
           setLoading(false);
         }, 500);
       }
-    } catch (error) { }
+    } catch (error) { 
+      toast({ description: "Error al obtener propiedad", variant: "destructive" });
+    }
   }
 
   async function getBranches() {
@@ -117,7 +117,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
   }
 
   useEffect(() => {
-    getVehicleData();
+    getPropertyData();
     getBranches();
   }, []);
 
@@ -135,15 +135,15 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
   async function handleEdit() {
     setButtonLoading(true);
     try {
-      const vehicle = await fetch("/api/cars/" + uuid, {
+      const property = await fetch("/api/properties/" + uuid, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form.getValues()),
       }).then((response) => response.json());
-      if (vehicle) {
-        setPropertyData(vehicle);
+      if (property) {
+        setPropertyData(property);
         toast({ description: "¡Vehículo editado!", variant: "default" });
         setButtonLoading(false);
         router.refresh();
@@ -228,7 +228,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
       }).then((response) => response.json());
       if (uploadResponse.msg === "THUMBNAIL_UPLOADED") {
         toast({ description: "¡Imagen cambiada!", variant: "default" });
-        getVehicleData();
+        getPropertyData();
       }
     } catch (error) {
       toast({
@@ -262,7 +262,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                 <div
                   onClick={handleClick}
                   className="w-3/4 mx-auto my-5 rounded-full md:w-3/5 inputFileFormProfile"
-                  title="Cambiar logo de empresa"
+                  title="Click para cambiar imagen"
                 >
                   {propertyData?.imagePath === "" && (
                     <>

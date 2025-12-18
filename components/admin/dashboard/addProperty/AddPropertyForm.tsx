@@ -142,7 +142,7 @@ const AddPropertyForm = () => {
     try {
       const sanitized = transformNumbers(values);
 
-      const property = await fetch("/api/cars", {
+      const property = await fetch("/api/properties", {
         method: "POST",
         body: JSON.stringify(sanitized),
       }).then((response) => response.json());
@@ -280,7 +280,7 @@ const AddPropertyForm = () => {
                     name="expensas"
                     render={({ field }) => (
                       <FormItem className="col-span-2 md:col-span-1">
-                        <FormLabel>Expensas (ARS)</FormLabel>
+                        <FormLabel>Expensas (ARS) <span className="text-sm text-gray-500">(opcional)</span></FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Ej. 640,000"
@@ -369,7 +369,7 @@ const AddPropertyForm = () => {
                   render={({ field }) => (
                     <FormItem className="w-full col-span-2 pr-0 mt-4 md:mt-8 md:w-1/2 md:pr-5 ">
                       <FormLabel>
-                        Descripción <span className="">(opcional)</span>
+                        Descripción <span className="text-sm text-gray-500">(opcional)</span>
                       </FormLabel>
                       <Textarea
                         {...field}

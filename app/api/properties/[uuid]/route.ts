@@ -12,10 +12,10 @@ export async function GET(
 ) {
   await connectDB();
   try {
-    const car = await PropertyModel.findOne({ _id: params.uuid });
-    console.log(car);
+    const property = await PropertyModel.findOne({ _id: params.uuid });
+    //console.log(property);
     
-    return NextResponse.json(car);
+    return NextResponse.json(property);
   } catch (error) {
     return NextResponse.json({ msg: "ERROR_GET_PROPERTY" });
   }
@@ -35,11 +35,11 @@ export async function DELETE(
       api_secret: process.env.CLOUDINARY_SECRET,
     });
 
-    // get car data
+    // get property data
     const propertyToDelete = await PropertyModel.findOne({ _id: params.uuid });
     // get gallery data
     const gallery = await PropertyImageModel.find({ propertyID: params.uuid });
-    // delete car
+    // delete property
     await PropertyModel.findOneAndDelete({ _id: params.uuid });
     // delete thumbnail from cloudinary
     await cloudinary.uploader.destroy(propertyToDelete.imagePublicID);
@@ -58,17 +58,17 @@ export async function DELETE(
 // EDIT PROPERTY
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { uuid: string } }
+  { params }: { params: { id: string } }
 ) {
   await connectDB();
-  const { uuid } = params;
+  const { id } = params;
   const data: IProperty = await request.json();
-
   try {
-    const car = await PropertyModel.findOneAndUpdate({ uuid }, data, {
+    const property = await PropertyModel.findOneAndUpdate({ id }, data, {
       new: true,
     });
-    return NextResponse.json(car);
+    console.log("property editada:", property);
+    return NextResponse.json(property);
   } catch (error) {
     return NextResponse.json({ msg: "ERROR_EDIT_PROPERTY" });
   }
