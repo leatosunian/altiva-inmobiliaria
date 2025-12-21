@@ -19,13 +19,13 @@ const Home = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   async function getLastProperties() {
-    const latestProperties = await fetch("/api/cars/latests/", {
+    const latestProperties = await fetch("/api/properties/latests/", {
       method: "GET",
       cache: "no-store",
     });
-    const cars = await latestProperties.json();
-    if (cars.length !== 0) {
-      setLatestProperties(cars);
+    const properties = await latestProperties.json();
+    if (properties.length !== 0) {
+      setLatestProperties(properties);
       setLoading(false);
     }
     return latestProperties;

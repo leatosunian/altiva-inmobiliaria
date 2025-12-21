@@ -1,5 +1,6 @@
-import { GlassmorphismNav } from "@/components/page/GlassmorphismNav";
-import VehiclesCont from "@/components/page/home/vehicles/VehiclesCont";
+import { GlassmorphismNavBlack } from "@/components/page/GlassmorphismNavBlack";
+import Footer from "@/components/page/home/Footer";
+import PropertiesCont from "@/components/page/home/vehicles/PropertiesCont";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <>
-      <GlassmorphismNav />
-      <VehiclesCont />
+      <GlassmorphismNavBlack />
+      <PropertiesCont />
+      <Footer />
     </>
   );
 };

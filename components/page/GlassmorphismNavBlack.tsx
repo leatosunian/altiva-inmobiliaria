@@ -5,12 +5,13 @@ import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import logo from "@/public/logo2-1.png";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const navigation = [
-    { name: "Inmuebles", href: "#testimonials" },
-    { name: "Venta", href: "#features" },
-    { name: "Alquiler", href: "#ai-team" },
-    { name: "Contacto", href: "/car-dealerships" },
+    { name: "Inmuebles", href: "/properties" },
+    { name: "Venta", href: "/properties?search=Venta" },
+    { name: "Alquiler", href: "/properties?search=Alquiler" },
+    { name: "Contacto", href: "/contact" },
 ]
 
 export function GlassmorphismNavBlack() {
@@ -18,6 +19,21 @@ export function GlassmorphismNavBlack() {
     const [isVisible, setIsVisible] = useState(true)
     const [hasLoaded, setHasLoaded] = useState(false)
     const lastScrollY = useRef(0)
+    const [searchValue, setSearchValue] = useState<string>("");
+    const searchParams = useSearchParams();
+    const { push } = useRouter();
+
+    const handleSearch = () => {
+        console.log(searchValue);
+        const params = new URLSearchParams(searchParams);
+        if (searchValue !== "") {
+            params.set("search", searchValue);
+        } else {
+            params.delete("search");
+        }
+        push(`/properties/?${params.toString()}`);
+        console.log(params.toString());
+    };
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -95,7 +111,7 @@ export function GlassmorphismNavBlack() {
                                     src={logo}
                                     alt="Cliste"
                                     width={80}
-                                    
+
                                     className="object-contain w-full h-full"
                                 />
                             </div>
@@ -108,7 +124,7 @@ export function GlassmorphismNavBlack() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className="font-medium transition-all duration-200 text-white hover:scale-105"
+                                        className="font-medium text-white transition-all duration-200 hover:scale-105"
                                     >
                                         {item.name}
                                     </Link>
@@ -116,7 +132,7 @@ export function GlassmorphismNavBlack() {
                                     <button
                                         key={item.name}
                                         onClick={() => scrollToSection(item.href)}
-                                        className="font-medium transition-all duration-200 text-white hover:scale-105"
+                                        className="font-medium text-white transition-all duration-200 hover:scale-105"
                                     >
                                         {item.name}
                                     </button>
@@ -124,8 +140,55 @@ export function GlassmorphismNavBlack() {
                             )}
                         </div>
 
+                        {/* search input */}
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSearch();
+                            }}
+                            className="w-fit "
+                        >
+                            <div className="flex">
+                                <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+                                    Buscar propiedad
+                                </label>
+
+                                <div className="relative w-full">
+                                    <input
+                                        type="text"
+                                        onChange={(e) => setSearchValue(e.target.value)}
+                                        id="search-dropdown"
+                                        className="z-20 block w-full px-2 py-1.5 text-xs text-gray-900 border border-gray-300  bg-gray-50 border-s-gray-50 border-s-2 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 rounded-full dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-red-500"
+                                        placeholder="Buscar propiedad"
+                                    />
+                                    <button
+                                        type="submit"
+                                        onClick={handleSearch}
+                                        className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-full border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                    >
+                                        <svg
+                                            className="w-2.5 h-2.5"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        {/* search input */}
+
                         {/* Desktop CTA Button */}
-                        <div className="hidden md:block">
+                        {/* <div className="hidden md:block">
                             <button
                                 className="flex items-center px-6 py-2 font-medium text-white transition-all duration-300 bg-red-800 rounded-full hover:bg-red-70 hover:scale-105 group"
                                 onClick={() => scrollToSection("#contact")}
@@ -133,7 +196,7 @@ export function GlassmorphismNavBlack() {
                                 <span className="mr-2">Tasar propiedad</span>
                                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                             </button>
-                        </div>
+                        </div> */}
 
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -169,7 +232,7 @@ export function GlassmorphismNavBlack() {
 
                 {/* Menu container with glassmorphism effect */}
                 <div
-                    className={ ` mt-2 w-[90vw] max-w-xs mx-auto transition-all duration-400 ease-out ${isOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-4 scale-95 pointer-events-none"
+                    className={` mt-2 w-[90vw] max-w-xs mx-auto transition-all duration-400 ease-out ${isOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-4 scale-95 pointer-events-none"
                         }`}
                 >
                     <div className="p-4 border shadow-2xl bg-white/20 backdrop-blur-md border-white/20 rounded-2xl">

@@ -26,6 +26,7 @@ import { Separator } from "@/components/ui/separator";
 import { IProperty } from "@/app/models/property";
 import { FaLocationDot } from "react-icons/fa6";
 import { Bath, DoorOpen, House, Maximize2, Scan } from "lucide-react";
+import noimage from "@/public/noimage.jpg";
 
 interface Props {
   properties: IProperty[];
@@ -135,14 +136,23 @@ const LatestProperties = ({ properties }: Props) => {
                       >
                         {/* Image wrapper with fixed aspect height; Image uses fill to cover */}
                         <div className="relative w-full h-56 mb-4 overflow-hidden sm:h-64 md:h-72 lg:h-72 xl:h-64 2xl:h-72 rounded-t-md sm:mb-5">
-                          <Image
+                          {property?.imagePath === '' ? (<>
+                            <Image
+                              src={noimage}
+                              alt=""
+                              unoptimized
+                              width={500}
+                              height={500}
+                              className="object-cover h-full mb-4 overflow-hidden select-none rounded-t-md "
+                            />
+                          </>) : (<>  <Image
                             src={property.imagePath!}
                             alt={property.name ?? "property image"}
                             unoptimized
                             fill
                             sizes="(max-width: 768px) 100vw, 33vw"
                             className="object-cover"
-                          />
+                          /></>)}
                         </div>
                         {/* Use h-full so the footer pushes to the bottom consistently */}
                         <div className="flex flex-col justify-start w-full h-fit md:justify-between md:h-full">
@@ -159,24 +169,72 @@ const LatestProperties = ({ properties }: Props) => {
                             </p>
                             <Separator />
                             <CardDescription className="flex flex-wrap items-center justify-between w-full pt-2 pb-2 h-fit gap-y-2 gap-x-2">
+                              {/* {property.metersSquare && (<>
+                                <div className="flex items-center gap-1">
+                                  <Maximize2 size={14} />
+                                  <span className="text-xs">{property.metersSquare} m² </span>
+                                </div>
+                              </>)}
+
+                              {property.metersSquare && (<>
+                                <div className="flex items-center gap-1">
+                                  <FaBed size={16} />
+                                  <span className="text-xs"> {property.dormitorios} dormitorios</span>
+                                </div>
+                              </>)}
+
+                              {property.metersSquare && (<>
+
+                                <div className="flex items-center gap-1">
+                                  <DoorOpen size={17} />
+                                  <span className="text-xs"> {property.rooms} ambientes</span>
+                                </div>
+                              </>)}
+
+                              {property.metersSquare && (<>
+
+                                <div className="flex items-center gap-1">
+                                  <Bath size={17} />
+                                  <span className="text-xs"> {property.bathrooms} baños</span>
+                                </div>
+                              </>)} */}
+
                               <div className="flex items-center gap-1">
                                 <Maximize2 size={14} />
-                                <span className="text-xs">{property.metersSquare} m² </span>
+                                {property.metersSquare ?
+                                  (<span className="text-xs">{property.metersSquare} m² </span>)
+                                  :
+                                  (<span className="text-xs">No especif.</span>)}
                               </div>
+
                               <div className="flex items-center gap-1">
                                 <FaBed size={16} />
-                                <span className="text-xs"> {property.dormitorios} dormitorios</span>
+                                {property.dormitorios ?
+                                  (<span className="text-xs"> {property.dormitorios} dormitorios</span>)
+                                  :
+                                  (<span className="text-xs"> No especif.</span>)}
                               </div>
+
                               <div className="flex items-center gap-1">
                                 <DoorOpen size={17} />
-                                <span className="text-xs"> {property.rooms} ambientes</span>
+                                {property.rooms ?
+                                  (<span className="text-xs"> {property.rooms} ambientes</span>)
+                                  :
+                                  (<span className="text-xs"> No especif.</span>)}
                               </div>
+
                               <div className="flex items-center gap-1">
                                 <Bath size={17} />
-                                <span className="text-xs"> {property.bathrooms} baños</span>
+                                {property.bathrooms ?
+                                  (<span className="text-xs"> {property.bathrooms} baños</span>)
+                                  :
+                                  (<span className="text-xs"> No especif.</span>)}
                               </div>
+
+
+
                             </CardDescription>
-                            
+
                             <Separator />
 
                             <div className="flex flex-col gap-2 pt-2 pb-2">
@@ -211,16 +269,18 @@ const LatestProperties = ({ properties }: Props) => {
             <Button onClick={() => api?.scrollTo(current - 1)}>-</Button>
             <Button onClick={() => api?.scrollTo(current + 1)}>+</Button>
           </div> */}
-        </div>
+        </div >
         {/* Custom Indicators */}
-        <div className="flex justify-center space-x-2 ">
-          {latestProperties.map((dot, index) => (
-            <button
-              key={dot._id}
-              className={`w-2 h-2 rounded-full ${index === current ? "bg-black" : "bg-gray-300"
-                }`}
-            />
-          ))}
+        <div className="flex justify-center space-x-2 " >
+          {
+            latestProperties.map((dot, index) => (
+              <button
+                key={dot._id}
+                className={`w-2 h-2 rounded-full ${index === current ? "bg-black" : "bg-gray-300"
+                  }`}
+              />
+            ))
+          }
         </div>
         <div className="flex justify-center w-full mt-4 h-fit">
           <Link className="w-fit h-fit" href={"/properties"}>
@@ -229,7 +289,7 @@ const LatestProperties = ({ properties }: Props) => {
             </Button>
           </Link>
         </div>
-      </section>
+      </section >
     </>
   );
 };

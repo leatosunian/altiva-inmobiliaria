@@ -289,7 +289,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               <BsFillBuildingsFill />
-              <span className="ml-3 ">Mis propiedades</span>
+              <span className="ml-3 ">Propiedades</span>
             </Link>
             <Link
               href="/admin/dashboard/stock/add"
@@ -307,7 +307,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 <TbUserEdit />
-                <span className="ml-3 ">Mis empleados</span>
+                <span className="ml-3 ">Empleados</span>
               </Link>
             )}
 

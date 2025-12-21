@@ -1,6 +1,4 @@
 "use client";
-import { carBrands } from "@/app/utils/carBrands";
-import { carYears } from "@/app/utils/carYears";
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@/components/page/home/vehicles/Breadcrumbs";
 import {
@@ -20,7 +18,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import styles from "@/app/css-modules/vehicles/vehicles.module.css";
-import buttonStyle from "@/app/css-modules/home.search.module.css";
 import {
   Card,
   CardDescription,
@@ -31,21 +28,8 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Footer from "@/components/page/home/Footer";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Bath, CheckIcon, ChevronsUpDown, DoorOpen, Maximize2 } from "lucide-react";
+
+import { Bath, DoorOpen, Maximize2 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoaderFullscreen from "@/components/page/LoaderFullscreen";
 import Link from "next/link";
@@ -53,10 +37,11 @@ import { FaBed, FaRegCalendar } from "react-icons/fa";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { Badge } from "@/components/ui/badge";
 import { IProperty } from "@/app/models/property";
-import { Separator } from "@radix-ui/react-separator";
 import { FaLocationDot } from "react-icons/fa6";
+import noimage from "@/public/noimage.jpg";
+import { Separator } from "@/components/ui/separator";
 
-const VehiclesCont = () => {
+const PropertiesCont = () => {
   const [open, setOpen] = useState(false);
   const [brandFilter, setBrandFilter] = useState("");
   const [vehicleFetch, setVehicleFetch] = useState<IProperty[]>([]);
@@ -74,21 +59,21 @@ const VehiclesCont = () => {
   const firstVehicleIndex = lastVehicleIndex - vehiclesPerPage;
   const [numberOfPages, setNumberOfPages] = useState<number[]>([0]);
 
-  async function getCars() {
+  async function getProperties() {
     try {
       const url =
         searchFilter && searchFilter !== "null"
-          ? `/api/cars/?search=${searchFilter}`
-          : `/api/cars/`;
-      const carsFetch = await fetch(url, {
+          ? `/api/properties/?search=${searchFilter}`
+          : `/api/properties/`;
+      const propertiesFetch = await fetch(url, {
         method: "GET",
         cache: "no-store",
       });
-      const cars = await carsFetch.json();
-      setVehicleList(cars);
-      setVehicleFetch(cars);
+      const properties = await propertiesFetch.json();
+      setVehicleList(properties);
+      setVehicleFetch(properties);
       setLoading(false);
-      return cars;
+      return properties;
     } catch (error) {
       return;
     }
@@ -188,13 +173,13 @@ const VehiclesCont = () => {
   }, [vehicleList, currentPage]);
 
   useEffect(() => {
-    getCars();
+    getProperties();
     console.log(propertyTypeFilter);
-    
-    if(propertyTypeFilter === 'venta'){
+
+    if (propertyTypeFilter === 'venta') {
       handleFilterByBusinessType('Venta')
     }
-    if(propertyTypeFilter === 'alquiler'){
+    if (propertyTypeFilter === 'alquiler') {
       handleFilterByBusinessType('Alquiler')
     }
   }, []);
@@ -448,7 +433,7 @@ const VehiclesCont = () => {
                     refresh();
                   }
                 }}
-                className="bg-red-800 text-white hover:bg-red-900"
+                className="text-white bg-red-800 hover:bg-red-900"
               >
                 Remover filtros
               </Button>
@@ -461,7 +446,7 @@ const VehiclesCont = () => {
             {currentVehicles.length !== 0 && (
               <>
                 <div
-                  className={`${styles.vehiclesCont} xl:gap-10 gap-14 2xl:gap-12 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 py-5 md:py-0 pl-0 lg:pl-10   `}
+                  className={`${styles.vehiclesCont} md:gap-4 gap-10 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 py-5 md:py-0 pl-0 lg:pl-10`}
                 >
                   {currentVehicles.length > 0 &&
                     currentVehicles.map((property) => (
@@ -472,64 +457,100 @@ const VehiclesCont = () => {
                         >
                           <Card
                             key={property._id}
-                            className="flex unselectable flex-col md:max-h-[500px] max-h-fit 2xl:max-h-fit  h-fit shadow-lg"
+                            className="flex flex-col h-full shadow-lg unselectable"
                           >
-                            <Image
+
+                            {property.status === "Reservado" && (
+                              <Badge
+                                className="absolute bg-orange-400 border-none shadow-lg mt-2 md:py-1 md:px-3 py-1.5 px-3.5 ml-2 text-white font-normal md:text-xs text-sm "
+                                variant="outline"
+                              >
+                                Reservado
+                              </Badge>
+                            )}
+                            {property.status === "Vendido" && (
+                              <Badge
+                                className="absolute bg-red-500 border-none shadow-lg mt-2 md:py-1 md:px-3 py-1.5 px-3.5 ml-2 text-white font-normal md:text-xs text-sm "
+                                variant="outline"
+                              >
+                                Vendido
+                              </Badge>
+                            )}
+
+                            {property.imagePath === "" || !property.imagePath ? (<>        <Image
+                              src={noimage}
+                              alt=""
+                              unoptimized
+                              width={500}
+                              height={500}
+                              className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
+                            /></>) : (<>  <Image
                               src={property.imagePath!}
                               alt=""
                               unoptimized
                               width={500}
                               height={500}
                               className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
-                            />
-                            <div className="flex flex-col justify-between w-full h-fit md:h-1/2">
+                            /></>)}
+
+                            <div className="flex flex-col justify-between w-full h-full md:h-1/2">
                               <CardHeader style={{ padding: "0 16px 10px 16px" }}>
-                                <CardTitle className="text-base sm:text-base textCut pb-1">
+                                <CardTitle className="text-lg md:text-sm 2xl:text-base textCut">
                                   {property.name}
                                 </CardTitle>
                                 <Separator />
                                 <p
                                   style={{ color: "#a1a1aa" }}
-                                  className="flex py-1 items-center gap-1 text-xs "
+                                  className="flex items-center gap-1 py-1 text-xs "
                                 >
                                   <FaLocationDot size={13} /> {property.neighborhood}, {property.city}
                                 </p>
                                 <Separator />
-                                <CardDescription className="flex items-center h-fit flex-wrap gap-y-2 justify-between w-full pt-2 pb-2 ">
-                                  <div className="flex items-center gap-1">
+                                <CardDescription className="flex flex-wrap items-center justify-between w-full pt-2 pb-2 h-fit gap-y-2 ">
+                                  <div className="flex items-center w-1/2 gap-1">
                                     <Maximize2 size={14} />
-                                    <span className="text-xs">{property.metersSquare} m² </span>
+                                    {property.metersSquare ?
+                                      (<span className="text-xs">{property.metersSquare} m² </span>)
+                                      :
+                                      (<span className="text-xs">No especif.</span>)}
                                   </div>
-                                  <div className="flex items-center gap-1">
+                                  <div className="flex items-center w-1/2 gap-1">
                                     <FaBed size={16} />
-                                    <span className="text-xs"> {property.dormitorios} dormitorios</span>
+                                    {property.dormitorios ?
+                                      (<span className="text-xs"> {property.dormitorios} dormitorios</span>)
+                                      :
+                                      (<span className="text-xs"> No especif.</span>)}
                                   </div>
-                                  <div className="flex items-center gap-1">
+                                  <div className="flex items-center w-1/2 gap-1">
                                     <DoorOpen size={17} />
-                                    <span className="text-xs"> {property.rooms} ambientes</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
+                                    {property.rooms ?
+                                      (<span className="text-xs"> {property.rooms} ambientes</span>)
+                                      :
+                                      (<span className="text-xs"> No especif.</span>)}                                  </div>
+                                  <div className="flex items-center w-1/2 gap-1">
                                     <Bath size={17} />
-                                    <span className="text-xs"> {property.bathrooms} baños</span>
-                                  </div>
+                                    {property.bathrooms ?
+                                      (<span className="text-xs"> {property.bathrooms} baños</span>)
+                                      :
+                                      (<span className="text-xs"> No especif.</span>)}                                  </div>
                                 </CardDescription>
                                 <Separator />
 
-                                <div className="flex flex-col gap-5 pt-2 pb-2">
+                                <div className="flex flex-col gap-5 pt-2 ">
 
                                   <p className="text-lg font-semibold">
                                     {property.currency} ${property.price}
                                   </p>
                                 </div>
                               </CardHeader>
-                              <CardFooter className=" gap-3 w-full px-4 pb-5 mt-2 md:mt-0">
+                              <CardFooter className="px-4 ">
                                 <Link
                                   href={`/properties/${property._id}`}
                                   className="w-full h-fit"
                                 >
                                   <Button
                                     variant={"default"}
-                                    className="w-full text-xs md:text-xs 2xl:text-xs hover:bg-red-900 bg-red-800 text-white"
+                                    className="w-full text-xs text-white bg-red-800 md:text-xs 2xl:text-xs hover:bg-red-900"
                                   >
                                     Ver más
                                   </Button>
@@ -598,7 +619,7 @@ const VehiclesCont = () => {
                         refresh();
                       }
                     }}
-                    className="bg-red-800 text-white hover:bg-red-900"
+                    className="text-white bg-red-800 hover:bg-red-900"
                   >
                     Eliminar filtros
                   </Button>
@@ -608,10 +629,10 @@ const VehiclesCont = () => {
           </div>
         </div>
 
-        <Footer />
+       
       </div>
     </>
   );
 };
 
-export default VehiclesCont;
+export default PropertiesCont;

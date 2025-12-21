@@ -26,13 +26,13 @@ type MenuItem = {
 const menuItems: MenuItem[] = [
   {
     href: "/admin/dashboard/stock",
-    label: "Mis propiedades",
+    label: "Propiedades",
     icon: BsFillBuildingsFill,
     matchChildren: true, // Marca como activo si la ruta actual es hija
   },
   {
     href: "/admin/dashboard/employees",
-    label: "Mis empleados",
+    label: "Empleados",
     icon: TbUserEdit,
     adminOnly: true,
     matchChildren: true,

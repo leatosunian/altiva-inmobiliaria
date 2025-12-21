@@ -39,6 +39,8 @@ import { IProperty } from "@/app/models/property";
 import { Bath, DoorOpen, Maximize2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
+import noimage from "@/public/noimage.jpg";
+
 
 const PropertyList = ({ properties }: { properties: IProperty[] }) => {
   const [loading, setLoading] = useState(true);
@@ -309,14 +311,22 @@ const PropertyList = ({ properties }: { properties: IProperty[] }) => {
                       className="flex flex-col min-h-[420px] sm:min-h-[420px] md:min-h-[520px] lg:min-h-[560px] xl:min-h-[520px] 2xl:min-h-[450px] shadow-lg overflow-hidden"
                     >
                       <div className="relative w-full h-56 mb-4 overflow-hidden sm:h-64 md:h-72 lg:h-72 xl:h-64 2xl:h-40 rounded-t-md sm:mb-5">
-                        <Image
+                        {property.imagePath === "" ? (<>  <Image
+                          src={noimage}
+                          alt=""
+                          unoptimized
+                          width={500}
+                          height={500}
+                          className="object-cover h-full mb-4 overflow-hidden select-none rounded-t-md "
+                        /></>) : (<>  <Image
                           src={property.imagePath!}
                           alt=""
                           unoptimized
                           width={500}
                           height={500}
                           sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover" />
+                          className="object-cover" /></>)}
+
                       </div>
                       {/* Use h-full so the footer pushes to the bottom consistently */}
                       <div className="flex flex-col justify-start w-full h-fit md:justify-between md:h-full">
