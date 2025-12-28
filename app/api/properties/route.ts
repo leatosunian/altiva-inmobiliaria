@@ -7,17 +7,52 @@ import PropertyModel from "@/app/models/property";
 // GET ALL CARS
 export async function GET(request: NextRequest, context: any) {
   await connectDB();
-  const { search } = Object.fromEntries(new URL(request.url).searchParams);
+  const url = new URL(request.url);
+  const search = url.searchParams.get("search");
+  const businessType = url.searchParams.get("businessType");
+  const propertyType = url.searchParams.get("propertyType");
+  console.log('businessType', businessType);
+  console.log('propertyType', propertyType);
+  console.log('search', search);
+  
   try {
-    const searchQuery =
-      search && (search !== "null") !== null
-        ? {
-          name: { $regex: new RegExp(search.toLowerCase(), "i") },
-        }
-        : {};
-    const properties = await PropertyModel.find(searchQuery);
+    // escape regex helper to avoid injection/issues with special chars
+    const escapeRegExp = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    let query: any = {};
+
+    if (businessType) {
+      query.businessType = { $regex: new RegExp(`^${escapeRegExp(businessType)}$`, "i") };
+    }
+
+    if (propertyType) {
+      query.propertyType = { $regex: new RegExp(`^${escapeRegExp(propertyType)}$`, "i") };
+    }
+
+    if (search) {
+      const s = escapeRegExp(search);
+      const searchRegex = { $regex: new RegExp(s, "i") };
+      const searchClause = {
+        $or: [
+          { name: searchRegex },
+          { businessType: searchRegex },
+          { propertyType: searchRegex },
+          { address: searchRegex },
+        ],
+      };
+
+      // if other filters already set, combine with AND
+      if (Object.keys(query).length > 0) {
+        query = { $and: [query, searchClause] };
+      } else {
+        query = searchClause;
+      }
+    }
+
+    const properties = await PropertyModel.find(query);
     return NextResponse.json(properties);
   } catch (error) {
+    console.error("ERROR_GET_PROPERTY", error);
     return NextResponse.json({ msg: "ERROR_GET_PROPERTY" });
   }
 }
@@ -28,7 +63,7 @@ export async function POST(request: NextRequest) {
   await connectDB();
   const data = await request.json();
   data.imagePublicID = ''
-  
+
   //data.bathrooms = Number(data.bathrooms)
   //data.floors = Number(data.floors)
   //data.antiquity = Number(data.antiquity)

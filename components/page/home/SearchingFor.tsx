@@ -18,20 +18,20 @@ const SearchingFor = () => {
   return (
     <>
       <div
-        className="flex flex-col items-center justify-center w-full gap-6 px-6 sm:px-16 md:px-32 2xl:px-56"
+        className="flex flex-col overflow-hidden items-center justify-center w-full gap-6 px-6 sm:px-16 md:px-32 2xl:px-56"
         style={{ height: "fit-content" }}
       >
         {/* Título */}
         <motion.div
           initial={{ opacity: 0, x: 100 }}
-          viewport={{ amount: "all", once: true }}
+          viewport={{ amount: "some", once: true }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           className="flex flex-col w-full gap-0 sm:gap-3"
         >
-          <h3 className="text-2xl font-bold sm:text-3xl sm:text-left">
+          <h3 className="text-2xl  font-bold sm:text-3xl sm:text-left">
             ¿Qué estás buscando?
-          </h3>
+          </h3> 
           <Separator
             style={{ height: "2px" }}
             className="my-3 bg-red-800 w-9 sm:my-0"

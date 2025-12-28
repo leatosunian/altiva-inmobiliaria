@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "@/components/page/Header";
 import Footer from "@/components/page/home/Footer";
-import Slider from "@/components/page/home/Slider";
+import Hero from "@/components/page/home/Hero";
 import { Suspense, useEffect, useState } from "react";
 import ContactForm from "@/components/page/home/ContactForm";
 import AboutSection from "@/components/page/home/About";
@@ -43,9 +43,10 @@ const Home = () => {
         <div className="w-full">
           {/* <Header /> */}
           <GlassmorphismNavBlack />
-          <Slider />
+          <Hero />
           <AboutSection />
-          <Separator className="w-2/3 mx-auto my-16" />
+          {/* <Separator className="w-2/3 mx-auto my-16" /> */}
+          <div className="h-0 md:h-14"></div>
           <SearchingFor />
           <Separator className="w-2/3 mx-auto my-16" />
           <LatestProperties properties={latestProperties} />

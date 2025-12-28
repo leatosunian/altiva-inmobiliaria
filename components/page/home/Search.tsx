@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import searchimg from "@/public/search6.png";
 import Image from "next/image";
+
 const Search = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const searchParams = useSearchParams();

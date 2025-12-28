@@ -51,7 +51,8 @@ const PropertiesCont = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchFilter = searchParams.get("search");
-  const propertyTypeFilter = searchParams.get("propType");
+  const businessTypeFilter = searchParams.get("businessType");
+  const propertyTypeFilter = searchParams.get("propertyType");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentVehicles, setCurrentVehicles] = useState<IProperty[]>([]);
   const [vehiclesPerPage, setVehiclesPerPage] = useState<number>(12);
@@ -61,10 +62,11 @@ const PropertiesCont = () => {
 
   async function getProperties() {
     try {
-      const url =
-        searchFilter && searchFilter !== "null"
-          ? `/api/properties/?search=${searchFilter}`
-          : `/api/properties/`;
+      const params = new URLSearchParams();
+      if (searchFilter && searchFilter !== "null") params.set("search", searchFilter);
+      if (businessTypeFilter) params.set("businessType", businessTypeFilter);
+      if (propertyTypeFilter) params.set("propertyType", propertyTypeFilter);
+      const url = params.toString() ? `/api/properties/?${params.toString()}` : `/api/properties/`;
       const propertiesFetch = await fetch(url, {
         method: "GET",
         cache: "no-store",
@@ -174,13 +176,13 @@ const PropertiesCont = () => {
 
   useEffect(() => {
     getProperties();
-    console.log(propertyTypeFilter);
+    console.log('businessTypeFilter', businessTypeFilter, 'propertyTypeFilter', propertyTypeFilter);
 
-    if (propertyTypeFilter === 'venta') {
-      handleFilterByBusinessType('Venta')
+    if (businessTypeFilter === 'venta') {
+      handleFilterByBusinessType('Venta');
     }
-    if (propertyTypeFilter === 'alquiler') {
-      handleFilterByBusinessType('Alquiler')
+    if (businessTypeFilter === 'alquiler') {
+      handleFilterByBusinessType('Alquiler');
     }
   }, []);
 
