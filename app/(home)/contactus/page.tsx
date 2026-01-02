@@ -1,6 +1,5 @@
-import Header from "@/components/page/Header";
 import ContactForm from "@/components/page/home/contactus/ContactForm";
-import Footer from "@/components/page/home/Footer";
+import { TranslucentNavBlack } from "@/components/page/TranslucentNavBlack";
 import { Metadata } from "next";
 import React from "react";
 
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 const ContactUs = () => {
   return (
     <>
-      <Header />
+      <TranslucentNavBlack />
       <section
         className="flex flex-col items-start justify-start w-full my-auto h-fit "
         style={{ transform: "translateY(90px)" }}

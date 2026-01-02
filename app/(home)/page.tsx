@@ -12,7 +12,8 @@ import SearchingFor from "@/components/page/home/SearchingFor";
 import Counters from "@/components/page/home/Counters";
 import { Separator } from "@/components/ui/separator";
 import { IProperty } from '../models/property';
-import { GlassmorphismNavBlack } from "@/components/page/GlassmorphismNavBlack";
+import { TranslucentNav } from "@/components/page/TranslucentNav";
+import LoaderFullscreen from "@/components/page/LoaderFullscreen";
 
 const Home = () => {
   const [latestProperties, setLatestProperties] = useState<IProperty[]>([]);
@@ -39,10 +40,10 @@ const Home = () => {
   return (
     <>
       <Suspense>
-        {/* {loading && <LoaderFullscreen />} */}
+        {loading && <LoaderFullscreen />}
         <div className="w-full">
           {/* <Header /> */}
-          <GlassmorphismNavBlack />
+          <TranslucentNav />
           <Hero />
           <AboutSection />
           {/* <Separator className="w-2/3 mx-auto my-16" /> */}

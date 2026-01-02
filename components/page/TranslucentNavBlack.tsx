@@ -5,17 +5,17 @@ import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import logo from "@/public/logo2-1.png";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 const navigation = [
   { name: "Inmuebles", href: "/properties" },
   { name: "Venta", href: "/properties?search=Venta" },
   { name: "Alquiler", href: "/properties?search=Alquiler" },
-  { name: "Contacto", href: "/contact" },
+  { name: "Contacto", href: "/contactus" },
 ]
 
-export function GlassmorphismNavBlack() {
+export function TranslucentNavBlack() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [hasLoaded, setHasLoaded] = useState(false)
@@ -105,7 +105,7 @@ export function GlassmorphismNavBlack() {
         animate={{ opacity: 1 }}
       >
         <div className="w-[95vw] max-w-lg md:max-w-4xl mx-auto">
-          <div className="px-4 py-3 border rounded-full bg-black/50 backdrop-blur-md border-white/20 md:px-6 md:py-2">
+          <div className="px-4 py-3 bg-black border rounded-full backdrop-blur-md border-white/20 md:px-6 md:py-2">
             <div className="flex items-center justify-between">
               {/* Logo */}
 

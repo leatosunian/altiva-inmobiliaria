@@ -44,8 +44,8 @@ import { Separator } from "@/components/ui/separator";
 const PropertiesCont = () => {
   const [open, setOpen] = useState(false);
   const [brandFilter, setBrandFilter] = useState("");
-  const [vehicleFetch, setVehicleFetch] = useState<IProperty[]>([]);
-  const [vehicleList, setVehicleList] = useState<IProperty[]>([]);
+  const [propertiesFetch, setPropertiesFetch] = useState<IProperty[]>([]);
+  const [propertiesList, setPropertiesList] = useState<IProperty[]>([]);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
   const pathname = usePathname();
@@ -72,8 +72,8 @@ const PropertiesCont = () => {
         cache: "no-store",
       });
       const properties = await propertiesFetch.json();
-      setVehicleList(properties);
-      setVehicleFetch(properties);
+      setPropertiesList(properties);
+      setPropertiesFetch(properties);
       setLoading(false);
       return properties;
     } catch (error) {
@@ -82,57 +82,57 @@ const PropertiesCont = () => {
   }
 
   function sortVehiclesByPriceDesc() {
-    const vehiclesSorted = [...vehicleList].sort(
+    const vehiclesSorted = [...propertiesList].sort(
       (prev, next) => next.price - prev.price
     );
-    setVehicleList(vehiclesSorted);
+    setPropertiesList(vehiclesSorted);
   }
   function sortVehiclesByPriceAsc() {
-    const vehiclesSorted = [...vehicleList].sort(
+    const vehiclesSorted = [...propertiesList].sort(
       (prev, next) => prev.price - next.price
     );
-    setVehicleList(vehiclesSorted);
+    setPropertiesList(vehiclesSorted);
   }
   function sortVehiclesByDateAsc() {
-    const vehiclesSorted = [...vehicleList].sort((a, b) => {
+    const vehiclesSorted = [...propertiesList].sort((a, b) => {
       return (
         new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime()
       );
     });
-    setVehicleList(vehiclesSorted);
+    setPropertiesList(vehiclesSorted);
   }
   function sortVehiclesByDateDesc() {
-    const vehiclesSorted = [...vehicleList].sort((a, b) => {
+    const vehiclesSorted = [...propertiesList].sort((a, b) => {
       return (
         new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
       );
     });
-    setVehicleList(vehiclesSorted);
+    setPropertiesList(vehiclesSorted);
   }
   function handleFilterByAmbientes(rooms: number) {
-    const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
+    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
       return vehicle.rooms === Number(rooms);
     });
-    setVehicleList(vehiclesFiltered);
+    setPropertiesList(vehiclesFiltered);
   }
   function handleFilterByPropertyType(propertyType: string) {
-    const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
+    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
       return vehicle.propertyType === propertyType;
     });
-    setVehicleList(vehiclesFiltered);
+    setPropertiesList(vehiclesFiltered);
   }
 
   function handleFilterByBathrooms(bathrooms: number) {
-    const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
+    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
       return vehicle.bathrooms === bathrooms;
     });
-    setVehicleList(vehiclesFiltered);
+    setPropertiesList(vehiclesFiltered);
   }
   function handleFilterByBusinessType(businessType: string) {
-    const vehiclesFiltered = vehicleFetch.filter((vehicle) => {
+    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
       return vehicle.businessType === businessType;
     });
-    setVehicleList(vehiclesFiltered);
+    setPropertiesList(vehiclesFiltered);
   }
   function handlePrevAndNextPage(to: string) {
     if (to === "PREV") {
@@ -157,22 +157,22 @@ const PropertiesCont = () => {
   }
 
   useEffect(() => {
-    const currentVehicles = vehicleList.slice(
+    const currentVehicles = propertiesList.slice(
       firstVehicleIndex,
       lastVehicleIndex
     );
     setCurrentVehicles(currentVehicles);
 
     let paginationPages: number[] = [];
-    for (let i = 1; i <= Math.ceil(vehicleList.length / vehiclesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(propertiesList.length / vehiclesPerPage); i++) {
       paginationPages.push(i);
     }
     setNumberOfPages(paginationPages);
-    console.log("vehiclelist", vehicleList);
+    console.log("vehiclelist", propertiesList);
 
     console.log("numberOfPages", currentPage);
     console.log("numberOfPages", numberOfPages);
-  }, [vehicleList, currentPage]);
+  }, [propertiesList, currentPage]);
 
   useEffect(() => {
     getProperties();
@@ -193,23 +193,24 @@ const PropertiesCont = () => {
     <>
       {loading && <LoaderFullscreen />}
       {/* HEADER SEPARATOR */}
-      <div className="w-full h-16 md:h-20"></div>
+      <div className="w-full h-16 md:h-28"></div>
 
-      {/* BREADCRUMBS */}
-      <div className="w-full px-6 pt-5 pb-3 md:pt-2 md:px-24 2xl:px-48 h-fit">
-        <Breadcrumbs />
-      </div>
+
 
       {/* container for padding */}
       <div className="px-6 md:px-24 2xl:px-48 ">
+        {/* BREADCRUMBS */}
+        <div className=" w-fit h-fit">
+          <Breadcrumbs />
+        </div>
         {/*  title and sort by */}
-        <div className="flex flex-col justify-between w-full gap-2 mt-0 md:mt-2 md:flex-row h-fit ">
+        <div className="flex flex-col justify-between w-full gap-2 mt-0 md:mt-1 md:flex-row h-fit ">
           <div className="flex flex-col w-fit">
             <h4 className="text-2xl font-medium md:text-3xl">
               Todas las propiedades
             </h4>
             <span className="mb-2 text-sm text-gray-400">
-              Mostrando 1-12 de {vehicleList.length} propiedades
+              Mostrando 1-12 de {propertiesList.length} propiedades
             </span>
           </div>
 
@@ -301,25 +302,26 @@ const PropertiesCont = () => {
         {/* VEHICLE LIST */}
         <div className="flex mt-4 mb-10 md:mt-7">
           {/* FILTERS SIDEBAR */}
+
+
           <div
-            style={{ border: "1px solid #0000001c" }}
-            className="flex-col hidden w-1/4 px-5 pt-3 pb-5 rounded-md shadow-lg h-fit lg:flex"
+
+            className="flex-col hidden w-1/4 gap-2 h-fit lg:flex"
           >
             <div className="">
-              <span className="text-lg font-semibold">Filtros</span>
+              <span className="text-lg font-semibold">Filtrar propiedades</span>
             </div>
-
             {/* divider */}
-            <div
+            {/* <div
               style={{
                 width: "100%",
                 height: "1px",
                 backgroundColor: "#0000001c",
                 margin: "8px 0 12px  0 ",
               }}
-            ></div>
+            ></div> */}
 
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 px-5 pt-3 pb-5 rounded-md shadow-lg" style={{ border: "1px solid #0000001c" }}>
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium">Tipo de operación</span>
                 <Select
@@ -427,7 +429,7 @@ const PropertiesCont = () => {
                   console.log(searchFilter);
 
                   if (searchFilter === "") {
-                    setVehicleList(vehicleFetch);
+                    setPropertiesList(propertiesFetch);
                     return;
                   }
                   if (searchFilter !== "") {
@@ -528,27 +530,27 @@ const PropertiesCont = () => {
                                     {property.rooms ?
                                       (<span className="text-xs"> {property.rooms} ambientes</span>)
                                       :
-                                      (<span className="text-xs"> No especif.</span>)}                                  </div>
+                                      (<span className="text-xs"> No especif.</span>)}
+                                  </div>
                                   <div className="flex items-center w-1/2 gap-1">
                                     <Bath size={17} />
                                     {property.bathrooms ?
                                       (<span className="text-xs"> {property.bathrooms} baños</span>)
                                       :
-                                      (<span className="text-xs"> No especif.</span>)}                                  </div>
+                                      (<span className="text-xs"> No especif.</span>)}
+                                  </div>
                                 </CardDescription>
                                 <Separator />
 
                                 <div className="flex flex-col gap-5 pt-2 ">
-
                                   <p className="text-lg font-semibold">
-                                    {property.currency} ${property.price}
+                                    {property.currency} ${property.price.toLocaleString()}
                                   </p>
                                 </div>
-                              </CardHeader>
-                              <CardFooter className="px-4 ">
+
                                 <Link
                                   href={`/properties/${property._id}`}
-                                  className="w-full h-fit"
+                                  className="w-full mt-5 h-fit"
                                 >
                                   <Button
                                     variant={"default"}
@@ -557,7 +559,11 @@ const PropertiesCont = () => {
                                     Ver más
                                   </Button>
                                 </Link>
-                              </CardFooter>
+
+                              </CardHeader>
+                              {/* <CardFooter className="px-4 ">
+                         
+                              </CardFooter> */}
                             </div>
                           </Card>
                         </div>
@@ -603,7 +609,7 @@ const PropertiesCont = () => {
                 </div>
               </>
             )}
-            {vehicleList.length === 0 && (
+            {propertiesList.length === 0 && (
               <>
                 <div className="flex flex-col items-center justify-center w-full gap-5 my-32 h-fit">
                   <span className="text-2xl font-semibold">
@@ -613,7 +619,7 @@ const PropertiesCont = () => {
 
                     onClick={() => {
                       if (searchFilter === "") {
-                        setVehicleList(vehicleFetch);
+                        setPropertiesList(propertiesFetch);
                         return;
                       }
                       if (searchFilter !== "") {
@@ -631,7 +637,7 @@ const PropertiesCont = () => {
           </div>
         </div>
 
-       
+
       </div>
     </>
   );

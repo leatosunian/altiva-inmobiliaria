@@ -1,4 +1,4 @@
-import { GlassmorphismNavBlack } from "@/components/page/GlassmorphismNavBlack";
+import { TranslucentNavBlack } from "@/components/page/TranslucentNavBlack";
 import Footer from "@/components/page/home/Footer";
 import PropertiesCont from "@/components/page/home/vehicles/PropertiesCont";
 import { Metadata } from "next";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <>
-      <GlassmorphismNavBlack />
+      <TranslucentNavBlack />
       <PropertiesCont />
       <Footer />
     </>

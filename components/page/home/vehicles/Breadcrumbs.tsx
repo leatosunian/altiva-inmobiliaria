@@ -18,7 +18,7 @@ const Breadcrumbs = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Todas las propiedades</BreadcrumbPage>
+            <BreadcrumbPage className="font-medium text-red-600">Todas las propiedades</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

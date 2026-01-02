@@ -18,7 +18,7 @@ const Breadcrumbs = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem className="block font-medium xs:hidden">
-            <BreadcrumbPage className="font-medium ">
+            <BreadcrumbPage className="font-medium text-red-600">
               Contactanos
             </BreadcrumbPage>
           </BreadcrumbItem>
