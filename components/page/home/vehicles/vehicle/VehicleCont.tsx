@@ -4,10 +4,6 @@ import Breadcrumbs from "@/components/page/home/vehicles/vehicle/Breadcrumbs";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/css-modules/vehicles/vehicle/vehicle.module.css";
-import { IoSpeedometerOutline } from "react-icons/io5";
-import { MdOutlineCalendarMonth } from "react-icons/md";
-import { GiGearStickPattern } from "react-icons/gi";
-import { PiEngineBold, PiGasPump } from "react-icons/pi";
 import {
   Carousel,
   CarouselContent,
@@ -135,7 +131,7 @@ const VehicleCont = () => {
                   <FaLocationDot style={{ color: "red" }} size={16} />
                   <span
                     //style={{ color: "#a1a1aa" }}
-                    className="text-sm leading-4 font-medium text-gray-700"
+                    className="text-sm font-medium leading-4 text-gray-700"
                   >
                     {vehicleData?.address}, {vehicleData?.neighborhood}, {vehicleData?.city}
                   </span>
@@ -143,11 +139,11 @@ const VehicleCont = () => {
               </div>
 
               
-                <span className="text-2xl mt-2 font-semibold md:mb-2">
+                <span className="mt-2 text-2xl font-semibold md:mb-2">
                   {vehicleData?.currency} ${vehicleData?.price}{" "}
                 </span>
               {/* vehicle data */}
-              <Card className="flex py-3 px-4 flex-wrap justify-between  gap-y-4 gap-x-8 ">
+              <Card className="flex flex-wrap justify-between px-4 py-3 gap-y-4 gap-x-8 ">
                 <div className="flex items-center gap-2 w-fit h-fit">
                   <Maximize2 size={20} color="red" />
                   <span className="text-sm">{vehicleData?.metersSquare} m² totales</span>
@@ -176,48 +172,48 @@ const VehicleCont = () => {
               </div>
 
 
-              <Card className="gap-3 px-4 flex flex-col  py-3">
+              <Card className="flex flex-col gap-3 px-4 py-3">
                 <span className="text-lg font-semibold">Más detalles <Separator
                   style={{ height: "2px" }}
-                  className=" bg-red-800 w-6 sm:my-0"
+                  className="w-6 bg-red-800  sm:my-0"
                 /></span>
-                <div className="grid grid-cols-3 gap-3 justify-around">
+                <div className="grid justify-around grid-cols-3 gap-3">
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Tipo de propiedad</span>
+                    <span className="text-xs font-semibold md:text-sm">Tipo de propiedad</span>
                     <span className="text-xs md:text-sm">{vehicleData?.propertyType}</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Superficie total</span>
+                    <span className="text-xs font-semibold md:text-sm">Superficie total</span>
                     <span className="text-xs md:text-sm">{vehicleData?.metersSquare} m²</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Superficie cubierta</span>
+                    <span className="text-xs font-semibold md:text-sm">Superficie cubierta</span>
                     <span className="text-xs md:text-sm">{vehicleData?.coveredMetersSquare} m²</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Plantas</span>
+                    <span className="text-xs font-semibold md:text-sm">Plantas</span>
                     <span className="text-xs md:text-sm">{vehicleData?.floors} plantas</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Garage</span>
+                    <span className="text-xs font-semibold md:text-sm">Garage</span>
                     <span className="text-xs md:text-sm">{vehicleData?.garageCarsQuantity} vehículos</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Baños</span>
+                    <span className="text-xs font-semibold md:text-sm">Baños</span>
                     <span className="text-xs md:text-sm">{vehicleData?.bathrooms}</span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Expensas</span>
+                    <span className="text-xs font-semibold md:text-sm">Expensas</span>
                     <span className="text-xs md:text-sm">{vehicleData?.expensas} </span>
                   </div>
                   <div className="flex flex-col col-span-1">
-                    <span className="font-semibold text-xs md:text-sm">Antiguedad</span>
+                    <span className="text-xs font-semibold md:text-sm">Antiguedad</span>
                     <span className="text-xs md:text-sm">{vehicleData?.antiquity} </span>
                   </div>
                 </div>
               </Card>
 
-              <Button className="bg-red-800 w-full md:w-fit mt-0 md:mt-5 text-white">
+              <Button className="w-full mt-0 text-white bg-red-800 md:w-fit md:mt-5">
                 Consultar por la propiedad
               </Button>
             </div>
