@@ -41,24 +41,25 @@ const Home = () => {
     <>
       <Suspense>
         {loading && <LoaderFullscreen />}
-        <div className="w-full">
-          {/* <Header /> */}
-          <TranslucentNav />
-          <Hero />
-          <AboutSection />
-          {/* <Separator className="w-2/3 mx-auto my-16" /> */}
-          <div className="h-0 md:h-14"></div>
-          <SearchingFor />
-          <Separator className="w-2/3 mx-auto my-16" />
-          <LatestProperties properties={latestProperties} />
-          <Separator className="w-2/3 mx-auto my-16" />
-          <Budget />
-          <Separator className="w-2/3 mx-auto mb-0 md:mb-36" />
-          <Counters />
-          <Separator className="w-2/3 mx-auto mb-14 sm:mb-36" />
-          <ContactForm />
-          <Footer />
-        </div>
+        {!loading && (<>
+          <div className="w-full">
+            <TranslucentNav />
+            <Hero />
+            <AboutSection />
+            {/* <Separator className="w-2/3 mx-auto my-16" /> */}
+            <div className="h-0 md:h-14"></div>
+            <SearchingFor />
+            <Separator className="w-2/3 mx-auto my-16" />
+            <LatestProperties properties={latestProperties} />
+            <Separator className="w-2/3 mx-auto my-16" />
+            <Budget />
+            <Separator className="w-2/3 mx-auto mb-0 md:mb-36" />
+            <Counters />
+            <Separator className="w-2/3 mx-auto mb-14 sm:mb-36" />
+            <ContactForm />
+            <Footer />
+          </div>
+        </>)}
       </Suspense>
     </>
   );

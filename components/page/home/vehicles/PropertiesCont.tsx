@@ -195,8 +195,6 @@ const PropertiesCont = () => {
       {/* HEADER SEPARATOR */}
       <div className="w-full h-16 md:h-28"></div>
 
-
-
       {/* container for padding */}
       <div className="px-6 md:px-24 2xl:px-48 ">
         {/* BREADCRUMBS */}
@@ -457,7 +455,7 @@ const PropertiesCont = () => {
                       <>
                         <div
                           key={property._id}
-                          className="col-span-1 md:h-full h-fit"
+                          className="col-span-1 md:h-full max-h-[560px] h-fit"
                         >
                           <Card
                             key={property._id}
@@ -487,18 +485,18 @@ const PropertiesCont = () => {
                               unoptimized
                               width={500}
                               height={500}
-                              className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
+                              className="object-cover h-full mb-4 overflow-hidden rounded-t-md "
                             /></>) : (<>  <Image
                               src={property.imagePath!}
                               alt=""
                               unoptimized
                               width={500}
                               height={500}
-                              className="object-cover h-full mb-4 overflow-hidden md:h-1/2 rounded-t-md "
+                              className="object-cover h-full mb-4 overflow-hidden rounded-t-md "
                             /></>)}
 
-                            <div className="flex flex-col justify-between w-full h-full md:h-1/2">
-                              <CardHeader style={{ padding: "0 16px 10px 16px" }}>
+                            <div className="flex flex-col justify-between w-full h-full ">
+                              <CardHeader style={{ padding: "0 16px 0px 16px" }}>
                                 <CardTitle className="text-lg md:text-sm 2xl:text-base textCut">
                                   {property.name}
                                 </CardTitle>
@@ -510,39 +508,42 @@ const PropertiesCont = () => {
                                   <FaLocationDot size={13} /> {property.neighborhood}, {property.city}
                                 </p>
                                 <Separator />
-                                <CardDescription className="flex flex-wrap items-center justify-between w-full pt-2 pb-2 h-fit gap-y-2 ">
-                                  <div className="flex items-center w-1/2 gap-1">
-                                    <Maximize2 size={14} />
-                                    {property.metersSquare ?
-                                      (<span className="text-xs">{property.metersSquare} m² </span>)
-                                      :
-                                      (<span className="text-xs">No especif.</span>)}
-                                  </div>
-                                  <div className="flex items-center w-1/2 gap-1">
-                                    <FaBed size={16} />
-                                    {property.dormitorios ?
-                                      (<span className="text-xs"> {property.dormitorios} dormitorios</span>)
-                                      :
-                                      (<span className="text-xs"> No especif.</span>)}
-                                  </div>
-                                  <div className="flex items-center w-1/2 gap-1">
-                                    <DoorOpen size={17} />
-                                    {property.rooms ?
-                                      (<span className="text-xs"> {property.rooms} ambientes</span>)
-                                      :
-                                      (<span className="text-xs"> No especif.</span>)}
-                                  </div>
-                                  <div className="flex items-center w-1/2 gap-1">
-                                    <Bath size={17} />
-                                    {property.bathrooms ?
-                                      (<span className="text-xs"> {property.bathrooms} baños</span>)
-                                      :
-                                      (<span className="text-xs"> No especif.</span>)}
-                                  </div>
-                                </CardDescription>
-                                <Separator />
+                              </CardHeader>
 
-                                <div className="flex flex-col gap-5 pt-2 ">
+                              <CardDescription style={{ padding: "0 16px 0px 16px" }} className="flex flex-wrap items-center justify-between w-full text-black h-fit gap-y-2 ">
+                                <div className="flex items-center w-1/2 gap-1">
+                                  <Maximize2 size={14} />
+                                  {property.metersSquare ?
+                                    (<span className="text-xs">{property.metersSquare} m² </span>)
+                                    :
+                                    (<span className="text-xs">No especif.</span>)}
+                                </div>
+                                <div className="flex items-center w-1/2 gap-1">
+                                  <FaBed size={16} />
+                                  {property.dormitorios ?
+                                    (<span className="text-xs"> {property.dormitorios} dormitorios</span>)
+                                    :
+                                    (<span className="text-xs"> No especif.</span>)}
+                                </div>
+                                <div className="flex items-center w-1/2 gap-1">
+                                  <DoorOpen size={17} />
+                                  {property.rooms ?
+                                    (<span className="text-xs"> {property.rooms} ambientes</span>)
+                                    :
+                                    (<span className="text-xs"> No especif.</span>)}
+                                </div>
+                                <div className="flex items-center w-1/2 gap-1">
+                                  <Bath size={17} />
+                                  {property.bathrooms ?
+                                    (<span className="text-xs"> {property.bathrooms} baños</span>)
+                                    :
+                                    (<span className="text-xs"> No especif.</span>)}
+                                </div>
+                              </CardDescription>
+
+                              <CardFooter style={{ padding: "0 16px 18px 16px" }} className="flex flex-col items-start w-full ">
+                                <Separator />
+                                <div className="flex gap-5 pt-3 ">
                                   <p className="text-lg font-semibold">
                                     {property.currency} ${property.price.toLocaleString()}
                                   </p>
@@ -550,7 +551,7 @@ const PropertiesCont = () => {
 
                                 <Link
                                   href={`/properties/${property._id}`}
-                                  className="w-full mt-5 h-fit"
+                                  className="w-full mt-4 h-fit"
                                 >
                                   <Button
                                     variant={"default"}
@@ -559,11 +560,7 @@ const PropertiesCont = () => {
                                     Ver más
                                   </Button>
                                 </Link>
-
-                              </CardHeader>
-                              {/* <CardFooter className="px-4 ">
-                         
-                              </CardFooter> */}
+                              </CardFooter>
                             </div>
                           </Card>
                         </div>

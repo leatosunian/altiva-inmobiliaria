@@ -104,14 +104,23 @@ const ContactForm = () => {
           {/* black overlay for background */}
 
 
-          <div className="flex flex-col items-center w-full px-8 pb-20 pt-14 gap-14 md:gap-0 md:flex-row ">
+          <div className="flex flex-col items-center w-full px-8 pb-24 pt-9 md:pt-20 gap-14 md:gap-0 md:flex-row ">
             <div className="flex justify-center w-full md:w-1/2 ">
-              <div style={{ borderRadius: '13px' }} className="z-20 flex flex-col w-full gap-10 px-0 mx-0 my-auto md:w-2/6 md:min-w-96 ">
-                <div className="flex flex-col gap-5">
+              <div style={{ borderRadius: '13px' }} className="z-20 flex flex-col justify-between w-full h-full gap-10 px-0 mx-0 md:w-2/6 md:min-w-96 ">
+                
+                <div className="flex flex-col gap-3">
+                  <span className="text-3xl font-bold text-white md:text-4xl 2xl:text-5xl">Pongámonos en contacto</span>
+                  <Separator
+                    style={{ height: "2px" }}
+                    className="w-10 bg-red-800 "
+                  />
+                </div>
+
+                <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <FaLocationDot color="red" />
                     <div className="flex flex-col">
-                      <span className="text-sm font-semibold md:text-2xl">Visitanos en</span>
+                      <span className="text-base font-semibold md:text-xl">Visitanos en</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "
@@ -124,11 +133,11 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <FaPhone color="red" />
                     <div className="flex flex-col">
-                      <span  className="text-sm font-semibold md:text-2xl">Pongámonos en contacto</span>
+                      <span className="text-base font-semibold md:text-xl">Llamanos</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "
@@ -142,11 +151,11 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <FaClock color="red" />
                     <div className="flex flex-col">
-                      <span className="text-sm font-semibold md:text-2xl">Nuestros horarios</span>
+                      <span className="text-base font-semibold md:text-xl">Nuestros horarios</span>
                       <Separator
                         style={{ height: "2px" }}
                         className="w-4 bg-red-800 "
