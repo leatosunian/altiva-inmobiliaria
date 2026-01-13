@@ -75,7 +75,6 @@ const AddPropertyForm = () => {
       luminocity: "",
       infrastructureStatus: "",
       disposition: "",
-
       hasElevator: false,
       calefaction: "",
       hasPatio: false,
@@ -220,7 +219,7 @@ const AddPropertyForm = () => {
                         <FormLabel>Nombre de la publicación</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Ej. Chevrolet Cruze LTZ 1.4T"
+                            placeholder="Ej. Venta departamento 3 ambientes zona centro"
                             type="text"
                             {...field}
                           />
@@ -283,7 +282,7 @@ const AddPropertyForm = () => {
                         <FormLabel>Expensas (ARS) <span className="text-sm text-gray-500">(opcional)</span></FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Ej. 640,000"
+                            placeholder="Ej. 140.000"
                             type="number"
                             {...field}
                           />
@@ -472,10 +471,10 @@ const AddPropertyForm = () => {
                     name="floors"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Pisos</FormLabel>
+                        <FormLabel>N° Piso</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Ej. 2"
+                            placeholder="Ej. 5"
                             type="number"
                             {...field}
                           />
@@ -560,7 +559,7 @@ const AddPropertyForm = () => {
                         <FormLabel>Luminosidad</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Ej. 2"
+                            placeholder="Ej. Buena"
                             type="text"
                             {...field}
                           />
@@ -621,6 +620,43 @@ const AddPropertyForm = () => {
               <Card className="p-4 mt-6 ">
                 <span className="mb-2 text-lg font-semibold">Caracteristicas <span className="text-sm text-gray-500">(opcional)</span></span>
                 <div className="grid grid-cols-1 gap-4 mt-4 md:gap-y-4 gap-x-6 md:gap-8 md:grid-cols-4 2xl:grid-cols-6">
+                  {/* rooms input */}
+                  <FormField
+                    control={form.control}
+                    name="rooms"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Ambientes</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Ej. 3 "
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/*  dormitorios input */}
+                  <FormField
+                    control={form.control}
+                    name="dormitorios"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Dormitorios</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Ej. 2 "
+                            type="number"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
                   {/* bathroom input */}
                   <FormField
                     control={form.control}
@@ -639,8 +675,6 @@ const AddPropertyForm = () => {
                       </FormItem>
                     )}
                   />
-                  {/* bathroom input */}
-
 
                   {/* floors input */}
                   <FormField
@@ -652,24 +686,6 @@ const AddPropertyForm = () => {
                         <FormControl>
                           <Input
                             placeholder="Ej. 3 autos"
-                            type="number"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="rooms"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Ambientes</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Ej. 3 "
                             type="number"
                             {...field}
                           />

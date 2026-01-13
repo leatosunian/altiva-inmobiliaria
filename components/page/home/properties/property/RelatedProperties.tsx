@@ -18,24 +18,27 @@ import {
 } from "@/components/ui/card";
 import stylesSearch from "@/app/css-modules/home.search.module.css";
 import { Button } from "@/components/ui/button";
+import EmblaCarousel, { EmblaPluginType } from "embla-carousel";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { FaBed, FaRegCalendar } from "react-icons/fa";
 import { IoSpeedometerOutline } from "react-icons/io5";
-import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { IProperty } from "@/app/models/property";
 import { FaLocationDot } from "react-icons/fa6";
-import { Bath, DoorOpen, House, Maximize2, Scan } from "lucide-react";
+import { Bath, DoorOpen, Maximize2 } from "lucide-react";
+import { IProperty } from "@/app/models/property";
 import noimage from "@/public/noimage.jpg";
 
 interface Props {
   properties: IProperty[];
 }
 
-const LatestProperties = ({ properties }: Props) => {
+const RelatedProperties = ({ properties }: Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [latestProperties, setLatestProperties] = useState<IProperty[]>([]);
   const [current, setCurrent] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     if (!api) {
@@ -61,47 +64,23 @@ const LatestProperties = ({ properties }: Props) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center w-full gap-8 my-8 align-middle h-fit md:gap-8 2xl:gap-12 md:my-14 2xl:my-0">
+      <section className="flex flex-col justify-center w-full py-20 align-middle gap-7 md:py-44 md:gap-8">
         <motion.header
           initial={{ opacity: 0, y: -70 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: "some", once: true }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="flex flex-col items-start justify-center px-6 overflow-visible sm:px-16 md:px-32 2xl:px-56 md:overflow-hidden md:hidden"
+          className="flex flex-col items-start justify-center w-full px-6 sm:items-center"
         >
           <div className="flex flex-col ">
-            <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
-              Propiedades seleccionadas
-            </h2>
+            <h4 className="text-xl font-bold sm:text-2xl">
+              Propiedades Relacionadas
+            </h4>
             <Separator
               style={{ height: "2px", backgroundColor: "#1C4D8D" }}
               className="my-5 w-9 sm:my-3"
             />
           </div>
-        </motion.header>
-        <motion.header
-          initial={{ opacity: 0, y: -70 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: "some", once: true }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="flex-row items-start justify-between hidden w-full px-6 mx-auto md:flex sm:px-16 md:px-32 2xl:px-56 "
-        >
-          <div className="flex flex-col ">
-            <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
-              Propiedades seleccionadas
-            </h2>
-            <Separator
-              style={{ height: "2px", backgroundColor: "#1C4D8D" }}
-              className="my-5 w-9 sm:my-3"
-            />
-          </div>
-          {/* <div className="flex justify-center mt-4 w-fit h-fit">
-            <Link href={"/properties"} className="w-fit h-fit">
-              <button className={`${stylesSearch.button}`}>
-                Ver todos los vehículos
-              </button>{" "}
-            </Link>
-          </div> */}
         </motion.header>
         <div className="w-full mx-auto overflow-hidden">
           <motion.div
@@ -288,9 +267,9 @@ const LatestProperties = ({ properties }: Props) => {
             </Button>
           </Link>
         </div>
-      </section >
+      </section>
     </>
   );
 };
 
-export default LatestProperties;
+export default RelatedProperties;

@@ -140,7 +140,7 @@ const Hero = () => {
               </SelectContent>
             </Select>
 
-            <Button onClick={handleSearch} className="flex gap-2 text-white bg-red-800 hover:bg-red-500">
+            <Button onClick={handleSearch} className="flex gap-2 text-white " style={{ backgroundColor: "#1C4D8D" }}>
               <FaSearch /> Buscar
             </Button>
           </Card>

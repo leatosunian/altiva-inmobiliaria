@@ -15,20 +15,20 @@ const Breadcrumbs = ({ name }: { name: string | undefined }) => {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href="/">Inicio</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Vehículos</BreadcrumbPage>
+            <BreadcrumbPage className="font-medium">Propiedades</BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem className="block font-medium xs:hidden">
-            <BreadcrumbPage className="font-medium ">
+          <BreadcrumbItem className="block xs:hidden">
+            <BreadcrumbPage className="font-semibold " style={{color:"#1C4D8D"}}>
               {name?.substring(0, 26)}...
             </BreadcrumbPage>
           </BreadcrumbItem>
-          <BreadcrumbItem className="hidden font-medium xs:block">
-            <BreadcrumbPage className="font-medium text-red textCutOneLine">
+          <BreadcrumbItem className="hidden xs:block">
+            <BreadcrumbPage className="font-semibold textCutOneLine" style={{color:"#1C4D8D"}}>
               {name}
             </BreadcrumbPage>
           </BreadcrumbItem>

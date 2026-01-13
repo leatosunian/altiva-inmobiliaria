@@ -4,9 +4,9 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Contactanos | Distrito Automotor",
+  title: "Contacto | Altiva Propiedades",
   description:
-    "Distrito Automotor, concesionaria de vehículos ubicada en Mar del Plata, Buenos Aires",
+    "Altiva Propiedades, inmobiliaria ubicada en Mar del Plata, Buenos Aires",
 };
 
 const ContactUs = () => {

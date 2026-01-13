@@ -107,23 +107,23 @@ const ContactForm = () => {
           <div className="flex flex-col items-center w-full px-8 pb-24 pt-9 md:pt-20 gap-14 md:gap-0 md:flex-row ">
             <div className="flex justify-center w-full md:w-1/2 ">
               <div style={{ borderRadius: '13px' }} className="z-20 flex flex-col justify-between w-full h-full gap-10 px-0 mx-0 md:w-2/6 md:min-w-96 ">
-                
+
                 <div className="flex flex-col gap-3">
                   <span className="text-3xl font-bold text-white md:text-4xl 2xl:text-5xl">Pongámonos en contacto</span>
                   <Separator
-                    style={{ height: "2px" }}
-                    className="w-10 bg-red-800 "
+                    style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                    className="w-10"
                   />
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
-                    <FaLocationDot color="red" />
+                    <FaLocationDot size={24} color="#1C4D8D" />
                     <div className="flex flex-col">
                       <span className="text-base font-semibold md:text-xl">Visitanos en</span>
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-4 bg-red-800 "
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-4"
                       />
                     </div>
                   </div>
@@ -135,12 +135,12 @@ const ContactForm = () => {
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
-                    <FaPhone color="red" />
+                    <FaPhone size={24} color="#1C4D8D" />
                     <div className="flex flex-col">
                       <span className="text-base font-semibold md:text-xl">Llamanos</span>
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-4 bg-red-800 "
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-4"
                       />
                     </div>
                   </div>
@@ -153,12 +153,12 @@ const ContactForm = () => {
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
-                    <FaClock color="red" />
+                    <FaClock size={24} color="#1C4D8D" />
                     <div className="flex flex-col">
                       <span className="text-base font-semibold md:text-xl">Nuestros horarios</span>
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-4 bg-red-800 "
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-4"
                       />
                     </div>
                   </div>
@@ -177,9 +177,10 @@ const ContactForm = () => {
                 <div className="flex flex-col">
                   <h2 className="text-lg font-semibold md:text-xl ">
                     Envianos tu consulta
-                  </h2>                    <Separator
-                    style={{ height: "2px" }}
-                    className="w-4 bg-red-800 "
+                  </h2>
+                  <Separator
+                    style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                    className="w-4 "
                   />
                 </div>
 
@@ -199,7 +200,7 @@ const ContactForm = () => {
                               <FormControl>
                                 <input
                                   {...field}
-                                  className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+                                  className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                                   placeholder="Ingrese su nombre"
                                   id="name"
                                   type="text"
@@ -222,7 +223,7 @@ const ContactForm = () => {
                               <FormControl>
                                 <input
                                   {...field}
-                                  className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+                                  className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                                   placeholder="Ingrese su apellido"
                                   id="surname"
                                   type="text"
@@ -247,7 +248,7 @@ const ContactForm = () => {
                             <FormControl>
                               <input
                                 {...field}
-                                className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+                                className="w-full px-4 py-2 text-xs font-normal transition duration-300 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                                 placeholder="Ingrese su número de teléfono"
                                 id="phone"
                                 type="number"
@@ -308,8 +309,9 @@ const ContactForm = () => {
 
                     {!loading && (
                       <button
-                        className="w-full px-4 py-3 mt-1 text-xs font-semibold text-white transition duration-300 bg-red-800 rounded-md hover:bg-red-900"
+                        className="w-full px-4 py-3 mt-1 text-xs font-semibold text-white transition duration-300 rounded-md "
                         type="submit"
+                        style={{ backgroundColor: "#1C4D8D" }}
                       >
                         Enviar consulta
                       </button>
@@ -383,7 +385,7 @@ const ContactForm = () => {
               </div>
             </div>
             <DialogFooter className="mx-auto ">
-              <Button onClick={() => setOpenCreatedLead(false)} type="submit">
+              <Button style={{ backgroundColor: "#1C4D8D" }} onClick={() => setOpenCreatedLead(false)} type="submit">
                 Entendido
               </Button>
             </DialogFooter>

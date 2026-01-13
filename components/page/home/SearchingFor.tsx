@@ -34,8 +34,8 @@ const SearchingFor = () => {
             ¿Qué estás buscando?
           </h3>
           <Separator
-            style={{ height: "2px" }}
-            className="my-3 bg-red-800 w-9 sm:my-0"
+            style={{ height: "2px", backgroundColor: "#4988C4" }}
+            className="my-3 w-9 sm:my-0"
           />
         </motion.div>
 
@@ -65,8 +65,8 @@ const SearchingFor = () => {
                       CASAS
                     </span>
                     <Separator
-                      style={{ height: "2px" }}
-                      className="w-5 my-5 bg-red-800 sm:my-0"
+                      style={{ height: "2px", backgroundColor: "#4988C4" }}
+                      className="w-5 my-5 sm:my-0"
                     />
                   </div>
                 </div>
@@ -98,8 +98,8 @@ const SearchingFor = () => {
                       DEPARTAMENTOS
                     </span>
                     <Separator
-                      style={{ height: "2px" }}
-                      className="w-5 my-5 bg-red-800 sm:my-0"
+                      style={{ height: "2px", backgroundColor: "#4988C4" }}
+                      className="w-5 my-5 sm:my-0"
                     />
                   </div>
                 </div>
@@ -132,8 +132,8 @@ const SearchingFor = () => {
                       TERRENOS
                     </span>
                     <Separator
-                      style={{ height: "2px" }}
-                      className="w-5 my-5 bg-red-800 sm:my-0"
+                      style={{ height: "2px", backgroundColor: "#4988C4" }}
+                      className="w-5 my-5 sm:my-0"
                     />
                   </div>
                 </div>
@@ -168,8 +168,8 @@ const SearchingFor = () => {
                     </span>
 
                     <Separator
-                      style={{ height: "2px" }}
-                      className="w-5 my-5 bg-red-800 sm:my-0"
+                      style={{ height: "2px", backgroundColor: "#4988C4" }}
+                      className="w-5 my-5 sm:my-0"
                     />
                   </div>
                 </div>

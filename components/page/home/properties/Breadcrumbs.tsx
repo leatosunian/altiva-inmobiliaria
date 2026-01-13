@@ -14,11 +14,11 @@ const Breadcrumbs = () => {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink href="/">Inicio</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage className="font-medium text-red-600">Todas las propiedades</BreadcrumbPage>
+            <BreadcrumbPage className="font-semibold " style={{color:"#1C4D8D"}}>Todas las propiedades</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

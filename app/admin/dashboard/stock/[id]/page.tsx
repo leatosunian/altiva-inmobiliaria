@@ -1,14 +1,13 @@
 import { Separator } from "@/components/ui/separator";
 import ImageGallery from "@/components/admin/dashboard/editProperty/ImageGallery";
 import EditPropertyForm from "@/components/admin/dashboard/editProperty/EditPropertyForm";
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
-const ACCEPTED_FILE_TYPES = ["image/png"];
 import React from "react";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Editar vehículo | Panel de administración",
+  title: "Editar propiedad | Panel de administración",
   description:
-    "Distrito Automotor, concesionaria de vehículos ubicada en Mar del Plata, Buenos Aires",
+    "Altiva Propiedades, inmobiliaria ubicada en Mar del Plata, Buenos Aires",
 };
 
 const EditProduct = ({ params }: { params: { id: string } }) => {

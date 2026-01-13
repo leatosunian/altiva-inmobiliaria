@@ -167,7 +167,8 @@ export function TranslucentNav() {
                     <button
                       type="submit"
                       onClick={handleSearch}
-                      className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-red-700 rounded-e-full border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                      style={{ backgroundColor: "#1C4D8D", transform: "translateX(4px)" }}
+                      className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-full"
                     >
                       <svg
                         className="w-2.5 h-2.5"

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Breadcrumbs from "@/components/page/home/vehicles/Breadcrumbs";
+import Breadcrumbs from "@/components/page/home/properties/Breadcrumbs";
 import {
   Pagination,
   PaginationContent,
@@ -27,14 +27,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Footer from "@/components/page/home/Footer";
-
 import { Bath, DoorOpen, Maximize2 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LoaderFullscreen from "@/components/page/LoaderFullscreen";
 import Link from "next/link";
-import { FaBed, FaRegCalendar } from "react-icons/fa";
-import { IoSpeedometerOutline } from "react-icons/io5";
+import { FaBed } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import { IProperty } from "@/app/models/property";
 import { FaLocationDot } from "react-icons/fa6";
@@ -81,58 +78,58 @@ const PropertiesCont = () => {
     }
   }
 
-  function sortVehiclesByPriceDesc() {
-    const vehiclesSorted = [...propertiesList].sort(
+  function sortPropertiesByPriceDesc() {
+    const propertiesSorted = [...propertiesList].sort(
       (prev, next) => next.price - prev.price
     );
-    setPropertiesList(vehiclesSorted);
+    setPropertiesList(propertiesSorted);
   }
-  function sortVehiclesByPriceAsc() {
-    const vehiclesSorted = [...propertiesList].sort(
+  function sortPropertiesByPriceAsc() {
+    const propertiesSorted = [...propertiesList].sort(
       (prev, next) => prev.price - next.price
     );
-    setPropertiesList(vehiclesSorted);
+    setPropertiesList(propertiesSorted);
   }
-  function sortVehiclesByDateAsc() {
-    const vehiclesSorted = [...propertiesList].sort((a, b) => {
+  function sortPropertiesByDateAsc() {
+    const propertiesSorted = [...propertiesList].sort((a, b) => {
       return (
         new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime()
       );
     });
-    setPropertiesList(vehiclesSorted);
+    setPropertiesList(propertiesSorted);
   }
-  function sortVehiclesByDateDesc() {
-    const vehiclesSorted = [...propertiesList].sort((a, b) => {
+  function sortPropertiesByDateDesc() {
+    const propertiesSorted = [...propertiesList].sort((a, b) => {
       return (
         new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
       );
     });
-    setPropertiesList(vehiclesSorted);
+    setPropertiesList(propertiesSorted);
   }
   function handleFilterByAmbientes(rooms: number) {
-    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
-      return vehicle.rooms === Number(rooms);
+    const propertiesFiltered = propertiesFetch.filter((property) => {
+      return property.rooms === Number(rooms);
     });
-    setPropertiesList(vehiclesFiltered);
+    setPropertiesList(propertiesFiltered);
   }
   function handleFilterByPropertyType(propertyType: string) {
-    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
-      return vehicle.propertyType === propertyType;
+    const propertiesFiltered = propertiesFetch.filter((property) => {
+      return property.propertyType === propertyType;
     });
-    setPropertiesList(vehiclesFiltered);
+    setPropertiesList(propertiesFiltered);
   }
 
   function handleFilterByBathrooms(bathrooms: number) {
-    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
-      return vehicle.bathrooms === bathrooms;
+    const propertiesFiltered = propertiesFetch.filter((property) => {
+      return property.bathrooms === bathrooms;
     });
-    setPropertiesList(vehiclesFiltered);
+    setPropertiesList(propertiesFiltered);
   }
   function handleFilterByBusinessType(businessType: string) {
-    const vehiclesFiltered = propertiesFetch.filter((vehicle) => {
-      return vehicle.businessType === businessType;
+    const propertiesFiltered = propertiesFetch.filter((property) => {
+      return property.businessType === businessType;
     });
-    setPropertiesList(vehiclesFiltered);
+    setPropertiesList(propertiesFiltered);
   }
   function handlePrevAndNextPage(to: string) {
     if (to === "PREV") {
@@ -219,16 +216,16 @@ const PropertiesCont = () => {
                 onValueChange={(type) => {
                   console.log(type);
                   if (type === "price-desc") {
-                    sortVehiclesByPriceDesc();
+                    sortPropertiesByPriceDesc();
                   }
                   if (type === "price-asc") {
-                    sortVehiclesByPriceAsc();
+                    sortPropertiesByPriceAsc();
                   }
                   if (type === "date-desc") {
-                    sortVehiclesByDateDesc();
+                    sortPropertiesByDateDesc();
                   }
                   if (type === "date-asc") {
-                    sortVehiclesByDateAsc();
+                    sortPropertiesByDateAsc();
                   }
                 }}
               >
@@ -261,16 +258,16 @@ const PropertiesCont = () => {
               onValueChange={(type) => {
                 console.log(type);
                 if (type === "price-desc") {
-                  sortVehiclesByPriceDesc();
+                  sortPropertiesByPriceDesc();
                 }
                 if (type === "price-asc") {
-                  sortVehiclesByPriceAsc();
+                  sortPropertiesByPriceAsc();
                 }
                 if (type === "date-desc") {
-                  sortVehiclesByDateDesc();
+                  sortPropertiesByDateDesc();
                 }
                 if (type === "date-asc") {
-                  sortVehiclesByDateAsc();
+                  sortPropertiesByDateAsc();
                 }
               }}
             >
@@ -435,6 +432,8 @@ const PropertiesCont = () => {
                     refresh();
                   }
                 }}
+                style={{ backgroundColor: "#1C4D8D" }}
+
                 className="text-white bg-red-800 hover:bg-red-900"
               >
                 Remover filtros
@@ -510,8 +509,8 @@ const PropertiesCont = () => {
                                 <Separator />
                               </CardHeader>
 
-                              <CardDescription style={{ padding: "0 16px 0px 16px" }} className="flex flex-wrap items-center justify-between w-full text-black h-fit gap-y-2 ">
-                                <div className="flex items-center w-1/2 gap-1">
+                              <CardDescription style={{ padding: "0 16px 0px 16px", color: "#a1a1aa" }} className="flex flex-wrap items-center justify-between w-full h-fit gap-y-2 ">
+                                <div className="flex items-center w-1/2 gap-1" >
                                   <Maximize2 size={14} />
                                   {property.metersSquare ?
                                     (<span className="text-xs">{property.metersSquare} m² </span>)
@@ -555,9 +554,10 @@ const PropertiesCont = () => {
                                 >
                                   <Button
                                     variant={"default"}
-                                    className="w-full text-xs text-white bg-red-800 md:text-xs 2xl:text-xs hover:bg-red-900"
+                                    style={{ backgroundColor: "#1C4D8D" }}
+                                    className="w-full text-xs text-white "
                                   >
-                                    Ver más
+                                    Ver propiedad
                                   </Button>
                                 </Link>
                               </CardFooter>

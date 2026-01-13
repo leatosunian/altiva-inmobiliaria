@@ -1,24 +1,21 @@
 import React from "react";
 import Image from "next/image";
 import logo from "@/public/logo2-1.png";
-import { FaFacebook, FaFacebookF, FaFacebookSquare, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
-import { SiMercadopago } from "react-icons/si";
+import { FaFacebookSquare, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { IoLocationSharp } from "react-icons/io5";
+
 const Footer = () => {
   return (
     <>
       <footer
-        style={{ borderTop: "1px solid #ff00001a" }}
-        className="relative pt-8 pb-6 bg-red-800"
+        style={{ borderTop: "1px solid #ff00001a", backgroundColor: "#0F2854" }}
+        className="relative pt-8 pb-6 "
       >
-          <div className="container px-4 mx-auto md:px-20 2xl:px-0">
+        <div className="container px-4 mx-auto md:px-20 2xl:px-0">
           <div className="flex flex-wrap text-left text-white lg:text-left">
             <div className="flex flex-col justify-center w-full gap-4 px-4 lg:w-5/12">
-              {/* <h4 className="text-3xl fonat-semibold text-blueGray-700">
-                HASCAR
-              </h4> */}
               <Image
                 src={logo}
                 alt=""
@@ -43,9 +40,9 @@ const Footer = () => {
                 <IoLocationSharp />
                 <span className="ml-2 text-sm font-medium text-white ">
                   Av. Colón 1234, Mar del Plata, Argentina.
-                </span> 
+                </span>
               </div>
-            </div> 
+            </div>
             <div className="w-full lg:w-7/12">
               <div className="flex flex-wrap mb-6 items-top">
                 <div className="w-full px-4 mt-5 ml-auto lg:mt-0 lg:w-4/12">
@@ -61,7 +58,7 @@ const Footer = () => {
                       <Link
                         target="_blank"
                         className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                        href="/properties"
                       >
                         Inmuebles
                       </Link>
@@ -70,7 +67,7 @@ const Footer = () => {
                       <Link
                         target="_blank"
                         className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                        href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                        href="/properties?search=Venta"
                       >
                         Comprar
                       </Link>
@@ -79,7 +76,7 @@ const Footer = () => {
                       <Link
                         target="_blank"
                         className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                        href="https://blog.creative-tim.com?ref=njs-profile"
+                        href="/properties?search=Alquiler"
                       >
                         Alquilar
                       </Link>
@@ -88,16 +85,7 @@ const Footer = () => {
                       <Link
                         target="_blank"
                         className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
-                      >
-                        Tasar propiedad
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        target="_blank"
-                        className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                        href="https://www.github.com/creativetimofficial?ref=njs-profile"
+                        href="/contactus"
                       >
                         Contacto
                       </Link>
@@ -136,12 +124,12 @@ const Footer = () => {
                   <ul className="mt-4 list-unstyled">
                     <li>
                       <Link
-                          target="_blank"
-                          className="block pb-2 text-sm font-medium text-white hover:text-white/80"
-                          href="https://wa.me/5492235423025"
-                        >
-                          +54 9 223 542-2030
-                        </Link>
+                        target="_blank"
+                        className="block pb-2 text-sm font-medium text-white hover:text-white/80"
+                        href="https://wa.me/5492235423025"
+                      >
+                        +54 9 223 542-2030
+                      </Link>
                     </li>
                     <li>
                       <Link

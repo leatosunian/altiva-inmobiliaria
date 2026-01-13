@@ -1,12 +1,12 @@
 import { TranslucentNavBlack } from "@/components/page/TranslucentNavBlack";
 import Footer from "@/components/page/home/Footer";
-import PropertiesCont from "@/components/page/home/vehicles/PropertiesCont";
+import PropertiesCont from "@/components/page/home/properties/PropertiesCont";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vehículos | Distrito Automotor",
+  title: "Propiedades | Altiva Propiedades",
   description:
-    "Distrito Automotor, concesionaria de vehículos ubicada en Mar del Plata, Buenos Aires",
+    "Altiva Propiedades, inmobiliaria ubicada en Mar del Plata, Buenos Aires",
 };
 
 const Page = () => {

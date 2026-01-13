@@ -101,7 +101,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
           setLoading(false);
         }, 500);
       }
-    } catch (error) { 
+    } catch (error) {
       toast({ description: "Error al obtener propiedad", variant: "destructive" });
     }
   }
@@ -435,7 +435,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Casa">Automóvil</SelectItem>
+
                           <SelectItem value="Departamento">Departamento</SelectItem>
                           <SelectItem value="PH">PH</SelectItem>
                           <SelectItem value="Fondo de comercio">Fondo de comercio</SelectItem>
@@ -467,7 +467,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                       <FormLabel>Expensas (ARS)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ej. 640,000"
+                          placeholder="Ej. 140.000"
                           type="number"
                           {...field}
                         />
@@ -623,7 +623,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                   name="floors"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Pisos</FormLabel>
+                      <FormLabel>N° Piso</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Ej. 2"
@@ -694,7 +694,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                       <FormLabel>Luminosidad</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ej. 2"
+                          placeholder="Ej. Muy buena"
                           type="text"
                           {...field}
                         />
@@ -754,7 +754,44 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
             {/* caracteristicas info inputs */}
             <Card className="p-4 mt-6 ">
               <span className="mb-2 text-lg font-semibold">Caracteristicas</span>
-              <div className="grid grid-cols-1 gap-4 mt-4 mb-2 md:gap-8 md:grid-cols-6 2xl:grid-cols-8">
+              <div className="grid grid-cols-1 gap-4 mt-4 md:gap-y-4 gap-x-6 md:gap-8 md:grid-cols-4 2xl:grid-cols-6">
+                <FormField
+                  control={form.control}
+                  name="rooms"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Ambientes</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ej. 3 "
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                {/*  dormitorios input */}
+                <FormField
+                  control={form.control}
+                  name="dormitorios"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Dormitorios</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ej. 2 "
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 {/* bathroom input */}
                 <FormField
                   control={form.control}
@@ -795,23 +832,9 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="rooms"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Ambientes</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Ej. 3 "
-                          type="number"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+
+
+                <Separator className="mt-5 mb-4" />
 
                 <FormField
                   control={form.control}
