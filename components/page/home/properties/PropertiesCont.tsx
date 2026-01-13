@@ -624,7 +624,8 @@ const PropertiesCont = () => {
                         refresh();
                       }
                     }}
-                    className="text-white bg-red-800 hover:bg-red-900"
+                    style={{backgroundColor:"#1C4D8D"}}
+                    className="text-white "
                   >
                     Eliminar filtros
                   </Button>

@@ -93,14 +93,13 @@ input[type=number]::-webkit-outer-spin-button {
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 8px solid #293c7a;
+  border: 2px solid white;
   animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-  -webkit-animation: l20-1 0.8s infinite linear alternate,
-    l20-2 1.6s infinite linear;
+  -webkit-animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
 }
 
 .loaderSmall {
