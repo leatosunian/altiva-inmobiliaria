@@ -1,16 +1,24 @@
-import React from "react";
+"use client";
 import { motion } from "framer-motion";
 
-const LoaderFullscreen = () => {
+interface LoaderFullscreenProps {
+  isVisible: boolean;
+}
+
+const LoaderFullscreen = ({ isVisible }: LoaderFullscreenProps) => {
   return (
     <motion.div
-      className="fixed flex items-center justify-center w-full h-full overflow-y-hidden"
-      style={{ zIndex: "99999999", backgroundColor: "#0F2854", pointerEvents: "none" }}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{ duration: .6,  }}
+      className="fixed inset-0 flex items-center justify-center"
+      style={{
+        zIndex: 99999999,
+        backgroundColor: "#0F2854",
+        pointerEvents: isVisible ? "auto" : "none",
+      }}
+      initial={false}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
     >
-      <div className="loader"></div>
+      <div className="loader" />
     </motion.div>
   );
 };
