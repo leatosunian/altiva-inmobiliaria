@@ -277,18 +277,21 @@ export function TranslucentNav() {
                 <div className="h-px bg-white/10" />
 
                 {/* Mobile CTA Button */}
-                <button
-                  className="flex items-center justify-center px-6 py-3 font-medium text-white transition-all duration-300 bg-red-800 rounded-full mt-7 hover:scale-105 group"
-                  style={{
-                    opacity: isOpen ? 1 : 0,
-                    transform: isOpen ? "translateY(0)" : "translateY(-10px)",
-                    transition: `all 0.3s ease-out ${navigation.length * 50 + 150}ms`,
-                  }}
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  <span className="mr-2">Tasar propiedad</span>
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
+                <Link href="/contactus" className="mx-auto">
+                  <button
+                    className="flex items-center justify-center px-6 py-3 font-medium text-white transition-all duration-300 rounded-full mt-7 hover:scale-105 group"
+                    style={{
+                      opacity: isOpen ? 1 : 0,
+                      transform: isOpen ? "translateY(0)" : "translateY(-10px)",
+                      transition: `all 0.3s ease-out ${navigation.length * 50 + 150}ms`,
+                      backgroundColor: "#1C4D8D",
+                    }}
+                  //onClick={() => scrollToSection("#contact")}
+                  >
+                    <span className="mr-2">Tasar propiedad</span>
+                    <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,17 +1,13 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
 import React, { useEffect, useState } from "react";
-import contactImg from "@/public/contact.png";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { IBranch } from "@/app/models/branch";
 import {
-  FaFacebook,
   FaInstagram,
   FaLocationDot,
-  FaTwitter,
 } from "react-icons/fa6";
-import { SiMercadopago } from "react-icons/si";
 import { formSchema } from "@/app/schemas/contactForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,11 +23,7 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -43,7 +35,6 @@ import Footer from "../Footer";
 import styles from '@/app/css-modules/home.contact.module.css'
 import { motion } from "framer-motion";
 import { usePageLoader } from "@/app/utils/usePageLoader";
-import LoaderFullscreen from "../../LoaderFullscreen";
 
 
 const ContactForm = () => {
@@ -52,11 +43,6 @@ const ContactForm = () => {
   const [loadingPage, setLoadingPage] = useState(true);
   const [openCreatedLead, setOpenCreatedLead] = useState(false);
   const { toast } = useToast();
-
-  const [dataReady, setDataReady] = useState(false);
-  const pageReady = usePageLoader();
-
-  const isLoading = !dataReady || !pageReady;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -103,7 +89,7 @@ const ContactForm = () => {
   }
 
   useEffect(() => {
-    getBranches();
+    //getBranches();
   }, []);
 
   return (

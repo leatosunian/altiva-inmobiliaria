@@ -162,7 +162,7 @@ const PropertyCont = () => {
         <div className="w-full h-16 md:h-28"></div>
 
         {/* BREADCRUMBS */}
-        <div className="w-full px-6 pb-5 md:pt-0 pt-9 md:px-24 2xl:px-64 h-fit">
+        <div className="w-full px-6 pb-0 md:pb-5 md:pt-0 pt-9 md:px-24 2xl:px-64 h-fit">
           <Breadcrumbs name={propertyData?.name} />
         </div>
 
@@ -586,7 +586,7 @@ const PropertyCont = () => {
                     {propertyData?.name}
                   </h4>
                   <div className="flex gap-1 ">
-                    <FaLocationDot style={{ color: "red" }} size={16} />
+                    <FaLocationDot style={{ color: "#1C4D8D" }} size={16} />
                     <span
                       //style={{ color: "#a1a1aa" }}
                       className="text-sm font-medium leading-4 text-gray-700"
@@ -605,19 +605,19 @@ const PropertyCont = () => {
                 {/* property data */}
                 <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8 ">
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Maximize2 size={20} color="red" />
+                    <Maximize2 size={20} color="#1C4D8D" />
                     <span className="text-sm">{propertyData?.metersSquare} m² totales</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <FaBed size={20} color="red" />
+                    <FaBed size={20} color="#1C4D8D" />
                     <span className="text-sm"> {propertyData?.dormitorios} dormitorios</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <DoorOpen size={20} color="red" />
+                    <DoorOpen size={20} color="#1C4D8D" />
                     <span className="text-sm"> {propertyData?.rooms} ambientes</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Bath size={20} color="red" />
+                    <Bath size={20} color="#1C4D8D" />
                     <span className="text-sm"> {propertyData?.bathrooms} baños</span>
                   </div>
 
@@ -639,8 +639,8 @@ const PropertyCont = () => {
                     <span className="text-lg font-semibold">
                       Información general
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-6 bg-red-800 sm:my-0"
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-6"
                       />
                     </span>
 
@@ -701,8 +701,8 @@ const PropertyCont = () => {
                     <span className="text-lg font-semibold">
                       Superficies
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-6 bg-red-800 sm:my-0"
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-6 sm:my-0"
                       />
                     </span>
 
@@ -737,8 +737,8 @@ const PropertyCont = () => {
                     <span className="text-lg font-semibold">
                       Ambientes y distribución
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-6 bg-red-800 sm:my-0"
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-6 sm:my-0"
                       />
                     </span>
 
@@ -774,8 +774,8 @@ const PropertyCont = () => {
                   <div className="flex flex-col gap-3">
                     <span className="text-lg font-semibold">Comodidades
                       <Separator
-                        style={{ height: "2px" }}
-                        className="w-6 bg-red-800 sm:my-0"
+                        style={{ height: "2px", backgroundColor: "#1C4D8D" }}
+                        className="w-6"
                       />
                     </span>
                     <div className="grid justify-around grid-cols-4 gap-3">
@@ -861,6 +861,7 @@ const PropertyCont = () => {
                         <Textarea
                           id="message"
                           value={message}
+                          className="min-h-[200px] "
                           onChange={(e) => setMessage(e.target.value)}
                           required
                         />
@@ -872,7 +873,9 @@ const PropertyCont = () => {
                     <Button
                       onClick={sendWhatsAppMessage}
                       type="button"
-                      className="w-full text-white bg-red-600"
+                      style={{ backgroundColor: "#1C4D8D" }}
+
+                      className="w-full text-white "
                     >
                       Enviar consulta
                     </Button>
@@ -1073,7 +1076,6 @@ const PropertyCont = () => {
                       objectFit="cover"
                       height={500}
                       unoptimized
-
                       //onClick={() => { setGalleryIndex(index); setIsOpen(true) }}
                       className="object-cover w-full h-full my-auto rounded-lg"
                     />

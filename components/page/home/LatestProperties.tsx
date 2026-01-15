@@ -75,7 +75,7 @@ const LatestProperties = ({ properties }: Props) => {
             </h2>
             <Separator
               style={{ height: "2px", backgroundColor: "#1C4D8D" }}
-              className="my-5 w-9 sm:my-3"
+              className="my-2 w-9 sm:my-3"
             />
           </div>
         </motion.header>
@@ -281,13 +281,13 @@ const LatestProperties = ({ properties }: Props) => {
             ))
           }
         </div>
-        <div className="flex justify-center w-full mt-4 h-fit">
+        {/* <div className="flex justify-center w-full mt-4 h-fit">
           <Link className="w-fit h-fit" href={"/properties"}>
             <Button className="text-xs text-white md:text-sm " style={{ backgroundColor: "#1C4D8D" }}>
               Ver todas las propiedades
             </Button>
           </Link>
-        </div>
+        </div> */}
       </section >
     </>
   );

@@ -68,7 +68,7 @@ const AboutSection = () => {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-2xl font-bold text-gray-800 md:text-4xl 2xl:text-5xl"
+            className="text-3xl font-bold text-gray-800 md:text-4xl 2xl:text-5xl"
           >
             Conocé acerca de nosotros
           </motion.h2>
@@ -82,14 +82,14 @@ const AboutSection = () => {
 
           <motion.p
             variants={itemVariants}
-            className="mb-5 text-sm text-left text-gray-600 sm:text-base"
+            className="mb-5 text-base text-left text-gray-600 sm:text-base"
           >
             En Altiva Propiedades acompañamos a nuestros clientes en cada etapa del proceso inmobiliario, ofreciendo un servicio profesional, transparente y personalizado. Entendemos que cada operación es una decisión importante, por eso trabajamos para que la compra, venta o alquiler de tu propiedad sea simple y segura.
           </motion.p>
 
           <motion.p
             variants={itemVariants}
-            className="text-sm text-left text-gray-600 mb-9 sm:text-base"
+            className="text-base text-left text-gray-600 mb-9 sm:text-base"
           >
             Con más de 14 años de experiencia en el sector, nos especializamos en la selección de propiedades de calidad y en el asesoramiento integral, adaptado a las necesidades de cada cliente. Nuestro compromiso es brindar una experiencia confiable, eficiente y orientada a la satisfacción.
           </motion.p>

@@ -65,7 +65,7 @@ const Hero = () => {
             className="text-4xl font-extrabold text-left text-white sm:text-center xl:text-5xl 2xl:text-6xl"
             style={{ letterSpacing: ".5px" }}
           >
-            Encuentra el espacio perfecto para tu vida o negocio
+            Encontrá el espacio perfecto para tu vida o negocio
           </h3>
         </motion.div>
         <motion.div

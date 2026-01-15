@@ -15,7 +15,7 @@ const ContactUs = () => {
       <TranslucentNavBlack />
       <section
         className="flex flex-col items-start justify-start w-full my-auto h-fit "
-        style={{ transform: "translateY(90px)" }}
+        style={{ transform: "translateY(80px)" }}
       >
         <ContactForm />
       </section>

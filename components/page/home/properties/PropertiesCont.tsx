@@ -199,12 +199,12 @@ const PropertiesCont = () => {
       <LoaderFullscreen isVisible={isLoading} />
       <div className={isLoading ? "opacity-0" : "opacity-100"}>
         {/* HEADER SEPARATOR */}
-        <div className="w-full h-16 md:h-28"></div>
+        <div className="w-full h-24 md:h-28"></div>
 
         {/* container for padding */}
-        <div className="px-6 md:px-24 2xl:px-48 ">
+        <div className="px-6 mt-2 md:mt-0 md:px-24 2xl:px-48 ">
           {/* BREADCRUMBS */}
-          <div className=" w-fit h-fit">
+          <div className="mb-4 w-fit h-fit">
             <Breadcrumbs />
           </div>
           {/*  title and sort by */}
@@ -518,7 +518,7 @@ const PropertiesCont = () => {
                                   <Separator />
                                 </CardHeader>
 
-                                <CardDescription style={{ padding: "0 16px 0px 16px", color: "#a1a1aa" }} className="flex flex-wrap items-center justify-between w-full h-fit gap-y-2 ">
+                                <CardDescription style={{ padding: "10px 16px 10px 16px", color: "#a1a1aa" }} className="flex flex-wrap items-center justify-between w-full h-fit gap-y-2 ">
                                   <div className="flex items-center w-1/2 gap-1" >
                                     <Maximize2 size={14} />
                                     {property.metersSquare ?

@@ -54,10 +54,6 @@ const RelatedProperties = ({ properties }: Props) => {
     setLatestProperties(properties);
   }, [properties]);
 
-  useEffect(() => {
-    console.log(latestProperties);
-  }, [latestProperties]);
-
   const plugin = React.useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false })
   );
@@ -73,12 +69,12 @@ const RelatedProperties = ({ properties }: Props) => {
           className="flex flex-col items-start justify-center w-full px-6 sm:items-center"
         >
           <div className="flex flex-col ">
-            <h4 className="text-xl font-bold sm:text-2xl">
+            <h4 className="text-2xl font-bold sm:text-3xl">
               Propiedades Relacionadas
             </h4>
             <Separator
               style={{ height: "2px", backgroundColor: "#1C4D8D" }}
-              className="my-5 w-9 sm:my-3"
+              className="my-2 w-9 sm:my-3"
             />
           </div>
         </motion.header>
