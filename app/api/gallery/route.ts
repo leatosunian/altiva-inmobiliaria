@@ -2,9 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { v2 as cloudinary } from "cloudinary";
 import PropertyImageModel from "@/app/models/propertyimage";
+import connectDB from "@/lib/db";
 
 // SAVE GALLERY IMAGES
 export async function POST(request: NextRequest) {
+  await connectDB();
   try {
     const data = await request.formData();
     const propertyID = data.get("carID") as string;

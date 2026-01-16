@@ -40,7 +40,7 @@ const ImageGallery = () => {
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const params = useParams();
-  const carID = params.id;
+  const carID = params.uuid;
   const handleClick = () => {
     fileInputRef.current?.click();
   };
@@ -96,7 +96,7 @@ const ImageGallery = () => {
   async function getGallery() {
     setFetchLoading(true)
     try {
-      const galleryResponse = await fetch("/api/gallery/" + params.id, {
+      const galleryResponse = await fetch("/api/gallery/" + params.uuid, {
         method: "GET",
         cache: "no-store",
       }).then((response) => response.json());

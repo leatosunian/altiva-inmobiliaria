@@ -1,12 +1,14 @@
 import PropertyImageModel from "@/app/models/propertyimage";
 import CarImageModel from "@/app/models/propertyimage";
 import { NextRequest, NextResponse } from "next/server";
+import connectDB from "@/lib/db";
 
 // GET GALLERY IMAGES
 export async function GET(
   request: NextRequest,
   { params }: { params: { uuid: string } }
 ) {
+  await connectDB();
   console.log(params.uuid);
 
   try {

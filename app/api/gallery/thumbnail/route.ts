@@ -4,9 +4,11 @@ import { mkdir, writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
+import connectDB from "@/lib/db";
 
 // SAVE GALLERY IMAGES
 export async function POST(request: NextRequest) {
+  await connectDB();
   try {
     const data = await request.formData();
     const carID = data.get("carID") as string;
