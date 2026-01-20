@@ -35,7 +35,7 @@ import { useParams } from "next/navigation";
 import { IPropertyImage } from "@/app/models/propertyimage";
 import { useRouter } from "next/navigation";
 
-const ImageGallery = () => {
+const ImageGallery = ({ uuid }: { uuid: string }) => {
   const router = useRouter();
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -69,14 +69,14 @@ const ImageGallery = () => {
       let formData = new FormData();
       filesToUpload.forEach((file) => {
         formData.append("gallery_images", file);
-        formData.append("carID", carID as string);
+        formData.append("property_id", uuid);
       });
 
       const uploadResponse = await fetch("/api/gallery", {
         method: "POST",
         body: formData,
       }).then((response) => response.json());
-      console.log(uploadResponse);
+
       if (uploadResponse.msg === "FILES_UPLOADED") {
         toast({ description: "¡Imágenes añadidas!", variant: "default" });
         setFilesToUpload([]);
@@ -96,7 +96,7 @@ const ImageGallery = () => {
   async function getGallery() {
     setFetchLoading(true)
     try {
-      const galleryResponse = await fetch("/api/gallery/" + params.uuid, {
+      const galleryResponse = await fetch("/api/gallery/" + uuid, {
         method: "GET",
         cache: "no-store",
       }).then((response) => response.json());
@@ -107,10 +107,7 @@ const ImageGallery = () => {
     } catch (error) {
       // error alert
       setFetchLoading(false)
-      //toast({
-      //  description: "Error al eliminar imagen",
-      //  variant: "destructive",
-      //});
+     
     }
   }
 
@@ -119,7 +116,6 @@ const ImageGallery = () => {
   }, []);
 
   async function handleDeleteImage() {
-    console.log(imageToDelete);
     setFetchLoading(true)
     if (imageToDelete) {
       try {
@@ -129,7 +125,7 @@ const ImageGallery = () => {
             method: "DELETE",
           }
         ).then((response) => response.json());
-        console.log(deleteResponse);
+
         if (deleteResponse.msg === "IMAGE_DELETED") {
           toast({
             description: "Imagen eliminada",
@@ -141,7 +137,7 @@ const ImageGallery = () => {
         // error alert
         setFetchLoading(false)
         toast({
-          description: "Error al eliminar imágen",
+          description: "Error al eliminar imagen",
           variant: "destructive",
         });
       }
@@ -178,7 +174,7 @@ const ImageGallery = () => {
                           <CarouselItem key={image.uuid}>
                             <Image
                               className="w-full m-auto rounded-md"
-                              alt="Imagen del vehículo"
+                              alt="Imagen de la galería"
                               onClick={() => {
                                 setImageToDelete(image.uuid);
                                 handleImageClick();

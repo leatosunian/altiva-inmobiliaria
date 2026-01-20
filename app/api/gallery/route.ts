@@ -9,18 +9,17 @@ export async function POST(request: NextRequest) {
   await connectDB();
   try {
     const data = await request.formData();
-    const propertyID = data.get("carID") as string;
+    const propertyID = data.get("property_id") as string;
     const files = data.getAll("gallery_images") as File[];
-    console.log('files', files)
     cloudinary.config({
       cloud_name: "dm4mkjisn",
       api_key: "274595485733553",
       api_secret: process.env.CLOUDINARY_SECRET,
     });
+
     if (files.length === 0) {
       return NextResponse.json({ msg: "NO_FILES_PROVIDED" }, { status: 400 });
     }
-
 
     for (const file of files) {
       const bytes = await file.arrayBuffer()
@@ -35,7 +34,7 @@ export async function POST(request: NextRequest) {
           })
           .end(buffer);
       });
-      console.log(cloudinaryResponse);
+
       await PropertyImageModel.create({
         propertyID,
         path: cloudinaryResponse.secure_url,

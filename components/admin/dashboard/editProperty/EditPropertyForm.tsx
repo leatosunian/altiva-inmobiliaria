@@ -148,6 +148,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
   // Initial data fetch
   useEffect(() => {
     getPropertyData();
+    
     //getBranches();
   }, []);
 
@@ -424,7 +425,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                   Galería de imágenes
                 </span>
 
-                <ImageGallery />
+                <ImageGallery uuid={uuid} />
               </Card>
             </div>
 

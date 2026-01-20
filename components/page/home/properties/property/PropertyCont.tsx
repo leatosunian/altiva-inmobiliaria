@@ -128,6 +128,7 @@ const PropertyCont = () => {
         cache: "no-store",
       });
       const gallery = await galleryFetch.json();
+      console.log("gallery", gallery);
       setGallery(gallery);
       setDataReady(true);
     } catch (error) {
@@ -177,11 +178,11 @@ const PropertyCont = () => {
                   <h4 className="text-2xl font-semibold md:text-3xl">
                     {propertyData?.name}
                   </h4>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <FaLocationDot style={{ color: "#1C4D8D" }} size={18} />
                     <span
                       //style={{ color: "#a1a1aa" }}
-                      className="text-sm md:text-lg font-medium leading-4 text-gray-700"
+                      className="text-sm font-medium leading-4 text-gray-700 md:text-lg"
                     >
                       {propertyData?.address}, {propertyData?.neighborhood}, {propertyData?.city}
                     </span>
