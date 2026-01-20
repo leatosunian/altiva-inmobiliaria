@@ -90,6 +90,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
   const [branches, setBranches] = useState<IBranch[]>();
   const [buttonLoading, setButtonLoading] = useState(false);
 
+  // Get property data
   async function getPropertyData() {
     try {
       const property = await fetch("/api/properties/" + uuid, {
@@ -97,6 +98,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
       }).then((response) => response.json());
       if (property) {
         setPropertyData(property);
+
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -106,6 +108,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
     }
   }
 
+  // Get branches --not in use--
   async function getBranches() {
     try {
       const branchesFetch = await fetch("/api/branches", {
@@ -116,22 +119,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
     } catch (error) { }
   }
 
-  useEffect(() => {
-    getPropertyData();
-    getBranches();
-  }, []);
-
-  useEffect(() => {
-    if (scrollToDiv) {
-      const element = document.getElementById(scrollToDiv);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      } else {
-
-      }
-    }
-  }, [scrollToDiv]);
-
+  // edit property
   async function handleEdit() {
     setButtonLoading(true);
     try {
@@ -157,6 +145,23 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
     }
   }
 
+  // Initial data fetch
+  useEffect(() => {
+    getPropertyData();
+    //getBranches();
+  }, []);
+
+  // Scroll to div if scrollToDiv param is present
+  useEffect(() => {
+    if (scrollToDiv) {
+      const element = document.getElementById(scrollToDiv);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [scrollToDiv]);
+
+  // Set form values when propertyData changes 
   useEffect(() => {
     if (propertyData) {
       form.setValue("name", propertyData!.name);
@@ -182,6 +187,17 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
       if (propertyData!.rooms) form.setValue("rooms", propertyData!.rooms.toString());
       if (propertyData!.dormitorios) form.setValue("dormitorios", propertyData!.dormitorios.toString());
 
+      // Optional fields
+      if (propertyData!.uncoveredMetersSquare) form.setValue("uncoveredMetersSquare", propertyData!.uncoveredMetersSquare.toString());
+      if (propertyData!.luminocity) form.setValue("luminocity", propertyData!.luminocity);
+      if (propertyData!.infrastructureStatus) form.setValue("infrastructureStatus", propertyData!.infrastructureStatus);
+      if (propertyData!.disposition) form.setValue("disposition", propertyData!.disposition);
+      form.setValue("hasElevator", propertyData!.hasElevator || false);
+      if (propertyData!.calefaction) form.setValue("calefaction", propertyData!.calefaction);
+      form.setValue("hasPatio", propertyData!.hasPatio || false);
+      form.setValue("hasPool", propertyData!.hasPool || false);
+      form.setValue("hasQuincho", propertyData!.hasQuincho || false);
+      form.setValue("hasTerrace", propertyData!.hasTerrace || false);
     }
     console.log(form.getValues());
   }, [propertyData]);
@@ -752,7 +768,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
             {/* datos del inmueble inputs */}
 
             {/* caracteristicas info inputs */}
-            <Card className="p-4 mt-6 ">
+            <Card className="flex flex-col p-4 mt-6 ">
               <span className="mb-2 text-lg font-semibold">Caracteristicas</span>
               <div className="grid grid-cols-1 gap-4 mt-4 md:gap-y-4 gap-x-6 md:gap-8 md:grid-cols-4 2xl:grid-cols-6">
                 <FormField
@@ -772,7 +788,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                     </FormItem>
                   )}
                 />
-                
+
                 {/*  dormitorios input */}
                 <FormField
                   control={form.control}
@@ -810,10 +826,8 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                     </FormItem>
                   )}
                 />
-                {/* bathroom input */}
 
-
-                {/* floors input */}
+                {/* garage input */}
                 <FormField
                   control={form.control}
                   name="garageCarsQuantity"
@@ -832,10 +846,7 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                   )}
                 />
 
-
-
-                <Separator className="mt-5 mb-4" />
-
+                {/* calefaction input */}
                 <FormField
                   control={form.control}
                   name="calefaction"
@@ -853,6 +864,12 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                     </FormItem>
                   )}
                 />
+
+              </div>
+
+              <Separator className="col-span-1 mt-5 mb-4" />
+              <div className="grid grid-cols-1 gap-4 mt-4 md:gap-y-4 gap-x-6 md:gap-8 md:grid-cols-4 2xl:grid-cols-6">
+
 
                 <FormField
                   name="hasElevator"
@@ -953,7 +970,6 @@ const EditPropertyForm = ({ uuid }: { uuid: string }) => {
                     </FormItem>
                   )}
                 />
-
               </div>
             </Card>
             {/* caracteristicas info inputs */}

@@ -19,10 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SessionWrapper>
-      <html lang="en" className={inter.variable}>
-        <body className={inter.className}>{children}</body>
-      </html>
-    </SessionWrapper>
+    <html lang="en" className={inter.variable}>
+      <body className={inter.className}>
+        <SessionWrapper>
+          {children}
+        </SessionWrapper>
+      </body>
+    </html>
   );
 }

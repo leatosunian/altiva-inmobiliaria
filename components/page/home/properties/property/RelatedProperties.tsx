@@ -23,7 +23,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FaBed, FaRegCalendar } from "react-icons/fa";
-import { IoSpeedometerOutline } from "react-icons/io5";
+import { IoChevronBack, IoSpeedometerOutline } from "react-icons/io5";
 import { Separator } from "@/components/ui/separator";
 import { FaLocationDot } from "react-icons/fa6";
 import { Bath, DoorOpen, Maximize2 } from "lucide-react";
@@ -256,10 +256,12 @@ const RelatedProperties = ({ properties }: Props) => {
             ))
           }
         </div>
-        <div className="flex justify-center w-full mt-4 h-fit">
+        <div className="flex justify-start px-6 md:px-24 2xl:px-64 w-full mt-4 h-fit">
           <Link className="w-fit h-fit" href={"/properties"}>
-            <Button className="text-xs text-white md:text-sm " style={{ backgroundColor: "#1C4D8D" }}>
-              Ver todas las propiedades
+            <Button className="text-xs text-white md:text-sm flex gap-2 justify-center items-center " style={{ backgroundColor: "#1C4D8D" }}>
+              <IoChevronBack  size={17}/>
+
+              Volver a Inmuebles
             </Button>
           </Link>
         </div>

@@ -177,11 +177,11 @@ const PropertyCont = () => {
                   <h4 className="text-2xl font-semibold md:text-3xl">
                     {propertyData?.name}
                   </h4>
-                  <div className="flex gap-1 ">
-                    <FaLocationDot style={{ color: "#1C4D8D" }} size={16} />
+                  <div className="flex gap-2 items-center">
+                    <FaLocationDot style={{ color: "#1C4D8D" }} size={18} />
                     <span
                       //style={{ color: "#a1a1aa" }}
-                      className="text-sm font-medium leading-4 text-gray-700"
+                      className="text-sm md:text-lg font-medium leading-4 text-gray-700"
                     >
                       {propertyData?.address}, {propertyData?.neighborhood}, {propertyData?.city}
                     </span>
@@ -193,7 +193,7 @@ const PropertyCont = () => {
                   <span className="text-2xl font-semibold ">
                     {propertyData?.currency} ${propertyData?.price.toLocaleString()}
                   </span>
-                  {propertyData?.expensas !== null && propertyData?.expensas !== undefined && (
+                  {propertyData?.expensas !== null && propertyData?.expensas !== undefined && propertyData?.expensas !== 0 && (
                     <span className="ml-2 text-sm font-medium text-gray-500">
                       (Expensas: ${propertyData?.expensas.toLocaleString()})
                     </span>)}
@@ -201,22 +201,22 @@ const PropertyCont = () => {
 
 
                 {/* property data */}
-                <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8 ">
+                <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8" style={{ backgroundColor: "#1C4D8D" }}>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Maximize2 size={20} color="#1C4D8D" />
-                    <span className="text-sm">{propertyData?.metersSquare ? `${propertyData.metersSquare} m² totales` : "No especif."}</span>
+                  <Maximize2 size={20} color="white" />
+                  <span className="text-sm text-white">{propertyData?.metersSquare ? `${propertyData.metersSquare} m² totales` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <FaBed size={20} color="#1C4D8D" />
-                    <span className="text-sm">{propertyData?.dormitorios ? `${propertyData.dormitorios} ${propertyData.dormitorios === 1 ? "dormitorio" : "dormitorios"}` : "No especif."}</span>
+                  <FaBed size={20} color="white" />
+                  <span className="text-sm text-white">{propertyData?.dormitorios ? `${propertyData.dormitorios} ${propertyData.dormitorios === 1 ? "dormitorio" : "dormitorios"}` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <DoorOpen size={20} color="#1C4D8D" />
-                    <span className="text-sm">{propertyData?.rooms ? `${propertyData.rooms} ${propertyData.rooms === 1 ? "ambiente" : "ambientes"}` : "No especif."}</span>
+                  <DoorOpen size={20} color="white" />
+                  <span className="text-sm text-white">{propertyData?.rooms ? `${propertyData.rooms} ${propertyData.rooms === 1 ? "ambiente" : "ambientes"}` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Bath size={20} color="#1C4D8D" />
-                    <span className="text-sm">{propertyData?.bathrooms ? `${propertyData.bathrooms} ${propertyData.bathrooms === 1 ? "baño" : "baños"}` : "No especif."}</span>
+                  <Bath size={20} color="white" />
+                  <span className="text-sm text-white">{propertyData?.bathrooms ? `${propertyData.bathrooms} ${propertyData.bathrooms === 1 ? "baño" : "baños"}` : "No especif."}</span>
                   </div>
                 </Card>
 
@@ -433,66 +433,67 @@ const PropertyCont = () => {
               <div className="relative">
                 {/* Carousel */}
                 {gallery.length > 0 ? (
-                  <>    <Carousel
-                    setApi={setApi}
-                    className="relative w-full h-full overflow-hidden rounded-lg aspect-square "
-                    //onMouseEnter={plugin.current.stop}
-                    //plugins={[plugin.current as any]}
-                    opts={{
-                      align: "start",
-                      loop: true,
-                      startIndex: galleryIndex
-                    }}
-                  //onMouseLeave={plugin.current.reset}
-                  >
-                    <CarouselContent className="h-full">
-                      <CarouselItem
-                        className="w-full h-full overflow-hidden rounded-md "
-                      >
-
-                        <Image
-                          src={propertyData?.imagePath!}
-                          alt={`Imagen `}
-                          width={500}
-                          objectFit="cover"
-                          onClick={() => {
-                            setGalleryIndex(0);
-                            setIsOpen(true)
-                          }}
-                          height={500}
-                          unoptimized
-                          className="object-cover w-full h-full my-auto rounded-lg"
-                        />
-                      </CarouselItem>
-                      {gallery.map((image, index) => (
+                  <>
+                    <Carousel
+                      setApi={setApi}
+                      className="relative w-full h-full overflow-hidden rounded-lg aspect-square "
+                      //onMouseEnter={plugin.current.stop}
+                      //plugins={[plugin.current as any]}
+                      opts={{
+                        align: "start",
+                        loop: true,
+                        startIndex: galleryIndex
+                      }}
+                    //onMouseLeave={plugin.current.reset}
+                    >
+                      <CarouselContent className="h-full">
                         <CarouselItem
-                          key={image.uuid}
                           className="w-full h-full overflow-hidden rounded-md "
                         >
-                          {/* <Zoom> */}
+
                           <Image
-                            src={image.path}
+                            src={propertyData?.imagePath!}
                             alt={`Imagen `}
                             width={500}
                             objectFit="cover"
+                            onClick={() => {
+                              setGalleryIndex(0);
+                              setIsOpen(true)
+                            }}
                             height={500}
                             unoptimized
-                            onClick={() => { setGalleryIndex(index + 1); setIsOpen(true) }}
                             className="object-cover w-full h-full my-auto rounded-lg"
                           />
-                          {/* </Zoom> */}
                         </CarouselItem>
-                      ))}
-                    </CarouselContent>
+                        {gallery.map((image, index) => (
+                          <CarouselItem
+                            key={image.uuid}
+                            className="w-full h-full overflow-hidden rounded-md "
+                          >
+                            {/* <Zoom> */}
+                            <Image
+                              src={image.path}
+                              alt={`Imagen `}
+                              width={500}
+                              objectFit="cover"
+                              height={500}
+                              unoptimized
+                              onClick={() => { setGalleryIndex(index + 1); setIsOpen(true) }}
+                              className="object-cover w-full h-full my-auto rounded-lg"
+                            />
+                            {/* </Zoom> */}
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
 
-                  </Carousel></>) : (<Image
-                    src={noimage}
-                    alt=""
-                    unoptimized
-                    width={500}
-                    height={500}
-                    className="object-cover w-full h-full my-auto rounded-lg "
-                  />)}
+                    </Carousel></>) : (<Image
+                      src={noimage}
+                      alt=""
+                      unoptimized
+                      width={500}
+                      height={500}
+                      className="object-cover w-full h-full my-auto rounded-lg "
+                    />)}
 
 
 
@@ -603,24 +604,23 @@ const PropertyCont = () => {
 
 
                 {/* property data */}
-                <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8 ">
+                <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8" style={{ backgroundColor: "#1C4D8D" }}>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Maximize2 size={20} color="#1C4D8D" />
-                    <span className="text-sm">{propertyData?.metersSquare} m² totales</span>
+                    <Maximize2 size={20} color="white" />
+                    <span className="text-sm text-white">{propertyData?.metersSquare} m² totales</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <FaBed size={20} color="#1C4D8D" />
-                    <span className="text-sm"> {propertyData?.dormitorios} dormitorios</span>
+                    <FaBed size={20} color="white" />
+                    <span className="text-sm text-white"> {propertyData?.dormitorios} dormitorios</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <DoorOpen size={20} color="#1C4D8D" />
-                    <span className="text-sm"> {propertyData?.rooms} ambientes</span>
+                    <DoorOpen size={20} color="white" />
+                    <span className="text-sm text-white"> {propertyData?.rooms} ambientes</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                    <Bath size={20} color="#1C4D8D" />
-                    <span className="text-sm"> {propertyData?.bathrooms} baños</span>
+                    <Bath size={20} color="white" />
+                    <span className="text-sm text-white"> {propertyData?.bathrooms} baños</span>
                   </div>
-
                 </Card>
                 <div className="w-full mt-0 h-fit">
                   <pre
@@ -657,8 +657,12 @@ const PropertyCont = () => {
                             <span className="text-xs md:text-sm">Piso {propertyData?.floors}</span>
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-xs font-semibold md:text-sm">Expensas</span>
-                            <span className="text-xs md:text-sm">${propertyData?.expensas.toLocaleString()}</span>
+                            {propertyData?.expensas !== null && propertyData?.expensas !== undefined && (
+                              <>
+                                <span className="text-xs font-semibold md:text-sm">Expensas</span>
+                                <span className="text-xs md:text-sm">${propertyData?.expensas.toLocaleString()}</span>
+                              </>
+                            )}
                           </div>
                           {propertyData.disposition !== "" && (
                             <div className="flex flex-col">

@@ -58,13 +58,13 @@ export async function DELETE(
 // EDIT PROPERTY
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { uuid: string } }
 ) {
   await connectDB();
-  const { id } = params;
+  const { uuid } = params;
   const data: IProperty = await request.json();
   try {
-    const property = await PropertyModel.findOneAndUpdate({ id }, data, {
+    const property = await PropertyModel.findOneAndUpdate({ _id: uuid }, data, {
       new: true,
     });
     console.log("property editada:", property);
