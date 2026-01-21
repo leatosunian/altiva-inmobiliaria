@@ -553,7 +553,7 @@ const PropertiesCont = () => {
                                   <Separator />
                                   <div className="flex gap-5 pt-3 ">
                                     <p className="text-lg font-semibold">
-                                      {property.currency} ${property.price.toLocaleString()}
+                                      {property?.currency === "USD" && property?.currency} ${property?.price.toLocaleString()}
                                     </p>
                                   </div>
 

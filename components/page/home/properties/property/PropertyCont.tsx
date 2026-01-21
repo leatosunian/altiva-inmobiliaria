@@ -192,7 +192,7 @@ const PropertyCont = () => {
 
                 <div>
                   <span className="text-2xl font-semibold ">
-                    {propertyData?.currency} ${propertyData?.price.toLocaleString()}
+                    {propertyData?.currency === "USD" && propertyData?.currency} ${propertyData?.price.toLocaleString()}
                   </span>
                   {propertyData?.expensas !== null && propertyData?.expensas !== undefined && propertyData?.expensas !== 0 && (
                     <span className="ml-2 text-sm font-medium text-gray-500">
@@ -204,20 +204,20 @@ const PropertyCont = () => {
                 {/* property data */}
                 <Card className="flex flex-wrap justify-between px-4 py-3 shadow-md gap-y-4 gap-x-8" style={{ backgroundColor: "#1C4D8D" }}>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                  <Maximize2 size={20} color="white" />
-                  <span className="text-sm text-white">{propertyData?.metersSquare ? `${propertyData.metersSquare} m² totales` : "No especif."}</span>
+                    <Maximize2 size={20} color="white" />
+                    <span className="text-sm text-white">{propertyData?.metersSquare ? `${propertyData.metersSquare} m² totales` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                  <FaBed size={20} color="white" />
-                  <span className="text-sm text-white">{propertyData?.dormitorios ? `${propertyData.dormitorios} ${propertyData.dormitorios === 1 ? "dormitorio" : "dormitorios"}` : "No especif."}</span>
+                    <FaBed size={20} color="white" />
+                    <span className="text-sm text-white">{propertyData?.dormitorios ? `${propertyData.dormitorios} ${propertyData.dormitorios === 1 ? "dormitorio" : "dormitorios"}` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                  <DoorOpen size={20} color="white" />
-                  <span className="text-sm text-white">{propertyData?.rooms ? `${propertyData.rooms} ${propertyData.rooms === 1 ? "ambiente" : "ambientes"}` : "No especif."}</span>
+                    <DoorOpen size={20} color="white" />
+                    <span className="text-sm text-white">{propertyData?.rooms ? `${propertyData.rooms} ${propertyData.rooms === 1 ? "ambiente" : "ambientes"}` : "No especif."}</span>
                   </div>
                   <div className="flex items-center gap-2 w-fit h-fit">
-                  <Bath size={20} color="white" />
-                  <span className="text-sm text-white">{propertyData?.bathrooms ? `${propertyData.bathrooms} ${propertyData.bathrooms === 1 ? "baño" : "baños"}` : "No especif."}</span>
+                    <Bath size={20} color="white" />
+                    <span className="text-sm text-white">{propertyData?.bathrooms ? `${propertyData.bathrooms} ${propertyData.bathrooms === 1 ? "baño" : "baños"}` : "No especif."}</span>
                   </div>
                 </Card>
 
@@ -600,7 +600,7 @@ const PropertyCont = () => {
 
 
                 <span className="text-2xl font-semibold ">
-                  {propertyData?.currency} ${propertyData?.price.toLocaleString()}
+                  {propertyData?.currency === "USD" && propertyData?.currency} ${propertyData?.price.toLocaleString()}
                 </span>
 
 

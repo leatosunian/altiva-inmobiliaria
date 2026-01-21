@@ -22,7 +22,7 @@ const EditProduct = ({ params }: { params: { id: string } }) => {
 
           <div className="block md:hidden">
             <Separator className="my-10 " />
-
+z|
             {/* GALLERY CAROUSEL */}
             <ImageGallery uuid={params.id} />
           </div>
