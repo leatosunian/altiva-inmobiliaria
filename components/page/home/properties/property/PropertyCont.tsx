@@ -23,7 +23,7 @@ import { Bath, DoorOpen, Maximize2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,6 +32,7 @@ import { usePageLoader } from "@/app/utils/usePageLoader";
 
 const PropertyCont = () => {
   const [api, setApi] = React.useState<CarouselApi>();
+  const [apiMobile, setApiMobile] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
   const [propertyData, setPropertyData] = useState<IProperty>();
@@ -80,20 +81,6 @@ const PropertyCont = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
   const plugin = React.useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false })
   );
@@ -110,8 +97,6 @@ const PropertyCont = () => {
     }
     return latestProperties;
   }
-
-
 
   async function getPropertyData(uuid: string) {
     try {
@@ -135,6 +120,32 @@ const PropertyCont = () => {
       return;
     }
   }
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
+    useEffect(() => {
+    if (!apiMobile) {
+      return;
+    }
+
+    setCount(apiMobile.scrollSnapList().length);
+    setCurrent(apiMobile.selectedScrollSnap() + 1);
+
+    apiMobile.on("select", () => {
+      setCurrent(apiMobile.selectedScrollSnap() + 1);
+    });
+  }, [apiMobile]);
 
   // fetch 10 lastest properties
   useEffect(() => {
@@ -167,6 +178,7 @@ const PropertyCont = () => {
           <Breadcrumbs name={propertyData?.name} />
         </div>
 
+        {/* DESKTOP */}
         <div className="hidden w-full px-6 py-0 md:py-2 md:px-24 2xl:px-64 h-fit md:block">
           <Card className="flex flex-col-reverse gap-6 p-6 shadow-lg md:flex-row md:gap-10 2xl:gap-14">
 
@@ -428,8 +440,8 @@ const PropertyCont = () => {
               </div>
             </div>
 
-            {/* carousel */}
-            <div className="relative w-full md:w-1/2 aspect-square ">
+            {/* carousel desktop */}
+            <div className="relative w-full md:w-1/2 aspect-square asd">
               {/* <Image src={car} alt="" className="w-full" width={500} height={500} /> */}
               <div className="relative">
                 {/* Carousel */}
@@ -459,7 +471,8 @@ const PropertyCont = () => {
                             objectFit="cover"
                             onClick={() => {
                               setGalleryIndex(0);
-                              setIsOpen(true)
+                              setIsOpen(true);
+                              console.log("clicked image");
                             }}
                             height={500}
                             unoptimized
@@ -509,6 +522,7 @@ const PropertyCont = () => {
                   ))}
                 </div>
               </div>
+
               <Card className="hidden w-full mt-10 md:block">
                 <CardHeader>
                   <CardTitle>Consultar por la propiedad</CardTitle>
@@ -570,13 +584,15 @@ const PropertyCont = () => {
               </Card>
 
             </div>
+            {/* carousel desktop */}
 
           </Card>
 
 
         </div>
-        <div className="block w-full px-0 py-0 md:hidden md:py-2 md:px-24 2xl:px-64 h-fit">
 
+        {/* MOBILE */}
+        <div className="block w-full px-0 py-0 md:hidden md:py-2 md:px-24 2xl:px-64 h-fit">
           <div className="flex flex-col-reverse gap-6 p-6 shadow-lg md:flex-row md:gap-10 2xl:gap-14">
 
             {/* property details */}
@@ -890,71 +906,74 @@ const PropertyCont = () => {
 
             </div>
 
-            {/* carousel */}
-            <div className="relative w-full md:w-1/2 aspect-square ">
+            {/* carousel mobile */}
+            <div className="relative w-full md:w-1/2 aspect-square DDD ">
               {/* <Image src={car} alt="" className="w-full" width={500} height={500} /> */}
               <div className="relative">
-                {/* Carousel */}
-                {gallery.length > 0 ? (<>    <Carousel
-                  setApi={setApi}
-                  className="relative w-full h-full overflow-hidden rounded-lg aspect-square "
-                  //onMouseEnter={plugin.current.stop}
-                  //plugins={[plugin.current as any]}
-                  opts={{
-                    align: "start",
-                    loop: true,
-                    startIndex: galleryIndex
-                  }}
-                //onMouseLeave={plugin.current.reset}
-                >
-                  <CarouselContent className="h-full">
-                    <CarouselItem
-                      className="w-full h-full overflow-hidden rounded-md "
-                    >
-
-                      <Image
-                        src={propertyData?.imagePath!}
-                        alt={`Imagen `}
-                        width={500}
-                        objectFit="cover"
-                        onClick={() => {
-                          setGalleryIndex(0);
-                          setIsOpen(true)
-                        }}
-                        height={500}
-                        unoptimized
-                        className="object-cover w-full h-full my-auto rounded-lg"
-                      />
-                    </CarouselItem>
-                    {gallery.map((image, index) => (
+                {/* Carousel  mobile*/}
+                {gallery.length > 0 ? (<>
+                  <Carousel
+                    setApi={setApiMobile}
+                    className="relative w-full h-full overflow-hidden rounded-lg aspect-square "
+                    //onMouseEnter={plugin.current.stop}
+                    //plugins={[plugin.current as any]}
+                    opts={{
+                      align: "start",
+                      loop: true,
+                      startIndex: galleryIndex
+                    }}
+                  //onMouseLeave={plugin.current.reset}
+                  >
+                    <CarouselContent className="h-full">
                       <CarouselItem
-                        key={image.uuid}
                         className="w-full h-full overflow-hidden rounded-md "
                       >
-                        {/* <Zoom> */}
+
                         <Image
-                          src={image.path}
+                          src={propertyData?.imagePath!}
                           alt={`Imagen `}
                           width={500}
                           objectFit="cover"
+                          onClick={() => {
+                            setGalleryIndex(0);
+                            setIsOpen(true);
+                            console.log("clicked image")
+                          }}
                           height={500}
                           unoptimized
-                          onClick={() => { setGalleryIndex(index + 1); setIsOpen(true) }}
                           className="object-cover w-full h-full my-auto rounded-lg"
                         />
-                        {/* </Zoom> */}
                       </CarouselItem>
-                    ))}
-                  </CarouselContent>
+                      {gallery.map((image, index) => (
+                        <CarouselItem
+                          key={image.uuid}
+                          className="w-full h-full overflow-hidden rounded-md "
+                        >
+                          {/* <Zoom> */}
+                          <Image
+                            src={image.path}
+                            alt={`Imagen `}
+                            width={500}
+                            objectFit="cover"
+                            height={500}
+                            unoptimized
+                            onClick={() => { setGalleryIndex(index + 1); setIsOpen(true) }}
+                            className="object-cover w-full h-full my-auto rounded-lg"
+                          />
+                          {/* </Zoom> */}
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
 
-                </Carousel></>) : (<Image
-                  src={noimage}
-                  alt=""
-                  unoptimized
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full my-auto rounded-lg "
-                />)}
+                  </Carousel></>) : (
+                  <Image
+                    src={noimage}
+                    alt=""
+                    unoptimized
+                    width={500}
+                    height={500}
+                    className="object-cover w-full h-full my-auto rounded-lg "
+                  />)}
 
 
 
@@ -1033,7 +1052,11 @@ const PropertyCont = () => {
 
           </div>
         </div>
+
+        {/* carousel dialog - active when image is clicked */}
         <Dialog open={isOpen} onOpenChange={setIsOpen} >
+          <DialogTitle className="sr-only">Imagen de la propiedad</DialogTitle>
+
           <DialogContent className="w-full min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[600px] 2xl:min-w-[830px] p-0 text-transparent bg-transparent border-none shadow-none h-fit">
 
             {/* carousel */}
@@ -1104,6 +1127,7 @@ const PropertyCont = () => {
             </div>
           </DialogContent>
         </Dialog>
+        {/* carousel dialog */}
 
         <RelatedProperties properties={latestProperties} />
       </div>

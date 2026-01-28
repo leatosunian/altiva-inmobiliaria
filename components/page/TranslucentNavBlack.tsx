@@ -225,7 +225,7 @@ export function TranslucentNavBlack() {
           </div>
         </div>
 
-        <div className="relative md:hidden">
+        {isOpen && (<div className="relative md:hidden">
           {/* Backdrop overlay - closes menu when tapping outside */}
           <div
             className={`fixed inset-0   transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -295,7 +295,8 @@ export function TranslucentNavBlack() {
               </div>
             </div>
           </div>
-        </div>
+        </div>)}
+
       </motion.div>
     </>
   )
