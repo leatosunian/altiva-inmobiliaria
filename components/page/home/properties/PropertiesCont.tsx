@@ -181,6 +181,7 @@ const PropertiesCont = () => {
 
   useEffect(() => {
     getProperties();
+    setCurrentPage(1);
     console.log('businessTypeFilter', businessTypeFilter, 'propertyTypeFilter', propertyTypeFilter);
 
     if (businessTypeFilter === 'venta') {
@@ -189,7 +190,7 @@ const PropertiesCont = () => {
     if (businessTypeFilter === 'alquiler') {
       handleFilterByBusinessType('Alquiler');
     }
-  }, []);
+  }, [searchFilter, businessTypeFilter, propertyTypeFilter]);
 
 
 
